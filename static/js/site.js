@@ -52,6 +52,7 @@
       '<div class="navbar-dropdown">' + ddItems + "</div>" +
       "</div>" +
       '<a class="navbar-item' + (active === "about" ? " is-active-page" : "") + '" href="' + root + 'about.html">About</a>' +
+      '<a class="navbar-item' + (active === "logbook" ? " is-active-page" : "") + '" href="' + root + 'logbook.html">Logbook</a>' +
       "</div>" +
       "</div>" +
       "</nav>";
