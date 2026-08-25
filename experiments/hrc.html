@@ -30,7 +30,7 @@
       <span class="tag is-light">HRC dashboard</span>
       <span class="tag is-light">50 simulated trials</span>
       <h1 class="title is-2 publication-title" style="margin-top:0.75rem;">Human-Robot Collaboration</h1>
-      <div class="placeholder-text">[EXPERIMENT INTRODUCTION — TO BE WRITTEN. Collaborative block-arrangement task where the VLM planner's subtasks are executed by the policy, checked against the goal, and escalated to a human when the policy fails.]</div>
+      <p>Evaluates whether a human can assist the VLA policy when it is unable to complete an individual subtask, without taking over the entire task. The VLM planner decomposes the overall goal into subtasks; the policy attempts each one autonomously; and after five failed attempts, that specific subtask is handed to a human collaborator.</p>
     </div>
   </div>
 </section>
@@ -41,7 +41,7 @@
       <figure class="image">
         <img src="../media/diagrams/hrc-loop.png" alt="Human-robot collaboration loop diagram" style="border-radius:10px;">
       </figure>
-      <h2 class="subtitle has-text-centered">[FIGURE CAPTION — TO BE WRITTEN] Human&ndash;robot interaction loop for the collaborative task (thesis figure).</h2>
+      <h2 class="subtitle has-text-centered">Human&ndash;robot interaction loop for the collaborative task: the robot and the human collaborator exchange visual and verbal instructions while working toward the shared goal configuration.</h2>
     </div>
   </div>
 </section>
@@ -49,8 +49,8 @@
 <section class="section" id="overview">
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Overview</span>
-    <h2 class="title is-3">[EXPERIMENT TITLE]</h2>
-    <div class="placeholder-text">[EXPERIMENT OVERVIEW — TO BE WRITTEN]</div>
+    <h2 class="title is-3">Escalating a subtask, not the whole task</h2>
+    <p>The overall task is first decomposed by the VLM planner into a sequence of manipulation subtasks. The VLA policy then attempts each subtask autonomously, with the system tracking its progress against the corresponding goal state. This allows the robot to remain autonomous when it can complete a task successfully, while giving control to the human only when it becomes stuck &mdash; escalation is applied at the subtask level rather than requiring the human to take over the entire task.</p>
   </div>
 </section>
 
@@ -58,7 +58,7 @@
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Methodology</span>
     <h2 class="title is-3">Plan &middot; execute &middot; check &middot; escalate</h2>
-    <div class="placeholder-text">[METHODOLOGY DESCRIPTION — TO BE WRITTEN] HRC dashboard, task definition &amp; planning, escalation mechanism for failed subtasks.</div>
+    <p>Each subtask is first attempted autonomously by the VLA policy, with up to five attempts allowed. If it is still unsuccessful after these attempts, it is flagged for human intervention: the human operator completes that specific subtask by repositioning the relevant block, after which the system checks the updated state and continues with the remaining planned subtasks. The current implementation uses a fixed attempt threshold to trigger escalation; it does not determine the cause of failure or allow the human to intervene at an arbitrary point during execution.</p>
     <div class="loop-diagram">
       <div class="loop-node">Plan</div><span class="loop-connector">&rarr;</span>
       <div class="loop-node">Execute</div><span class="loop-connector">&rarr;</span>
@@ -66,7 +66,7 @@
       <div class="loop-node escalate">Escalate to human</div><span class="loop-connector">&rarr;</span>
       <div class="loop-node">Continue</div>
     </div>
-    <p class="is-size-7 has-text-centered" style="color:#aaa;">[LOOP DIAGRAM CAPTION — TO BE WRITTEN / verify against thesis terminology]</p>
+    <p class="is-size-7 has-text-centered" style="color:#aaa;">A subtask is attempted autonomously for up to five tries; if still unsuccessful it is flagged for human intervention, and execution resumes with the remaining plan once the human has completed it.</p>
   </div>
 </section>
 
@@ -77,7 +77,7 @@
     <figure class="image">
       <img src="../media/hrc/hrc-dashboard.png" alt="HRC status dashboard alongside MuJoCo simulation" style="border-radius:10px;">
     </figure>
-    <p style="font-size:0.85rem;color:#888;">[FIGURE CAPTION — TO BE WRITTEN] HRC status dashboard (goal / current config / planned tasks / execution status) next to the live MuJoCo environment.</p>
+    <p style="font-size:0.85rem;color:#888;">Human Robot Collaboration dashboard with live MuJoCo viewer. It displays the initial and goal configurations, the current block configuration, the VLM-generated task sequence with each subtask marked pending/executing/completed, and the number of attempts made for the active subtask. When the retry limit is reached, the subtask is marked <code>FLAGGED FOR HUMAN</code>; once the human moves the block into position, the dashboard detects the change, clears the flag, and resumes execution automatically.</p>
   </div>
 </section>
 
@@ -105,11 +105,14 @@
     <h2 class="title is-3">Collective task performance</h2>
     <div class="columns">
       <div class="column"><div class="box has-text-centered"><p class="heading">Simulated trials</p><p class="title">50</p></div></div>
-      <div class="column"><div class="box has-text-centered"><p class="heading">Final goals reached</p><p class="title">&mdash;%</p></div></div>
-      <div class="column"><div class="box has-text-centered"><p class="heading">Subtasks requiring intervention</p><p class="title">&mdash;%</p></div></div>
-      <div class="column"><div class="box has-text-centered"><p class="heading">Autonomous subtask success</p><p class="title">&mdash;%</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Final goals reached</p><p class="title">100%</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Subtasks requiring intervention</p><p class="title">46.1%</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Manipulation success (autonomous)</p><p class="title">53.9%</p></div></div>
     </div>
-    <p class="is-size-7" style="color:#aaa;">[RESULTS DESCRIPTION — TO BE WRITTEN, including the non-target block position ablation]</p>
+    <p style="margin-top:1rem;">Over 50 trials with random initial and goal configurations, the VLA completed 48 of 89 subtasks without human intervention (53.9% manipulation success). At the individual-attempt level, only 48 of 282 policy attempts succeeded (17.0% primitive skill success, 3.17 mean retries per subtask) &mdash; the gap between these two figures comes from retries: a subtask that fails several times before eventually succeeding still counts once as a manipulation success. Far-side subtasks were markedly more reliable than near-side ones (73.7&ndash;81.2% vs. 23.1&ndash;37.5% manipulation success across the three colours). Despite the low primitive-level success rate, <strong>all 50 trials eventually reached their specified goal configuration</strong> through the escalation mechanism, and no trial exhausted the allowed replanning rounds.</p>
+
+    <h3 class="title is-4" style="margin-top:2rem;">Non-target block position ablation</h3>
+    <p>A genuine multi-block rearrangement requires several blocks to be away from their home position at once &mdash; a scene composition the policy never saw during single-task training, which caused early full-pipeline trials to fail almost completely. The fix used throughout the results above shows non-target blocks at their home position in the image passed to the policy, while the live simulation and ground-truth state continue to use their true position. A dedicated ablation (blue, near&rarr;far, 15 trials per condition, varying the block's true position independently of its rendered position) found that the fix does not recover performance towards the unmodified baseline &mdash; it was in fact the worst-performing of the four conditions tested, while rendering the distractors away (without physically moving them) performed similarly to the baseline. Physical distractor position appears to have a larger effect than the rendered position, suggesting a possible reach or collision interaction rather than a purely perceptual effect. This result covers only the blue task with 15 trials per condition and has not been replicated, so it is reported as an observation and open question rather than a confirmed finding.</p>
   </div>
 </section>
 
@@ -118,8 +121,8 @@
     <span class="section-eyebrow">Additional media</span>
     <h2 class="title is-3">Final scene &amp; early concept sketch</h2>
     <div class="columns">
-      <div class="column"><figure class="image"><img src="../media/hrc/final-scene.png" alt="Final collaborative task scene" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Final scene configuration for the collaborative task.</p></div>
-      <div class="column"><figure class="image"><img src="../media/diagrams/hrc-concept.png" alt="Early human-robot collaboration concept diagram" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Early-stage collaborative task concept (dexterity recognition + negotiation) &mdash; check against final thesis scope before including.</p></div>
+      <div class="column"><figure class="image"><img src="../media/hrc/final-scene.png" alt="Final collaborative task scene" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Not captioned in the thesis text &mdash; tell me what this scene shows and I'll write it up.</p></div>
+      <div class="column"><figure class="image"><img src="../media/diagrams/hrc-concept.png" alt="Early human-robot collaboration concept diagram" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Early conceptual sketch of the collaborative task allocation problem: subtasks split between robot and human by dexterity requirement, with a negotiation step reconciling who performs which subtask. The implemented protocol above is a considerably simpler instance of this idea &mdash; a subtask is allocated to the human only after the robot has exhausted a fixed number of autonomous attempts, with no dexterity-recognition or negotiation step.</p></div>
     </div>
   </div>
 </section>
@@ -132,13 +135,13 @@
       <div class="column is-half">
         <a class="card experiment-card" href="vlm-planner.html">
           <div class="card-image"><figure class="image"><img src="../media/diagrams/vlm-planner-pipeline.png" alt="VLM Planner"></figure></div>
-          <div class="card-content"><p class="title is-5">VLM Planner</p><p class="subtitle is-6">[DESCRIPTION — TO BE WRITTEN]</p></div>
+          <div class="card-content"><p class="title is-5">VLM Planner</p><p class="subtitle is-6">Composing the six learned primitives into multi-step rearrangements, at 94.6% planning accuracy.</p></div>
         </a>
       </div>
       <div class="column is-half">
         <a class="card experiment-card" href="cross-embodiment.html">
           <div class="card-image"><figure class="image"><img src="../media/cross-embodiment/franka-twoblocks.png" alt="Cross-Embodiment Evaluation"></figure></div>
-          <div class="card-content"><p class="title is-5">Cross-Embodiment Evaluation</p><p class="subtitle is-6">[DESCRIPTION — TO BE WRITTEN]</p></div>
+          <div class="card-content"><p class="title is-5">Cross-Embodiment Evaluation</p><p class="subtitle is-6">Extending the pipeline to Franka Emika Panda and Unitree G1, and training a single joint policy across all three.</p></div>
         </a>
       </div>
     </div>

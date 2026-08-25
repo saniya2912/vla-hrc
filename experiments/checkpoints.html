@@ -30,7 +30,7 @@
       <span class="tag is-light">Position vs. velocity control</span>
       <span class="tag is-light">Training &amp; inference pipeline</span>
       <h1 class="title is-2 publication-title" style="margin-top:0.75rem;">Checkpoint &amp; Policy Development</h1>
-      <div class="placeholder-text">[EXPERIMENT INTRODUCTION — TO BE WRITTEN. Iterating the six-task Baxter policy across checkpoints, control representations, and dataset/training corrections.]</div>
+      <p>The six-task Baxter policy was developed through controlled iterations of the training and demonstration pipeline. Every major jump and regression across eight checkpoints traced to a specific, identified cause in data completeness or serving infrastructure &mdash; never to model capacity or optimisation budget.</p>
     </div>
   </div>
 </section>
@@ -38,8 +38,8 @@
 <section class="section" id="overview">
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Overview</span>
-    <h2 class="title is-3">[EXPERIMENT TITLE]</h2>
-    <div class="placeholder-text">[EXPERIMENT OVERVIEW — TO BE WRITTEN]</div>
+    <h2 class="title is-3">From velocity control to a working six-task policy</h2>
+    <p>The first checkpoint, <code>vel_v1</code>, used the velocity-control formulation of &pi;0.5, in which the policy predicts joint velocities. It achieved no successful trials: the gripper rarely closed within the episode. Switching to position control &mdash; where the policy predicts target joint positions and a proportional controller converts these into motion &mdash; produced the first successful grasping behaviour, and every checkpoint that follows on this page builds on that change.</p>
   </div>
 </section>
 
@@ -47,13 +47,12 @@
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Methodology</span>
     <h2 class="title is-3">Dataset audit, training &amp; inference pipeline</h2>
-    <div class="placeholder-text">[METHODOLOGY DESCRIPTION — TO BE WRITTEN] Dataset and policy audit, training configuration, inference architecture.</div>
+    <p>Two further changes were introduced in <code>pos_v2</code>: demonstrations were recorded at the native 10&nbsp;Hz control rate rather than downsampled, and the robot state representation was expanded from 8 to 11 dimensions by including the 3D end-effector position. <code>pos_v3</code> continued training from <code>pos_v2</code> with a lower learning rate and additional near-side demonstrations. Two deployment-specific train&ndash;inference mismatches were also identified and fixed along the way: a gripper-initialisation mismatch, and gripper hysteresis within a single action chunk. The same fix is reused unmodified in the physical-robot deployment.</p>
     <div class="columns" style="margin-top:1rem;">
-      <div class="column"><figure class="image"><img src="../media/checkpoints/gripper-init-fix.png" alt="Gripper initialisation fix" style="border-radius:8px;"></figure></div>
-      <div class="column"><figure class="image"><img src="../media/checkpoints/gripper-hysteresis.png" alt="Gripper hysteresis" style="border-radius:8px;"></figure></div>
-      <div class="column"><figure class="image"><img src="../media/checkpoints/policy-actions-7d.png" alt="Policy actions, 7 degrees of freedom" style="border-radius:8px;"></figure></div>
+      <div class="column"><figure class="image"><img src="../media/checkpoints/gripper-init-fix.png" alt="Gripper initialisation fix" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Gripper initialisation mismatch: without the fix, the reset gripper control value (&asymp;0.65) places the policy near the grasp threshold at step 0, causing spurious early carry-mode behaviour; resetting to fully open (0.0) restores the expected initial state.</p></div>
+      <div class="column"><figure class="image"><img src="../media/checkpoints/gripper-hysteresis.png" alt="Gripper hysteresis" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Gripper hysteresis: a spurious close&ndash;open&ndash;close event within a single action chunk would otherwise drop a carried object; a grasp-latch fix prevents this from reaching the gripper controller.</p></div>
+      <div class="column"><figure class="image"><img src="../media/checkpoints/policy-actions-7d.png" alt="Policy actions, 7 degrees of freedom" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] This plot isn't captioned in the thesis text — tell me what it shows and I'll write it up.</p></div>
     </div>
-    <p style="font-size:0.85rem;color:#888;">[FIGURE CAPTIONS — TO BE WRITTEN]</p>
   </div>
 </section>
 
@@ -64,13 +63,16 @@
     <table class="table is-fullwidth is-striped">
       <thead><tr><th>Checkpoint</th><th>Description</th></tr></thead>
       <tbody>
-        <tr><td><code>base</code></td><td>π0.5 pretrained, no fine-tuning</td></tr>
-        <tr><td><code>pos_v2</code></td><td>Position-control, dataset iteration 2</td></tr>
-        <tr><td><code>pos_v3</code></td><td>Position-control, dataset iteration 3</td></tr>
-        <tr><td><code>v4b_run2</code></td><td>Position-control, corrected training/inference pipeline &mdash; latest</td></tr>
+        <tr><td><code>base</code></td><td>&pi;0.5 pretrained, zero-shot, no fine-tuning</td></tr>
+        <tr><td><code>vel_v1</code></td><td>Velocity control (predicts joint velocities) &mdash; 0% success, gripper rarely closed</td></tr>
+        <tr><td><code>pos_run3</code></td><td>First position-control checkpoint after switching from velocity control</td></tr>
+        <tr><td><code>pos_v2</code></td><td>Position-control; native 10&nbsp;Hz demonstration recording; 11-dim state (adds 3D end-effector position)</td></tr>
+        <tr><td><code>pos_v3</code></td><td>Warm-started from <code>pos_v2</code>, lower learning rate, additional near-side demonstrations</td></tr>
+        <tr><td><code>pos_v4</code></td><td>Trained fresh from <code>pi05_base</code> on an audited, complete six-task dataset (isolates a data bug that had left <code>pos_v3</code>'s training set with zero green-block episodes)</td></tr>
+        <tr><td><code>v4b_run1</code></td><td>Full success-filtered dataset via mixture training &mdash; invalidated by two serving-time normalisation bugs</td></tr>
+        <tr><td><code>v4b_run2</code></td><td>Same data as <code>run1</code>, retrained after fixing the normalisation bugs &mdash; latest, best green-block result of the project</td></tr>
       </tbody>
     </table>
-    <div class="placeholder-text">[CHECKPOINT DESCRIPTIONS — TO BE WRITTEN. Additional checkpoints referenced in the thesis: pos_run3_199999, pos_v4_199999, pos_v4b_99999, vel_pickplace_99999 — see repository for raw rollouts.]</div>
   </div>
 </section>
 
@@ -78,7 +80,7 @@
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Videos</span>
     <h2 class="title is-3">Checkpoint comparison &mdash; six tasks</h2>
-    <div class="placeholder-text">[CHECKPOINT COMPARISON INTRO — TO BE WRITTEN] Same six tasks, evaluated across four checkpoints along the development trajectory.</div>
+    <p>The same six tasks, evaluated across four checkpoints along the development trajectory. Each task was evaluated over 10 trials, with a trial counted as successful if the block crossed the workspace divider (x&nbsp;&gt;&nbsp;0.70&nbsp;m for far-side tasks, x&nbsp;&lt;&nbsp;0.66&nbsp;m for near-side tasks).</p>
 
     <h4 class="title is-5" style="margin-top:2rem;">Base <span class="tag is-light">pretrained π0.5, no fine-tuning</span></h4>
     <div class="carousel results-carousel">
@@ -129,26 +131,26 @@
     <figure class="image">
       <img src="../media/checkpoints/success-bar-chart.png" alt="Success rate bar chart across checkpoints" style="border-radius:10px;">
     </figure>
-    <p style="font-size:0.85rem;color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Existing thesis figure &mdash; success rate comparison across checkpoints.</p>
+    <p style="font-size:0.85rem;color:#888;">Trial-level success rate by task and checkpoint, grouped by block colour.</p>
 
     <div class="table-container" style="margin-top:1rem;">
       <table class="table is-fullwidth is-striped">
-        <thead><tr><th>Checkpoint</th><th>Control</th><th>Task 0</th><th>Task 1</th><th>Task 2</th><th>Task 3</th><th>Task 4</th><th>Task 5</th><th>Overall</th></tr></thead>
+        <thead><tr><th>Checkpoint</th><th>Control</th><th>Red&rarr;far</th><th>Red&rarr;near</th><th>Blue&rarr;far</th><th>Blue&rarr;near</th><th>Green&rarr;far</th><th>Green&rarr;near</th><th>Overall</th></tr></thead>
         <tbody>
-          <tr><td>Base (π0.5)</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-          <tr><td>pos_v2</td><td>Position</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-          <tr><td>pos_v3</td><td>Position</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-          <tr><td>v4b_run2</td><td>Position</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td>Base (&pi;0.5)</td><td>&mdash;</td><td>7/10</td><td>2/10</td><td>0/10</td><td>0/10</td><td>0/10</td><td>0/10</td><td>9/60 (15.0%)</td></tr>
+          <tr><td>pos_v2</td><td>Position</td><td>6/10</td><td>4/10</td><td>7/10</td><td>5/10</td><td>2/10</td><td>0/10</td><td>24/60 (40.0%)</td></tr>
+          <tr><td>pos_v3</td><td>Position</td><td>9/10</td><td>4/10</td><td>9/10</td><td>4/10</td><td>0/10</td><td>0/10</td><td>26/60 (43.3%)</td></tr>
+          <tr><td>v4b_run2</td><td>Position</td><td>5/10</td><td>2/10</td><td>7/10</td><td>3/10</td><td>7/10</td><td>1/10</td><td>25/60 (41.7%)</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="is-size-7" style="color:#aaa;">[RESULTS DESCRIPTION — TO BE WRITTEN. Table values intentionally left blank pending final thesis numbers.]</p>
+    <p>Switching from velocity to position control was the single largest jump in the series (0%&nbsp;&rarr;&nbsp;20% on the intervening <code>pos_run3</code> checkpoint, not shown above): the velocity-control policy grounded language correctly &mdash; it approached the right block &mdash; but the gripper stayed open for most of every episode, so no grasp ever occurred. <code>pos_v3</code>'s 0/0 on both green tasks looked like a workspace-geometry limit but traced to a data bug: its training set had zero green-block episodes because the far-side source directory had been deleted from disk after conversion. <code>v4b_run2</code> is the first checkpoint with a non-zero result on every task, and reaches the best green-far result of the project (70%) &mdash; at a small, unresolved cost to red-near and blue-far relative to its immediate predecessor.</p>
 
     <div class="columns" style="margin-top:1rem;">
-      <div class="column"><div class="box has-text-centered"><p class="heading">Best checkpoint</p><p class="title is-5">v4b_run2</p></div></div>
-      <div class="column"><div class="box has-text-centered"><p class="heading">Trial-level success</p><p class="title">&mdash;%</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Highest overall (pos_v3)</p><p class="title">43.3%</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Most complete (v4b_run2)</p><p class="title">41.7%</p></div></div>
       <div class="column"><div class="box has-text-centered"><p class="heading">Control representation</p><p class="title is-5">Position</p></div></div>
-      <div class="column"><div class="box has-text-centered"><p class="heading">Tasks with non-zero success</p><p class="title">&mdash;/6</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Tasks with non-zero success (v4b_run2)</p><p class="title">6/6</p></div></div>
     </div>
   </div>
 </section>
@@ -158,18 +160,9 @@
     <span class="section-eyebrow">Failure cases</span>
     <h2 class="title is-3">Diagnosing checkpoint failures</h2>
     <div class="columns">
-      <div class="column"><figure class="image"><img src="../media/checkpoints/state-mismatch.png" alt="State mismatch diagnostic" style="border-radius:8px;"></figure><p class="is-size-7">[CAPTION — TBD] State mismatch.</p></div>
-      <div class="column"><figure class="image"><img src="../media/checkpoints/chunk-repetition.png" alt="Action chunk repetition diagnostic" style="border-radius:8px;"></figure><p class="is-size-7">[CAPTION — TBD] Chunk repetition.</p></div>
-      <div class="column"><figure class="image"><img src="../media/checkpoints/incomplete-task.png" alt="Incomplete task example" style="border-radius:8px;"></figure><p class="is-size-7">[CAPTION — TBD] Incomplete task.</p></div>
+      <div class="column"><figure class="image"><img src="../media/checkpoints/state-mismatch.png" alt="State mismatch diagnostic" style="border-radius:8px;"></figure><p class="is-size-7">[FIGURE CAPTION — TO BE WRITTEN] Not captioned in the thesis text &mdash; tell me what this diagnostic shows and I'll write it up.</p></div>
+      <div class="column"><figure class="image"><img src="../media/checkpoints/chunk-repetition.png" alt="Action chunk repetition diagnostic" style="border-radius:8px;"></figure><p class="is-size-7">[FIGURE CAPTION — TO BE WRITTEN] Not captioned in the thesis text &mdash; tell me what this diagnostic shows and I'll write it up.</p></div>
     </div>
-  </div>
-</section>
-
-<section class="section" id="additional-media">
-  <div class="container is-max-desktop">
-    <span class="section-eyebrow">Additional media</span>
-    <h2 class="title is-3">Task completion example</h2>
-    <figure class="image"><img src="../media/checkpoints/task-complete.png" alt="Task completion example" style="border-radius:10px;"></figure>
   </div>
 </section>
 
@@ -181,13 +174,13 @@
       <div class="column is-half">
         <a class="card experiment-card" href="vla-policy.html">
           <div class="card-image"><figure class="image"><img src="../media/vla-policy/baxter-mujoco.png" alt="VLA Policy & Baxter Simulation"></figure></div>
-          <div class="card-content"><p class="title is-5">VLA Policy &amp; Baxter Simulation</p><p class="subtitle is-6">[DESCRIPTION — TO BE WRITTEN]</p></div>
+          <div class="card-content"><p class="title is-5">VLA Policy &amp; Baxter Simulation</p><p class="subtitle is-6">Adapting the pretrained &pi;0.5 policy to a six-task Baxter benchmark via LoRA fine-tuning.</p></div>
         </a>
       </div>
       <div class="column is-half">
         <a class="card experiment-card" href="vlm-planner.html">
           <div class="card-image"><figure class="image"><img src="../media/diagrams/vlm-planner-pipeline.png" alt="VLM Planner"></figure></div>
-          <div class="card-content"><p class="title is-5">VLM Planner</p><p class="subtitle is-6">[DESCRIPTION — TO BE WRITTEN]</p></div>
+          <div class="card-content"><p class="title is-5">VLM Planner</p><p class="subtitle is-6">Composing the six learned primitives into multi-step rearrangements, at 94.6% planning accuracy.</p></div>
         </a>
       </div>
     </div>

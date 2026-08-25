@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="[SHORT PROJECT DESCRIPTION — TO BE WRITTEN]">
+  <meta name="description" content="A hierarchical human-robot collaboration system combining a fine-tuned pi0.5 Vision-Language-Action policy with a Vision-Language Model planner and an escalation mechanism to a human collaborator, developed on a six-task Baxter benchmark and extended to cross-embodiment transfer and physical deployment.">
   <meta name="keywords" content="VLA, Vision-Language-Action, Human-Robot Collaboration, Baxter, pi0.5, LoRA">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Towards Generalisable Vision&ndash;Language&ndash;Action Policies for Human&ndash;Robot Collaboration &mdash; VLA-HRC</title>
@@ -101,35 +101,35 @@
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item">
           <img src="media/vla-policy/exec-a_initial.png" alt="Execution sequence — initial">
-          <div class="carousel-caption">[CAPTION — TO BE WRITTEN]</div>
+          <div class="carousel-caption">Execution sequence — initial pose</div>
         </div>
         <div class="item">
           <img src="media/vla-policy/exec-c_descent.png" alt="Execution sequence — descent">
-          <div class="carousel-caption">[CAPTION — TO BE WRITTEN]</div>
+          <div class="carousel-caption">Execution sequence — descent to grasp</div>
         </div>
         <div class="item">
           <img src="media/vla-policy/exec-f_place.png" alt="Execution sequence — place">
-          <div class="carousel-caption">[CAPTION — TO BE WRITTEN]</div>
+          <div class="carousel-caption">Execution sequence — controlled placement</div>
         </div>
         <div class="item">
           <img src="media/cross-embodiment/baxter-twoblocks.png" alt="Baxter embodiment">
-          <div class="carousel-caption">[CAPTION — TO BE WRITTEN]</div>
+          <div class="carousel-caption">Baxter — reference embodiment</div>
         </div>
         <div class="item">
           <img src="media/cross-embodiment/franka-twoblocks.png" alt="Franka embodiment">
-          <div class="carousel-caption">[CAPTION — TO BE WRITTEN]</div>
+          <div class="carousel-caption">Franka Emika Panda</div>
         </div>
         <div class="item">
           <img src="media/cross-embodiment/g1-twoblocks.png" alt="Unitree G1 embodiment">
-          <div class="carousel-caption">[CAPTION — TO BE WRITTEN]</div>
+          <div class="carousel-caption">Unitree G1 (right arm)</div>
         </div>
         <div class="item">
           <img src="media/hrc/hrc-dashboard.png" alt="HRC status dashboard">
-          <div class="carousel-caption">[CAPTION — TO BE WRITTEN]</div>
+          <div class="carousel-caption">HRC status dashboard with live MuJoCo viewer</div>
         </div>
         <div class="item">
           <img src="media/physical-robot/physical-setup.jpg" alt="Physical Baxter setup">
-          <div class="carousel-caption">[CAPTION — TO BE WRITTEN]</div>
+          <div class="carousel-caption">Physical setup with Robot DE NIRO and RealSense camera</div>
         </div>
       </div>
     </div>
@@ -142,7 +142,7 @@
       <div class="column is-four-fifths">
         <span class="section-eyebrow">System overview</span>
         <h2 class="title is-3">From a pretrained VLA to a collaborative manipulation system</h2>
-        <div class="placeholder-text has-text-left">[SYSTEM OVERVIEW DESCRIPTION — TO BE WRITTEN. This section should walk through how π0.5, LoRA fine-tuning, the VLM planner, and human escalation fit together.]</div>
+        <p class="has-text-left">This work develops a hierarchical human&ndash;robot collaboration system combining a Vision&ndash;Language Model (VLM) planner with a fine-tuned &pi;0.5 Vision&ndash;Language&ndash;Action (VLA) policy. The VLM decomposes a long-horizon goal into manipulation subtasks; the VLA policy executes each subtask from visual observations, robot state, and language instructions; and an escalation mechanism hands a subtask to a human after the robot has exhausted a fixed number of autonomous attempts. The system was first developed on a six-task Baxter manipulation benchmark in MuJoCo, then extended to evaluate cross-embodiment transfer (Franka Emika Panda, Unitree G1) and physical deployment on Robot DE NIRO.</p>
       </div>
     </div>
 
@@ -180,7 +180,7 @@
 
     <figure class="image" style="margin-top:2rem;">
       <img src="media/diagrams/pi05-overview.png" alt="π0.5 pretraining and post-training architecture overview" style="border-radius:10px;border:1px solid #eee;">
-      <figcaption class="has-text-centered" style="font-size:0.85rem;color:#888;margin-top:0.5rem;">[FIGURE CAPTION — TO BE WRITTEN] &mdash; π0.5 pre-training / post-training &amp; inference architecture (source: thesis figures).</figcaption>
+      <figcaption class="has-text-centered" style="font-size:0.85rem;color:#888;margin-top:0.5rem;">Model overview for &pi;0.5.</figcaption>
     </figure>
   </div>
 </section>
@@ -189,7 +189,7 @@
   <div class="container is-max-desktop">
     <div class="has-text-centered" style="margin-bottom:2rem;">
       <span class="section-eyebrow">Experiments</span>
-      <h2 class="title is-3">Eight stages, one pipeline</h2>
+      <h2 class="title is-3">Seven stages, one pipeline</h2>
       <p>Each stage of the thesis has its own page with methodology, media, and results.</p>
     </div>
 
@@ -199,7 +199,7 @@
           <div class="card-image"><figure class="image"><img src="media/vla-policy/baxter-mujoco.png" alt="VLA Policy & Baxter Simulation"></figure></div>
           <div class="card-content">
             <p class="title is-5">01 &middot; VLA Policy &amp; Baxter Simulation</p>
-            <p class="subtitle is-6">[EXPERIMENT DESCRIPTION — TO BE WRITTEN] Adapting π0.5 to a simulated Baxter pick-and-place setting.</p>
+            <p class="subtitle is-6">Adapting the pretrained &pi;0.5 policy to a six-task Baxter pick-and-place benchmark in MuJoCo via LoRA fine-tuning, after a zero-shot baseline showed the model's action and state interfaces did not match Baxter's 15-DOF system.</p>
             <div class="tags"><span class="tag">π0.5</span><span class="tag">LoRA</span><span class="tag">MuJoCo</span></div>
           </div>
         </a>
@@ -209,7 +209,7 @@
           <div class="card-image"><figure class="image"><img src="media/checkpoints/success-bar-chart.png" alt="Checkpoint & Policy Development"></figure></div>
           <div class="card-content">
             <p class="title is-5">02 &middot; Checkpoint &amp; Policy Development</p>
-            <p class="subtitle is-6">[EXPERIMENT DESCRIPTION — TO BE WRITTEN] Iterating the six-task policy across checkpoints and control representations.</p>
+            <p class="subtitle is-6">Iterating the six-task policy across eight checkpoints &mdash; from an unsuccessful velocity-control baseline to a position-control policy reaching 43.3% trial-level success &mdash; tracing every major jump and regression to a specific data or infrastructure cause.</p>
             <div class="tags"><span class="tag">Checkpoints</span><span class="tag">Training</span></div>
           </div>
         </a>
@@ -219,7 +219,7 @@
           <div class="card-image"><figure class="image"><img src="media/diagrams/vlm-planner-pipeline.png" alt="VLM Planner"></figure></div>
           <div class="card-content">
             <p class="title is-5">03 &middot; VLM Planner</p>
-            <p class="subtitle is-6">[EXPERIMENT DESCRIPTION — TO BE WRITTEN] Comparing current vs. goal scenes to produce an ordered task sequence.</p>
+            <p class="subtitle is-6">A Gemma-3-12B planner that compares symbolic current and goal block states and composes the six learned primitives into multi-step rearrangements, reaching 94.6% exact-match planning accuracy.</p>
             <div class="tags"><span class="tag">Gemma-3-12B</span><span class="tag">Planning</span></div>
           </div>
         </a>
@@ -229,7 +229,7 @@
           <div class="card-image"><figure class="image"><img src="media/hrc/hrc-dashboard.png" alt="Human-Robot Collaboration"></figure></div>
           <div class="card-content">
             <p class="title is-5">04 &middot; Human-Robot Collaboration</p>
-            <p class="subtitle is-6">[EXPERIMENT DESCRIPTION — TO BE WRITTEN] Plan, execute, check, and escalate failed subtasks to a human collaborator.</p>
+            <p class="subtitle is-6">A plan&ndash;execute&ndash;check&ndash;escalate loop that hands a subtask to a human after five failed autonomous attempts; across 50 trials, all reached their goal configuration, with 46.1% of subtasks requiring intervention.</p>
             <div class="tags"><span class="tag">Escalation</span><span class="tag">Dashboard</span></div>
           </div>
         </a>
@@ -239,7 +239,7 @@
           <div class="card-image"><figure class="image"><img src="media/cross-embodiment/franka-twoblocks.png" alt="Cross-Embodiment Evaluation"></figure></div>
           <div class="card-content">
             <p class="title is-5">05 &middot; Cross-Embodiment Evaluation</p>
-            <p class="subtitle is-6">[EXPERIMENT DESCRIPTION — TO BE WRITTEN] Joint multi-embodiment training and transfer across three robot platforms.</p>
+            <p class="subtitle is-6">Extending the fine-tuning pipeline to Franka Emika Panda and Unitree G1, and training a single joint policy across all three embodiments to test whether skills transfer between robots.</p>
             <div class="tags"><span class="tag">Baxter</span><span class="tag">Franka</span><span class="tag">Unitree G1</span></div>
           </div>
         </a>
@@ -249,7 +249,7 @@
           <div class="card-image"><figure class="image"><img src="media/physical-robot/physical-setup.jpg" alt="Physical Robot & Sim-to-Real"></figure></div>
           <div class="card-content">
             <p class="title is-5">06 &middot; Physical Robot &amp; Sim-to-Real</p>
-            <p class="subtitle is-6">[EXPERIMENT DESCRIPTION — TO BE WRITTEN] Deploying the policy on the physical Baxter platform.</p>
+            <p class="subtitle is-6">Deploying the simulation-trained policy on the physical Robot DE NIRO / Baxter platform to test whether simulation training transfers directly to real hardware.</p>
             <div class="tags"><span class="tag">Sim-to-real</span></div>
           </div>
         </a>
@@ -259,7 +259,7 @@
           <div class="card-image"><figure class="image"><img src="media/real-finetuning/training-block-positions-montage.png" alt="Real-Data Fine-Tuning"></figure></div>
           <div class="card-content">
             <p class="title is-5">07 &middot; Real-Data Fine-Tuning</p>
-            <p class="subtitle is-6">[EXPERIMENT DESCRIPTION — TO BE WRITTEN] Fine-tuning directly on physical-robot demonstrations.</p>
+            <p class="subtitle is-6">Fine-tuning &pi;0.5 from scratch on 28 real-robot kinesthetic demonstrations of a simplified pushing task, with no simulation data at all.</p>
             <div class="tags"><span class="tag">Real demonstrations</span></div>
           </div>
         </a>

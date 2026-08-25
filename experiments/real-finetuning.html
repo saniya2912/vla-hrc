@@ -30,7 +30,7 @@
       <span class="tag is-light">Pushing task</span>
       <span class="tag is-light">Real-data-only fine-tuning</span>
       <h1 class="title is-2 publication-title" style="margin-top:0.75rem;">Real-Data Fine-Tuning</h1>
-      <div class="placeholder-text">[EXPERIMENT INTRODUCTION — TO BE WRITTEN. A separate policy trained directly on physical-robot demonstrations, rather than transferred from simulation.]</div>
+      <p>Following the unsuccessful direct transfer of the simulation-trained policy, this experiment tests whether &pi;0.5 can be fine-tuned directly from real-robot demonstrations instead &mdash; independently of the sim-to-real issues found on the previous page.</p>
     </div>
   </div>
 </section>
@@ -38,8 +38,8 @@
 <section class="section" id="overview">
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Overview</span>
-    <h2 class="title is-3">[EXPERIMENT TITLE]</h2>
-    <div class="placeholder-text">[EXPERIMENT OVERVIEW — TO BE WRITTEN]</div>
+    <h2 class="title is-3">A simplified task, trained from scratch on real data</h2>
+    <p>For this pilot, the task was simplified from full pick-and-place to pushing a single block to the far side of the workspace while keeping the gripper closed throughout, removing grasping and release from the learning problem. The model was initialised directly from the pretrained <code>pi05_base</code> checkpoint &mdash; no warm-start from a simulation-trained policy, and no simulation data of any kind.</p>
   </div>
 </section>
 
@@ -47,7 +47,7 @@
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Methodology</span>
     <h2 class="title is-3">Real-data-only fine-tuning pilot</h2>
-    <div class="placeholder-text">[METHODOLOGY DESCRIPTION — TO BE WRITTEN] Physical demonstration collection, simplified pushing task, fine-tuning directly on real-robot data.</div>
+    <p>Demonstrations were collected using kinesthetic teaching rather than the scripted IK pipeline used elsewhere in this project: Baxter was placed in gravity-compensated, backdrivable mode, allowing the arm to be physically guided through the push motion while the raw joint trajectory was recorded, then resampled to 10&nbsp;Hz and replayed under position control. The gripper was closed once at the start of each session and held closed throughout, with a fixed language prompt (&ldquo;push the block to the far side&rdquo;) to avoid colour-grounding ambiguity. Training used a batch size of 2, AdamW, and a cosine learning-rate schedule (peak 2&times;10<sup>-4</sup>, 500 warm-up steps, decay to 1&times;10<sup>-5</sup> over 15,000 steps) &mdash; a shorter run than the simulation datasets, chosen to reduce the risk of overfitting the small real-robot dataset.</p>
     <table class="table is-fullwidth spec-table" style="margin-top:1rem;background:transparent;">
       <tbody>
         <tr><td>Demonstrations</td><td>28 real-robot demonstrations</td></tr>
@@ -63,11 +63,11 @@
     <span class="section-eyebrow">Data collection</span>
     <h2 class="title is-3">Physical demonstration collection</h2>
     <div class="columns">
-      <div class="column"><figure class="image"><img src="../media/real-finetuning/training-block-positions-montage.png" alt="Training block positions montage" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Block-position diversity across the 28 training demonstrations.</p></div>
-      <div class="column"><figure class="image"><img src="../media/real-finetuning/block-detect-annotated-reference.png" alt="Annotated block-detection reference" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Reference frame for automatic block-position detection.</p></div>
+      <div class="column"><figure class="image"><img src="../media/real-finetuning/training-block-positions-montage.png" alt="Training block positions montage" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Block-position diversity across the 28 training demonstrations.</p></div>
+      <div class="column"><figure class="image"><img src="../media/real-finetuning/block-detect-annotated-reference.png" alt="Annotated block-detection reference" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Reference frame for the colour-threshold block-position detector used to measure displacement.</p></div>
     </div>
     <figure class="image" style="margin-top:1rem;"><img src="../media/real-finetuning/training-centroid-visualization.png" alt="Training centroid visualization" style="border-radius:8px;"></figure>
-    <p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Block-centroid tracking across training trajectories.</p>
+    <p class="is-size-7" style="color:#888;">Detected block positions across the 28 real-data training episodes. Yellow dots: detected block centre for each episode. Red cross: centroid (mean position).</p>
     <p class="is-size-7" style="color:#aaa;">[MEDIA TODO] Additional photos from the physical demonstration-collection sessions can go here (see <code>website/videos/physical/</code>).</p>
   </div>
 </section>
@@ -81,10 +81,10 @@
         <video controls muted loop playsinline poster="../media/real-finetuning/clips/real-data-pilot-success-trial7.jpg" style="max-height:480px;">
           <source src="../media/real-finetuning/clips/real-data-pilot-success-trial7.mp4" type="video/mp4">
         </video>
-        <h2 class="subtitle has-text-centered">[VIDEO CAPTION — TO BE WRITTEN] Successful trial from the policy trained on real-robot demonstrations (trial 7).</h2>
+        <h2 class="subtitle has-text-centered">Successful trial from the real-data-only fine-tuned policy pushing the block to the far side (trial 7 of 25).</h2>
       </div>
     </div>
-    <p class="is-size-7" style="color:#aaa;">[MEDIA TODO] <code>website/videos/physical/Demo collection.MOV</code> (188s, 1080p) needs trimming/compression before publishing. <code>Inference.MOV</code> is currently an empty file &mdash; please re-export/re-upload.</p>
+    <p class="is-size-7" style="color:#aaa;">[MEDIA TODO] <code>website/videos/physical/Demo collection.MOV</code> (188s, 1080p) still needs trimming/compression before publishing. The homepage hero video now uses a working copy of the inference clip recovered from Google Drive &mdash; say if you'd like it (or a different clip) embedded here too.</p>
   </div>
 </section>
 
@@ -94,10 +94,10 @@
     <h2 class="title is-3">Real-data fine-tuning performance</h2>
     <div class="columns">
       <div class="column"><div class="box has-text-centered"><p class="heading">Demonstrations</p><p class="title">28</p></div></div>
-      <div class="column"><div class="box has-text-centered"><p class="heading">Task</p><p class="title is-5">Pushing</p></div></div>
-      <div class="column"><div class="box has-text-centered"><p class="heading">Success rate</p><p class="title">&mdash;%</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Evaluation trials</p><p class="title">25</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Success rate</p><p class="title">56%</p></div></div>
     </div>
-    <p class="is-size-7" style="color:#aaa;">[RESULTS DESCRIPTION — TO BE WRITTEN]</p>
+    <p style="margin-top:1rem;">The policy achieved 14 successful trials out of 25 (56%). The most common failure was pushing the block in the wrong direction (7 of 11 failures); three trials involved the arm hitting the table edge, and one block was knocked from the table. Measured displacement did not clearly separate successful and failed trials (mean 27.6&nbsp;cm for successes vs. 23.6&nbsp;cm for failures, with substantial overlap) &mdash; in one failed trial the block moved 17.4&nbsp;cm, comparable to several successes, but towards the near side rather than the required far side, showing that displacement magnitude alone is not a reliable measure of task success. A further limitation: the 28 training demonstrations placed the block at almost the same image location (std. &asymp;2.6&nbsp;cm), and evaluation trials were also close to this position (within &asymp;11.2&nbsp;cm of the training centroid, most within 3.2&nbsp;cm) &mdash; so the 56% figure is a measure of reliability on a scene close to the training distribution, not a measure of generalisation to new block placements.</p>
   </div>
 </section>
 
@@ -105,7 +105,7 @@
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Failure cases</span>
     <h2 class="title is-3">Success / failure comparison</h2>
-    <div class="placeholder-text">[FAILURE MODE NOTES — TO BE WRITTEN] Recorded failure modes include <code>arm_hit_table_edge</code>, <code>pushed_wrong_direction</code>, and <code>knocked_off_table</code> (from evaluation logs).</div>
+    <p>Of the 11 failed trials: 7 were pushed in the wrong direction, 3 involved the arm hitting the table edge, and 1 block was knocked off the table.</p>
     <div class="columns" style="margin-top:1rem;">
       <div class="column">
         <h4 class="title is-6 has-text-centered">Trial 7 &mdash; before / after <span class="tag is-success is-light">success</span></h4>
@@ -137,7 +137,7 @@
       <div class="column is-half">
         <a class="card experiment-card" href="physical-robot.html">
           <div class="card-image"><figure class="image"><img src="../media/physical-robot/physical-setup.jpg" alt="Physical Robot & Sim-to-Real"></figure></div>
-          <div class="card-content"><p class="title is-5">Physical Robot &amp; Sim-to-Real</p><p class="subtitle is-6">[DESCRIPTION — TO BE WRITTEN]</p></div>
+          <div class="card-content"><p class="title is-5">Physical Robot &amp; Sim-to-Real</p><p class="subtitle is-6">Deploying the simulation-trained policy directly on physical Robot DE NIRO / Baxter hardware.</p></div>
         </a>
       </div>
     </div>

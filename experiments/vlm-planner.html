@@ -30,7 +30,7 @@
       <span class="tag is-light">Closed-loop re-planning</span>
       <span class="tag is-light">Goal-conditioned</span>
       <h1 class="title is-2 publication-title" style="margin-top:0.75rem;">Vision&ndash;Language Planner</h1>
-      <div class="placeholder-text">[EXPERIMENT INTRODUCTION — TO BE WRITTEN. High-level VLM planner that compares current and goal scenes and infers the ordered sequence of manipulation subtasks passed to the policy.]</div>
+      <p>High-level task planning implemented using Gemma-3-12B as a layer above the fine-tuned &pi;0.5 policy. The planner determines which of the six manipulation primitives are required to transform the current block configuration into a specified goal configuration, expressing each as a natural-language instruction passed to the policy for execution.</p>
     </div>
   </div>
 </section>
@@ -41,7 +41,7 @@
       <figure class="image">
         <img src="../media/diagrams/vlm-planner-pipeline.png" alt="VLM planner pipeline diagram" style="border-radius:10px;">
       </figure>
-      <h2 class="subtitle has-text-centered">[FIGURE CAPTION — TO BE WRITTEN] Current scene / goal scene &rarr; VLM planner (Gemma-3-12B) &rarr; ordered task sequence.</h2>
+      <h2 class="subtitle has-text-centered">Current scene / goal scene &rarr; VLM planner (Gemma-3-12B) &rarr; ordered task sequence.</h2>
     </div>
   </div>
 </section>
@@ -49,8 +49,8 @@
 <section class="section" id="overview">
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Overview</span>
-    <h2 class="title is-3">[EXPERIMENT TITLE]</h2>
-    <div class="placeholder-text">[EXPERIMENT OVERVIEW — TO BE WRITTEN]</div>
+    <h2 class="title is-3">From image comparison to symbolic state</h2>
+    <p>The initial planner used rendered workspace and goal images as its input, but evaluation showed that modifying the images did not consistently change the planner's output &mdash; evidence that the model was not reliably grounding its decisions in the visual observations for this task. To isolate planning from this perception limitation, the final planner uses the ground-truth symbolic block state provided by the simulator instead: each block is represented as being on either the near or far side of the workspace divider. The planning and execution structure is unchanged; only the state representation given to the planner was replaced.</p>
   </div>
 </section>
 
@@ -58,7 +58,7 @@
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Methodology</span>
     <h2 class="title is-3">State representation &amp; querying strategy</h2>
-    <div class="placeholder-text">[METHODOLOGY DESCRIPTION — TO BE WRITTEN] Planner state representation, per-block independent querying, closed-loop goal checking and re-planning, goal space and integration with the policy.</div>
+    <p>The planner considers each block independently rather than asking the VLM to reason about all three blocks in a single structured response &mdash; motivated by an earlier monitoring pilot in which Gemma-3-12B produced accurate free-form scene descriptions but less reliable structured outputs when required to associate colours and positions with multiple similar objects simultaneously. For each block colour, the planner receives its current and goal symbolic state and returns whether the block must move; if the current and goal positions differ, the corresponding primitive (&ldquo;move the {colour} block to the {goal} side&rdquo;) is added to the task list. After each executed primitive, the current configuration is checked against the goal; if not yet reached, the planner generates an updated sequence from the new state. This plan&ndash;execute&ndash;check cycle repeats for a maximum of three planning rounds, giving the system a practical bound on execution time while allowing it to recover from an unsuccessful manipulation or a change introduced by a human.</p>
     <table class="table is-fullwidth spec-table" style="margin-top:1rem;background:transparent;">
       <tbody>
         <tr><td>Planner model</td><td>Gemma-3-12B</td></tr>
@@ -75,16 +75,16 @@
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Experimental setup</span>
     <h2 class="title is-3">Goal configurations &mdash; six-task workspace</h2>
-    <div class="placeholder-text">[GOAL SPACE DESCRIPTION — TO BE WRITTEN] Eight possible near/far goal configurations across the red, blue, and green blocks.</div>
+    <p>The planner operates over the complete 2&sup3; = 8 configuration space defined by the three block colours and their near/far positions. A goal configuration is specified by the corresponding target arrangement, and the planner generates the required sequence of primitive manipulation tasks to reach it.</p>
     <div class="img-grid" style="margin-top:1rem;">
-      <figure data-lightbox data-caption="[CAPTION] red far · blue far · green far"><img src="../media/vlm-planner/goal_images_6task/red_far_blue_far_green_far.png" alt="red far blue far green far"></figure>
-      <figure data-lightbox data-caption="[CAPTION] red far · blue far · green near"><img src="../media/vlm-planner/goal_images_6task/red_far_blue_far_green_near.png" alt="red far blue far green near"></figure>
-      <figure data-lightbox data-caption="[CAPTION] red far · blue near · green far"><img src="../media/vlm-planner/goal_images_6task/red_far_blue_near_green_far.png" alt="red far blue near green far"></figure>
-      <figure data-lightbox data-caption="[CAPTION] red far · blue near · green near"><img src="../media/vlm-planner/goal_images_6task/red_far_blue_near_green_near.png" alt="red far blue near green near"></figure>
-      <figure data-lightbox data-caption="[CAPTION] red near · blue far · green far"><img src="../media/vlm-planner/goal_images_6task/red_near_blue_far_green_far.png" alt="red near blue far green far"></figure>
-      <figure data-lightbox data-caption="[CAPTION] red near · blue far · green near"><img src="../media/vlm-planner/goal_images_6task/red_near_blue_far_green_near.png" alt="red near blue far green near"></figure>
-      <figure data-lightbox data-caption="[CAPTION] red near · blue near · green far"><img src="../media/vlm-planner/goal_images_6task/red_near_blue_near_green_far.png" alt="red near blue near green far"></figure>
-      <figure data-lightbox data-caption="[CAPTION] red near · blue near · green near"><img src="../media/vlm-planner/goal_images_6task/red_near_blue_near_green_near.png" alt="red near blue near green near"></figure>
+      <figure data-lightbox data-caption="red far · blue far · green far"><img src="../media/vlm-planner/goal_images_6task/red_far_blue_far_green_far.png" alt="red far blue far green far"></figure>
+      <figure data-lightbox data-caption="red far · blue far · green near"><img src="../media/vlm-planner/goal_images_6task/red_far_blue_far_green_near.png" alt="red far blue far green near"></figure>
+      <figure data-lightbox data-caption="red far · blue near · green far"><img src="../media/vlm-planner/goal_images_6task/red_far_blue_near_green_far.png" alt="red far blue near green far"></figure>
+      <figure data-lightbox data-caption="red far · blue near · green near"><img src="../media/vlm-planner/goal_images_6task/red_far_blue_near_green_near.png" alt="red far blue near green near"></figure>
+      <figure data-lightbox data-caption="red near · blue far · green far"><img src="../media/vlm-planner/goal_images_6task/red_near_blue_far_green_far.png" alt="red near blue far green far"></figure>
+      <figure data-lightbox data-caption="red near · blue far · green near"><img src="../media/vlm-planner/goal_images_6task/red_near_blue_far_green_near.png" alt="red near blue far green near"></figure>
+      <figure data-lightbox data-caption="red near · blue near · green far"><img src="../media/vlm-planner/goal_images_6task/red_near_blue_near_green_far.png" alt="red near blue near green far"></figure>
+      <figure data-lightbox data-caption="red near · blue near · green near"><img src="../media/vlm-planner/goal_images_6task/red_near_blue_near_green_near.png" alt="red near blue near green near"></figure>
     </div>
   </div>
 </section>
@@ -93,15 +93,21 @@
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Planner in action</span>
     <h2 class="title is-3">Planning examples</h2>
+    <p>Example current/goal scene pair used to develop and test the planner before switching to the symbolic-state input described above.</p>
     <div class="columns">
-      <div class="column"><figure class="image"><img src="../media/vlm-planner/goal-example.png" alt="Planner goal example" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Example current/goal scene pair passed to the planner.</p></div>
-      <div class="column"><figure class="image"><img src="../media/vlm-planner/gemma-monitor.png" alt="Gemma planner monitor output" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Live planner monitor / Gemma output.</p></div>
-    </div>
-    <div class="columns">
-      <div class="column"><figure class="image"><img src="../media/vlm-planner/test-current.png" alt="Test query current scene" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Current scene (test query)</p></div>
-      <div class="column"><figure class="image"><img src="../media/vlm-planner/test-goal.png" alt="Test query goal scene" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Goal scene (test query)</p></div>
+      <div class="column"><figure class="image"><img src="../media/vlm-planner/goal-example.png" alt="Planner goal example" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Example current/goal scene pair used during planner development.</p></div>
+      <div class="column"><figure class="image"><img src="../media/vlm-planner/test-current.png" alt="Test query current scene" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Current scene (test query).</p></div>
+      <div class="column"><figure class="image"><img src="../media/vlm-planner/test-goal.png" alt="Test query goal scene" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Goal scene (test query).</p></div>
     </div>
     <div class="placeholder-text" style="margin-top:1rem;">[VIDEO SECTION — TO BE ADDED] Planner walkthrough videos (correct plan, re-planning after execution, incorrect plan example).</div>
+
+    <h3 class="title is-4" style="margin-top:2.5rem;">Early monitoring pilot</h3>
+    <p>Before committing to this planner design, an earlier pilot compared two candidate approaches to visually monitoring a multi-object arrangement task on a real-world fruit-sorting setup: a detection-based approach using GroundingDINO, and a purely vision&ndash;language approach using a pretrained Gemma-3-12B model. GroundingDINO gave reliable, precisely localised detections and could verify simple spatial relationships robustly, but required predefined object queries and had no capacity for higher-level task reasoning. Gemma-3-12B produced accurate free-form scene descriptions and could reason flexibly about arbitrary goal conditions, but its structured, checklist-style output was materially less reliable once more than one spatial relationship had to be verified simultaneously. This trade-off &mdash; reliable detection with no reasoning versus flexible reasoning with unreliable structured output &mdash; directly motivated the per-block, single-object querying strategy adopted in the final planner above.</p>
+    <div class="columns">
+      <div class="column"><figure class="image"><img src="../media/vlm-planner/incomplete-task.png" alt="GroundingDINO incorrect order detected" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">GroundingDINO: incorrect order detected.</p></div>
+      <div class="column"><figure class="image"><img src="../media/vlm-planner/task-complete.png" alt="GroundingDINO task completed" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">GroundingDINO: task completed.</p></div>
+      <div class="column"><figure class="image"><img src="../media/vlm-planner/gemma-monitor.png" alt="Gemma-3-12B goal monitor" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Gemma-3-12B goal monitor: per-condition checklist, with a failed spatial-relation check shown in red.</p></div>
+    </div>
   </div>
 </section>
 
@@ -109,13 +115,14 @@
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Results</span>
     <h2 class="title is-3">VLM planner accuracy</h2>
-    <div class="columns">
-      <div class="column"><div class="box has-text-centered"><p class="heading">Planning accuracy</p><p class="title">&mdash;%</p></div></div>
-      <div class="column"><div class="box has-text-centered"><p class="heading">Correct block selection</p><p class="title">&mdash;%</p></div></div>
-      <div class="column"><div class="box has-text-centered"><p class="heading">Correct ordering</p><p class="title">&mdash;%</p></div></div>
-      <div class="column"><div class="box has-text-centered"><p class="heading">Re-planning trials</p><p class="title">&mdash;</p></div></div>
+    <p>The planner was evaluated exhaustively over the 56 non-trivial current&ndash;goal configuration pairs in the 2&sup3; = 8 state space (the 8 cases where current already matches goal are excluded, since the planner is never called for them). With deterministic greedy decoding, each pair was evaluated once.</p>
+    <div class="columns" style="margin-top:1rem;">
+      <div class="column"><div class="box has-text-centered"><p class="heading">Overall exact-match accuracy</p><p class="title">94.6%</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Single-block changes</p><p class="title">100%</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Two-block changes</p><p class="title">91.7%</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Three-block changes</p><p class="title">87.5%</p></div></div>
     </div>
-    <p class="is-size-7" style="color:#aaa;">[RESULTS DESCRIPTION — TO BE WRITTEN]</p>
+    <p class="is-size-7" style="color:#888;margin-top:0.75rem;">53 of 56 pairs produced the exact required sequence of primitives. Accuracy decreased slightly as the number of blocks requiring movement increased, from 100% (24/24) for single-block changes to 91.7% (22/24) for two blocks and 87.5% (7/8) when all three blocks had to move. The three errors consisted of one hallucinated primitive and two omitted primitives &mdash; no case contained both types of error, and all 24 single-block cases were solved correctly.</p>
   </div>
 </section>
 
@@ -123,9 +130,16 @@
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Failure cases</span>
     <h2 class="title is-3">Incorrect planning examples</h2>
-    <div class="columns">
-      <div class="column"><div class="box media-placeholder">[FAILURE MODE — TBD]</div></div>
-      <div class="column"><div class="box media-placeholder">[FAILURE MODE — TBD]</div></div>
+    <p>All three of the planner's 56 evaluated pairs that produced an incorrect sequence involved multi-block goals (R/B/G denote red/blue/green; n/f denote near/far):</p>
+    <div class="table-container" style="margin-top:1rem;">
+      <table class="table is-fullwidth is-striped">
+        <thead><tr><th>Current</th><th>Goal</th><th>Expected</th><th>VLM output</th></tr></thead>
+        <tbody>
+          <tr><td>R<sub>n</sub>,B<sub>n</sub>,G<sub>n</sub></td><td>R<sub>f</sub>,B<sub>f</sub>,G<sub>n</sub></td><td>Blue&rarr;far; Red&rarr;far</td><td>Blue&rarr;far; Green&rarr;near; Red&rarr;far <em>(hallucinated primitive)</em></td></tr>
+          <tr><td>R<sub>n</sub>,B<sub>n</sub>,G<sub>f</sub></td><td>R<sub>f</sub>,B<sub>f</sub>,G<sub>n</sub></td><td>Blue&rarr;far; Green&rarr;near; Red&rarr;far</td><td>Green&rarr;near; Red&rarr;far <em>(missing primitive)</em></td></tr>
+          <tr><td>R<sub>f</sub>,B<sub>n</sub>,G<sub>f</sub></td><td>R<sub>n</sub>,B<sub>f</sub>,G<sub>f</sub></td><td>Blue&rarr;far; Red&rarr;near</td><td>Red&rarr;near <em>(missing primitive)</em></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -138,13 +152,13 @@
       <div class="column is-half">
         <a class="card experiment-card" href="checkpoints.html">
           <div class="card-image"><figure class="image"><img src="../media/checkpoints/success-bar-chart.png" alt="Checkpoint & Policy Development"></figure></div>
-          <div class="card-content"><p class="title is-5">Checkpoint &amp; Policy Development</p><p class="subtitle is-6">[DESCRIPTION — TO BE WRITTEN]</p></div>
+          <div class="card-content"><p class="title is-5">Checkpoint &amp; Policy Development</p><p class="subtitle is-6">Iterating the six-task policy across eight checkpoints, reaching 43.3% trial-level success.</p></div>
         </a>
       </div>
       <div class="column is-half">
         <a class="card experiment-card" href="hrc.html">
           <div class="card-image"><figure class="image"><img src="../media/hrc/hrc-dashboard.png" alt="Human-Robot Collaboration"></figure></div>
-          <div class="card-content"><p class="title is-5">Human-Robot Collaboration</p><p class="subtitle is-6">[DESCRIPTION — TO BE WRITTEN]</p></div>
+          <div class="card-content"><p class="title is-5">Human-Robot Collaboration</p><p class="subtitle is-6">A plan&ndash;execute&ndash;check&ndash;escalate loop: across 50 trials, all reached their goal configuration.</p></div>
         </a>
       </div>
     </div>

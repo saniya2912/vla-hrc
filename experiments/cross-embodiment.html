@@ -31,7 +31,7 @@
       <span class="tag is-light">Unitree G1</span>
       <span class="tag is-light">Joint multi-embodiment training</span>
       <h1 class="title is-2 publication-title" style="margin-top:0.75rem;">Cross-Embodiment Evaluation</h1>
-      <div class="placeholder-text">[EXPERIMENT INTRODUCTION — TO BE WRITTEN. Evaluating whether the adapted VLA policy generalises across robot embodiments via joint multi-embodiment training.]</div>
+      <p>Extends the fine-tuning and demonstration-collection pipeline from Baxter alone to two additional embodiments &mdash; Franka Emika Panda and Unitree G1 (single arm) &mdash; with the aim of training a single cross-embodiment &pi;0.5 policy jointly on all three, rather than three independent solo policies.</p>
     </div>
   </div>
 </section>
@@ -39,8 +39,8 @@
 <section class="section" id="overview">
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Overview</span>
-    <h2 class="title is-3">[EXPERIMENT TITLE]</h2>
-    <div class="placeholder-text">[EXPERIMENT OVERVIEW — TO BE WRITTEN]</div>
+    <h2 class="title is-3">A shared scene, three robots</h2>
+    <p>The Franka and G1 scenes were built in MuJoCo using the same table, dividing line, and block layout as the Baxter environment, so that demonstrations and evaluation criteria remain directly comparable across robots. All experiments were conducted in simulation with only the right arm used for each robot; the G1 lower body was fixed to a pedestal, and both Franka and G1 used simplified parallel grippers (G1's native Dex3 hand was replaced with the Baxter gripper for consistency). The same six manipulation primitives were targeted on both robots, with final task coverage varying due to embodiment-specific reach and collision constraints.</p>
   </div>
 </section>
 
@@ -48,7 +48,7 @@
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Methodology</span>
     <h2 class="title is-3">Experimental setup &amp; joint training</h2>
-    <div class="placeholder-text">[METHODOLOGY DESCRIPTION — TO BE WRITTEN] Experimental setup and joint multi-embodiment training procedure.</div>
+    <p>Demonstrations were generated using the same pipeline as Baxter: task design, damped least-squares inverse-kinematics trajectory generation, scripted recording, and LeRobot conversion, producing datasets in the same format (224&times;224&times;3 workspace and wrist images, 11-dim state, 8-dim action). As the IK controller did not succeed on every task/embodiment combination, demonstrations were collected in excess and only successful episodes retained. To train a single policy across all three embodiments, the datasets were kept separate rather than merged &mdash; Baxter, Franka, and G1 have different joint and action ranges, so each dataset keeps its own normalisation statistics and is combined during training using OpenPI's mixture-loading support with equal weighting (1.0/1.0/1.0). This also allows the joint policy to be compared directly against independently fine-tuned solo policies for each embodiment.</p>
   </div>
 </section>
 
@@ -93,15 +93,16 @@
     <h2 class="title is-3">Transfer across embodiments</h2>
     <div class="table-container">
       <table class="table is-fullwidth is-striped">
-        <thead><tr><th>Embodiment</th><th>Independent training</th><th>Joint multi-embodiment training</th><th>&Delta;</th></tr></thead>
+        <thead><tr><th>Embodiment</th><th>Solo</th><th>Joint</th><th>Change</th></tr></thead>
         <tbody>
-          <tr><td>Baxter (reference)</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-          <tr><td>Franka</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-          <tr><td>Unitree G1</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td>Franka</td><td>34.0% (51/150)</td><td>41.3% (62/150)</td><td>+7.3 pp</td></tr>
+          <tr><td>Unitree G1</td><td>42.0% (63/150)</td><td>34.0% (51/150)</td><td>&minus;8.0 pp</td></tr>
+          <tr><td>Baxter (reference)</td><td>43.3% (26/60)</td><td>10.7% (16/150)</td><td>&minus;32.6 pp</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="is-size-7" style="color:#aaa;">[RESULTS DESCRIPTION — TO BE WRITTEN. Table values intentionally left blank pending final thesis numbers.]</p>
+    <p class="is-size-7" style="color:#666;">Each task was evaluated over 25 trials (150 trials per checkpoint/embodiment); Baxter's solo figure is the existing 10-trial-per-task reference and was not re-evaluated at this larger sample size, so that comparison should be read with some caution.</p>
+    <p style="margin-top:0.75rem;">Joint training does not provide a uniform benefit across embodiments: Franka shows a modest positive transfer effect (+7.3&nbsp;pp), G1 a modest negative effect (&minus;8.0&nbsp;pp), and Baxter a much larger collapse (&minus;32.6&nbsp;pp). The effect was also not uniform across tasks &mdash; for Franka, joint training improved four of six tasks; for G1 it improved three and reduced three. A further diagnostic found the gripper failed to close in 34.7% of Baxter joint-policy trials (52/150), compared with 2.7% on Franka (4/150) and 10.7% on G1 (16/150) &mdash; a possible partial explanation for Baxter's reduced performance, though the experiment does not establish the underlying cause.</p>
   </div>
 </section>
 
@@ -110,8 +111,8 @@
     <span class="section-eyebrow">Failure cases</span>
     <h2 class="title is-3">Negative transfer examples</h2>
     <div class="columns">
-      <div class="column"><div class="box media-placeholder">[FAILURE MODE — TBD]</div></div>
-      <div class="column"><div class="box media-placeholder">[FAILURE MODE — TBD]</div></div>
+      <div class="column"><div class="box"><p class="heading">Baxter, red&rarr;far</p><p class="title is-4">90% &rarr; 8%</p><p class="is-size-7">Solo vs. joint policy. The largest single-task regression observed &mdash; Baxter showed the steepest collapse of the three embodiments under joint training.</p></div></div>
+      <div class="column"><div class="box"><p class="heading">Unitree G1, blue&rarr;near</p><p class="title is-4">40% &rarr; 16%</p><p class="is-size-7">Solo vs. joint policy. Joint training improved G1 on three of six tasks but reduced performance on this one, illustrating the non-uniform, task-by-task nature of the transfer effect.</p></div></div>
     </div>
   </div>
 </section>
@@ -124,13 +125,13 @@
       <div class="column is-half">
         <a class="card experiment-card" href="hrc.html">
           <div class="card-image"><figure class="image"><img src="../media/hrc/hrc-dashboard.png" alt="Human-Robot Collaboration"></figure></div>
-          <div class="card-content"><p class="title is-5">Human-Robot Collaboration</p><p class="subtitle is-6">[DESCRIPTION — TO BE WRITTEN]</p></div>
+          <div class="card-content"><p class="title is-5">Human-Robot Collaboration</p><p class="subtitle is-6">A plan&ndash;execute&ndash;check&ndash;escalate loop: across 50 trials, all reached their goal configuration.</p></div>
         </a>
       </div>
       <div class="column is-half">
         <a class="card experiment-card" href="physical-robot.html">
           <div class="card-image"><figure class="image"><img src="../media/physical-robot/physical-setup.jpg" alt="Physical Robot & Sim-to-Real"></figure></div>
-          <div class="card-content"><p class="title is-5">Physical Robot &amp; Sim-to-Real</p><p class="subtitle is-6">[DESCRIPTION — TO BE WRITTEN]</p></div>
+          <div class="card-content"><p class="title is-5">Physical Robot &amp; Sim-to-Real</p><p class="subtitle is-6">Deploying the simulation-trained policy on physical Robot DE NIRO / Baxter hardware.</p></div>
         </a>
       </div>
     </div>

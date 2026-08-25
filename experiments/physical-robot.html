@@ -30,7 +30,7 @@
       <span class="tag is-light">RealSense</span>
       <span class="tag is-light">Sim-to-real transfer</span>
       <h1 class="title is-2 publication-title" style="margin-top:0.75rem;">Physical Robot &amp; Sim-to-Real</h1>
-      <div class="placeholder-text">[EXPERIMENT INTRODUCTION — TO BE WRITTEN. Deploying the simulation-trained policy on the physical Baxter platform and evaluating direct simulation-to-real transfer.]</div>
+      <p>Moves the validated simulation pipeline onto the physical Baxter robot: the strongest simulation checkpoint (<code>pos_v3</code>) is deployed directly, with no additional real-world training, to test whether simulation-trained manipulation transfers to physical hardware.</p>
     </div>
   </div>
 </section>
@@ -38,8 +38,8 @@
 <section class="section" id="setup-photos">
   <div class="container is-max-desktop">
     <div class="columns">
-      <div class="column"><figure class="image"><img src="../media/physical-robot/physical-setup.jpg" alt="Physical Baxter robot setup" style="border-radius:10px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Physical Baxter setup (faces blurred for privacy).</p></div>
-      <div class="column"><figure class="image"><img src="../media/diagrams/realrobot-architecture.png" alt="Real robot system architecture diagram" style="border-radius:10px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Real-robot control architecture: Baxter &harr; control laptop &harr; RealSense &harr; policy server.</p></div>
+      <div class="column"><figure class="image"><img src="../media/physical-robot/physical-setup.jpg" alt="Physical Baxter robot setup" style="border-radius:10px;"></figure><p class="is-size-7" style="color:#888;">Physical setup with Robot DE NIRO and RealSense camera (faces blurred for privacy).</p></div>
+      <div class="column"><figure class="image"><img src="../media/diagrams/realrobot-architecture.png" alt="Real robot system architecture diagram" style="border-radius:10px;"></figure><p class="is-size-7" style="color:#888;">Network architecture between the robot hardware, the remote control laptop, and the lab PC with GPU.</p></div>
     </div>
   </div>
 </section>
@@ -47,8 +47,8 @@
 <section class="section" id="overview" style="background:#fafafa;">
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Overview</span>
-    <h2 class="title is-3">[EXPERIMENT TITLE]</h2>
-    <div class="placeholder-text">[EXPERIMENT OVERVIEW — TO BE WRITTEN]</div>
+    <h2 class="title is-3">Two threads: direct transfer, and real-data-only fine-tuning</h2>
+    <p>This stage has two parts: validating simulation-to-real policy transfer directly, and a separate pilot that fine-tunes a policy from real demonstrations alone rather than continuing to debug transfer from simulation (covered on the <a href="real-finetuning.html">Real-Data Fine-Tuning</a> page). Together they test whether the simulation environment built for this project is an adequate proxy for the physical Baxter.</p>
   </div>
 </section>
 
@@ -56,7 +56,7 @@
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Methodology</span>
     <h2 class="title is-3">Physical setup &amp; sim-to-real transfer</h2>
-    <div class="placeholder-text">[METHODOLOGY DESCRIPTION — TO BE WRITTEN] Physical setup (Baxter hardware, control laptop, RealSense camera, policy server) and direct simulation-to-real transfer procedure.</div>
+    <p>The physical deployment splits computation across two machines, reflecting the physical location of the available sensors and compute: a remote control laptop runs ROS Indigo and the <code>baxter_interface</code> Python&nbsp;2.7 client library, with direct access to the robot's joint state, gripper state, and its built-in wrist camera over Baxter's native ROS topics, but no GPU suitable for policy inference; a separate, stationary lab PC provides the GPU used for inference and has an Intel RealSense camera attached directly to it for the workspace/scene view. The scene image is captured locally on the lab PC and injected into the observation stream immediately before each inference call. The physical robot uses the same position-control formulation as the simulation policy, with predicted joint-position targets converted to velocity commands using the same proportional controller, velocity limits, and inference frequency used in simulation.</p>
     <table class="table is-fullwidth spec-table" style="margin-top:1rem;background:transparent;">
       <tbody>
         <tr><td>Robot</td><td>Baxter (7-DOF right arm, parallel-jaw gripper)</td></tr>
@@ -73,9 +73,13 @@
     <span class="section-eyebrow">Camera &amp; robot setup</span>
     <h2 class="title is-3">Hardware overview</h2>
     <div class="columns">
-      <div class="column"><figure class="image"><img src="../media/physical-robot/late-stage-overview.png" alt="Late-stage physical setup overview" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN]</p></div>
-      <div class="column"><figure class="image"><img src="../media/physical-robot/late-stage-update.jpg" alt="Late-stage physical setup update" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN]</p></div>
+      <div class="column"><figure class="image"><img src="../media/physical-robot/late-stage-overview.png" alt="Late-stage physical setup overview" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Not captioned in the thesis text &mdash; tell me what this shows and I'll write it up.</p></div>
+      <div class="column"><figure class="image"><img src="../media/physical-robot/late-stage-update.jpg" alt="Late-stage physical setup update" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Not captioned in the thesis text &mdash; tell me what this shows and I'll write it up.</p></div>
     </div>
+    <figure class="image" style="margin-top:1rem;">
+      <img src="../media/vla-policy/workspace-alignment.png" alt="Camera and workspace alignment" style="border-radius:8px;">
+    </figure>
+    <p style="font-size:0.85rem;color:#888;">Camera and workspace alignment: the live RealSense view is overlaid with the simulated workspace to match the physical camera viewpoint to the training configuration.</p>
   </div>
 </section>
 
@@ -88,10 +92,10 @@
         <video controls muted loop playsinline poster="../media/physical-robot/clips/sim-to-real-episode4.jpg" style="max-height:480px;">
           <source src="../media/physical-robot/clips/sim-to-real-episode4.mp4" type="video/mp4">
         </video>
-        <h2 class="subtitle has-text-centered">[VIDEO CAPTION — TO BE WRITTEN] Direct simulation-to-real transfer rollout on physical Baxter (episode 4).</h2>
+        <h2 class="subtitle has-text-centered">Direct simulation-to-real transfer rollout on the physical Baxter (episode 4) &mdash; task 0, move the red block to the far side, using the <code>pos_v3</code> checkpoint with no additional real-world training.</h2>
       </div>
     </div>
-    <div class="placeholder-text">[MORE VIDEOS — TO BE ADDED] Additional real-robot rollout clips.</div>
+    <div class="placeholder-text">[MORE VIDEOS — TO BE ADDED] Additional real-robot rollout clips, if available.</div>
   </div>
 </section>
 
@@ -100,11 +104,11 @@
     <span class="section-eyebrow">Results</span>
     <h2 class="title is-3">Direct sim-to-real transfer</h2>
     <div class="columns">
-      <div class="column"><div class="box has-text-centered"><p class="heading">Physical trials</p><p class="title">&mdash;</p></div></div>
-      <div class="column"><div class="box has-text-centered"><p class="heading">Successful trials</p><p class="title">&mdash; / &mdash;</p></div></div>
-      <div class="column"><div class="box has-text-centered"><p class="heading">Transfer success rate</p><p class="title">&mdash;%</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Physical trials</p><p class="title">4</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Successful trials</p><p class="title">0 / 4</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Simulation reference (pos_v3, same task)</p><p class="title">9 / 10</p></div></div>
     </div>
-    <p class="is-size-7" style="color:#aaa;">[RESULTS DESCRIPTION — TO BE WRITTEN]</p>
+    <p style="margin-top:1rem;">Task 0 (move the red block to the far side) &mdash; the best-performing task for the <code>pos_v3</code> checkpoint in simulation at 9/10 &mdash; was deployed directly on the physical Baxter for four trials. None completed the grasp-and-relocate task. Analysis identified two main sim-to-real mismatches: the physical home pose differed from the MuJoCo training pose by approximately 28&deg; at the elbow and 12&deg; at the wrist, and the RealSense camera extrinsics had not been numerically aligned with the simulation camera. The trials also showed sensitivity to language grounding, with the in-vocabulary colour &ldquo;red&rdquo; producing more consistent gripper closure than the out-of-vocabulary &ldquo;brown&rdquo;. While the direct transfer did not succeed, the results point to specific, identified sources of the sim-to-real gap rather than a single unexplained failure &mdash; and motivated the real-data-only fine-tuning pilot on the next page.</p>
   </div>
 </section>
 
@@ -113,8 +117,8 @@
     <span class="section-eyebrow">Failure cases</span>
     <h2 class="title is-3">Sim-to-real gap</h2>
     <div class="columns">
-      <div class="column"><div class="box media-placeholder">[FAILURE MODE — TBD]</div></div>
-      <div class="column"><div class="box media-placeholder">[FAILURE MODE — TBD]</div></div>
+      <div class="column"><div class="box"><p class="heading">Home-pose mismatch</p><p class="is-size-7">The physical robot's reset pose differed from the MuJoCo training keyframe by &asymp;28&deg; at the elbow and &asymp;12&deg; at the wrist &mdash; every trial's first observation was already outside the training pose distribution.</p></div></div>
+      <div class="column"><div class="box"><p class="heading">Language grounding sensitivity</p><p class="is-size-7">The in-vocabulary colour word &ldquo;red&rdquo; produced more confident, sustained gripper-closure predictions than the out-of-vocabulary &ldquo;brown&rdquo; for the same physical block, evidence of language grounding even in a failing trial.</p></div></div>
     </div>
   </div>
 </section>
@@ -127,13 +131,13 @@
       <div class="column is-half">
         <a class="card experiment-card" href="cross-embodiment.html">
           <div class="card-image"><figure class="image"><img src="../media/cross-embodiment/franka-twoblocks.png" alt="Cross-Embodiment Evaluation"></figure></div>
-          <div class="card-content"><p class="title is-5">Cross-Embodiment Evaluation</p><p class="subtitle is-6">[DESCRIPTION — TO BE WRITTEN]</p></div>
+          <div class="card-content"><p class="title is-5">Cross-Embodiment Evaluation</p><p class="subtitle is-6">Extending the pipeline to Franka Emika Panda and Unitree G1, and training a single joint policy across all three.</p></div>
         </a>
       </div>
       <div class="column is-half">
         <a class="card experiment-card" href="real-finetuning.html">
           <div class="card-image"><figure class="image"><img src="../media/real-finetuning/training-block-positions-montage.png" alt="Real-Data Fine-Tuning"></figure></div>
-          <div class="card-content"><p class="title is-5">Real-Data Fine-Tuning</p><p class="subtitle is-6">[DESCRIPTION — TO BE WRITTEN]</p></div>
+          <div class="card-content"><p class="title is-5">Real-Data Fine-Tuning</p><p class="subtitle is-6">Fine-tuning &pi;0.5 from scratch on 28 real-robot demonstrations, with no simulation data at all.</p></div>
         </a>
       </div>
     </div>
