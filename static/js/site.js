@@ -38,7 +38,7 @@
       '<nav class="navbar" role="navigation" aria-label="main navigation">' +
       '<div class="navbar-brand">' +
       '<a class="navbar-item" href="' + root + 'index.html" style="font-weight:700;">' +
-      '<span class="tag is-dark is-rounded" style="margin-right:8px;">VH</span>VLA&ndash;HRC' +
+      '<img src="' + root + 'static/images/de-niro-logo.png" alt="Robot DE NIRO" style="height:34px;width:auto;margin-right:8px;">VLA&ndash;HRC' +
       "</a>" +
       '<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="siteNavMenu">' +
       "<span aria-hidden=\"true\"></span><span aria-hidden=\"true\"></span><span aria-hidden=\"true\"></span>" +
