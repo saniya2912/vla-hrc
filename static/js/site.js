@@ -45,18 +45,13 @@
       "</a>" +
       "</div>" +
       '<div id="siteNavMenu" class="navbar-menu">' +
-      '<div class="navbar-start" style="flex-grow:1; justify-content:center;">' +
+      '<div class="navbar-end">' +
       '<a class="navbar-item' + (active === "home" ? " is-active-page" : "") + '" href="' + root + 'index.html">Home</a>' +
       '<div class="navbar-item has-dropdown is-hoverable">' +
       '<a class="navbar-link' + (isExpGroup ? " is-active-page" : "") + '">Experiments</a>' +
       '<div class="navbar-dropdown">' + ddItems + "</div>" +
       "</div>" +
       '<a class="navbar-item' + (active === "about" ? " is-active-page" : "") + '" href="' + root + 'about.html">About</a>' +
-      "</div>" +
-      '<div class="navbar-end">' +
-      '<a class="navbar-item' + (active === "todo" ? " is-active-page" : "") + '" href="' + root + 'todo.html" title="Working checklist of every placeholder on the site">' +
-      '<span class="icon"><i class="fas fa-clipboard-list"></i></span><span>Content Checklist</span>' +
-      "</a>" +
       "</div>" +
       "</div>" +
       "</nav>";
