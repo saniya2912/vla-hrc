@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Content Checklist &mdash; VLA-HRC</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="static/css/site.css">
+  <link rel="icon" href="static/images/favicon.svg">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script>window.__SITE_DEPTH__ = 0;</script>
+  <script src="static/js/site.js"></script>
+  <style>
+    .todo-type { font-size: 0.65rem; letter-spacing: .04em; text-transform: uppercase; font-weight: 700; border-radius: 4px; padding: 3px 8px; white-space: nowrap; }
+    .todo-type.text { background: #eef1fd; color: #2952e3; }
+    .todo-type.video { background: #fbeaea; color: #c23b3b; }
+    .todo-type.image { background: #e6f6ef; color: #1a8f5e; }
+    .todo-type.data { background: #fbf1de; color: #b4790f; }
+    .todo-row { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.7rem 0.9rem; border-bottom: 1px solid #f0f0f0; }
+    .todo-row:last-child { border-bottom: none; }
+    .todo-row.is-done { opacity: 0.42; }
+    .todo-row.is-done .todo-label { text-decoration: line-through; }
+    .todo-check { margin-top: 3px; width: 17px; height: 17px; flex: none; cursor: pointer; }
+    .todo-body { flex: 1; min-width: 0; }
+    .todo-label { font-size: 0.92rem; }
+    .todo-meta { font-size: 0.74rem; color: #999; margin-top: 2px; }
+    .todo-goto { flex: none; font-size: 0.78rem; white-space: nowrap; }
+    .todo-page-card { border: 1px solid #eee; border-radius: 10px; margin-bottom: 1.75rem; overflow: hidden; }
+    .todo-page-head { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 1.1rem; background: #fafafa; border-bottom: 1px solid #eee; }
+    .todo-page-head h3 { margin: 0; font-size: 1.05rem; }
+    .todo-progress-pill { font-family: monospace; font-size: 0.75rem; color: #888; }
+    #progress-bar-outer { height: 8px; border-radius: 999px; background: #eee; overflow: hidden; }
+    #progress-bar-inner { height: 100%; background: hsl(204,86%,53%); width: 0%; transition: width .3s ease; }
+    .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0 1.5rem; }
+    .filter-bar button { font-size: 0.78rem; }
+    .todo-row[data-hidden="true"] { display: none; }
+  </style>
+</head>
+<body>
+
+<div id="site-navbar" data-active="todo"></div>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <span class="tag is-light">Working document &mdash; not part of the public narrative</span>
+      <h1 class="title is-2 publication-title" style="margin-top:0.75rem;">Content Checklist</h1>
+      <div class="content">
+        <p>
+          Every <span class="placeholder-chip" style="margin-left:0;">placeholder</span> on the site, one row each,
+          with a link straight to where it lives on the page. Tick items off as you send me the text/video/image
+          for them &mdash; your progress is saved in this browser (nothing is uploaded anywhere).
+        </p>
+      </div>
+      <div class="box" style="max-width:420px;">
+        <div id="progress-bar-outer"><div id="progress-bar-inner"></div></div>
+        <p class="todo-progress-pill" id="progress-label" style="margin-top:0.5rem;">0 / 0 complete</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="filter-bar">
+      <button class="button is-small is-dark" data-filter="all">All</button>
+      <button class="button is-small" data-filter="text"><span class="todo-type text" style="margin-right:4px;">text</span></button>
+      <button class="button is-small" data-filter="video"><span class="todo-type video" style="margin-right:4px;">video</span></button>
+      <button class="button is-small" data-filter="image"><span class="todo-type image" style="margin-right:4px;">image</span></button>
+      <button class="button is-small" data-filter="data"><span class="todo-type data" style="margin-right:4px;">data</span></button>
+      <button class="button is-small is-light" id="hide-done-toggle" style="margin-left:auto;">Hide completed</button>
+      <button class="button is-small is-light" id="reset-progress">Reset progress</button>
+    </div>
+
+    <div id="todo-root"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script>
+/* Every placeholder on the site, grouped by page. `id` must be stable —
+   it's the localStorage key, so don't reorder/renumber existing entries
+   once you've started checking things off. */
+var PAGES = [
+  { title: "Home", href: "index.html", items: [
+    { id: "home-title", type: "text", label: "[PROJECT TITLE]", meta: "Hero heading", hash: "hero" },
+    { id: "home-authors", type: "text", label: "[AUTHORS]", meta: "Hero byline", hash: "hero" },
+    { id: "home-institution", type: "text", label: "[INSTITUTION / DEPARTMENT / SUPERVISORS]", meta: "Hero byline", hash: "hero" },
+    { id: "home-thesis-link", type: "data", label: "[THESIS PDF] link", meta: "Hero button — URL or file", hash: "hero" },
+    { id: "home-code-link", type: "data", label: "[CODE] repository link", meta: "Hero button — URL", hash: "hero" },
+    { id: "home-hero-video", type: "video", label: "Hero video", meta: "Currently an empty placeholder box — pick the strongest demo clip", hash: "hero-video" },
+    { id: "home-hero-caption", type: "text", label: "Hero video caption", hash: "hero-video" },
+    { id: "home-carousel-captions", type: "text", label: "8 project-gallery carousel captions", meta: "One per image in the scroller", hash: "project-gallery" },
+    { id: "home-system-overview", type: "text", label: "System overview description", hash: "system-overview" },
+    { id: "home-pipeline-caption", type: "text", label: "π0.5 architecture figure caption", hash: "system-overview" },
+    { id: "home-card-descriptions", type: "text", label: "8 experiment card descriptions", meta: "Short blurb under each card title", hash: "experiments-grid" },
+    { id: "home-conclusions-preview", type: "image", label: "Conclusions card preview image", hash: "experiments-grid" },
+  ]},
+  { title: "01 · VLA Policy & Baxter Simulation", href: "experiments/vla-policy.html", items: [
+    { id: "vla-intro", type: "text", label: "Experiment introduction", hash: "" },
+    { id: "vla-hero-caption", type: "text", label: "Rollout video caption", meta: "Video itself already in place", hash: "" },
+    { id: "vla-overview", type: "text", label: "[EXPERIMENT TITLE] + overview paragraph", hash: "overview" },
+    { id: "vla-methodology", type: "text", label: "Methodology description + MuJoCo figure caption", hash: "system-methodology" },
+    { id: "vla-task-design", type: "text", label: "Task design description", hash: "experimental-setup" },
+    { id: "vla-camera-captions", type: "text", label: "Camera-view + centroid figure captions (5)", hash: "experimental-setup" },
+    { id: "vla-exec-captions", type: "text", label: "Video intro + 6 execution-sequence captions", hash: "videos" },
+    { id: "vla-photo-captions", type: "text", label: "3 platform photo captions", hash: "photos-platform" },
+    { id: "vla-results-desc", type: "text", label: "Results description", hash: "results" },
+    { id: "vla-results-data", type: "data", label: "Metric values: success rate, demos/task, control representation", hash: "results" },
+    { id: "vla-failures", type: "video", label: "3 failure-case examples (description + clip/image)", hash: "failure-cases" },
+  ]},
+  { title: "02 · Checkpoint & Policy Development", href: "experiments/checkpoints.html", items: [
+    { id: "ckpt-intro", type: "text", label: "Experiment introduction", hash: "" },
+    { id: "ckpt-overview", type: "text", label: "[EXPERIMENT TITLE] + overview paragraph", hash: "overview" },
+    { id: "ckpt-methodology", type: "text", label: "Methodology description + 3 diagnostic figure captions", hash: "methodology" },
+    { id: "ckpt-extra-checkpoints", type: "text", label: "Descriptions for the remaining logged checkpoints (pos_run3, pos_v4, pos_v4b, vel_pickplace)", hash: "experimental-setup" },
+    { id: "ckpt-video-intro", type: "text", label: "Checkpoint-comparison intro paragraph", hash: "videos" },
+    { id: "ckpt-results-table", type: "data", label: "Success-rate table — 28 blank cells", hash: "results" },
+    { id: "ckpt-results-desc", type: "text", label: "Results description", hash: "results" },
+    { id: "ckpt-results-metrics", type: "data", label: "Trial-level success % + tasks-with-non-zero-success", hash: "results" },
+    { id: "ckpt-failure-captions", type: "text", label: "3 failure-diagnostic captions", hash: "failure-cases" },
+    { id: "ckpt-additional", type: "text", label: "Task-complete figure caption", hash: "additional-media" },
+  ]},
+  { title: "03 · VLM Planner", href: "experiments/vlm-planner.html", items: [
+    { id: "vlm-intro", type: "text", label: "Experiment introduction", hash: "" },
+    { id: "vlm-pipeline-caption", type: "text", label: "Planner pipeline figure caption", hash: "" },
+    { id: "vlm-overview", type: "text", label: "[EXPERIMENT TITLE] + overview paragraph", hash: "overview" },
+    { id: "vlm-methodology", type: "text", label: "Methodology description", hash: "methodology" },
+    { id: "vlm-goal-space", type: "text", label: "Goal-space description + 8 goal-configuration captions", hash: "experimental-setup" },
+    { id: "vlm-example-captions", type: "text", label: "2 example-pair figure captions", hash: "planner-in-action" },
+    { id: "vlm-videos", type: "video", label: "3 planner walkthrough videos (correct plan / re-plan / incorrect plan)", meta: "Currently no video at all in this section", hash: "planner-in-action" },
+    { id: "vlm-results-data", type: "data", label: "4 accuracy metrics", hash: "results" },
+    { id: "vlm-results-desc", type: "text", label: "Results description", hash: "results" },
+    { id: "vlm-failures", type: "video", label: "2 incorrect-planning failure examples", hash: "failure-cases" },
+  ]},
+  { title: "04 · Human-Robot Collaboration", href: "experiments/hrc.html", items: [
+    { id: "hrc-intro", type: "text", label: "Experiment introduction", hash: "" },
+    { id: "hrc-loop-caption", type: "text", label: "HRC loop figure caption", hash: "" },
+    { id: "hrc-overview", type: "text", label: "[EXPERIMENT TITLE] + overview paragraph", hash: "overview" },
+    { id: "hrc-methodology", type: "text", label: "Methodology description", hash: "methodology" },
+    { id: "hrc-loop-diagram-caption", type: "text", label: "Plan/execute/check/escalate loop caption — verify against thesis terminology", hash: "methodology" },
+    { id: "hrc-dashboard-caption", type: "text", label: "Dashboard figure caption", hash: "experimental-setup" },
+    { id: "hrc-videos", type: "video", label: "3 videos: autonomous completion, escalation trigger, intervention hand-back", meta: "Only static screenshots in place right now", hash: "autonomous-execution-intervention" },
+    { id: "hrc-results-data", type: "data", label: "4 result metrics", hash: "results" },
+    { id: "hrc-results-desc", type: "text", label: "Results description, incl. non-target block position ablation", hash: "results" },
+    { id: "hrc-additional-captions", type: "text", label: "2 figure captions (final scene, early concept sketch)", hash: "additional-media" },
+  ]},
+  { title: "05 · Cross-Embodiment Evaluation", href: "experiments/cross-embodiment.html", items: [
+    { id: "ce-intro", type: "text", label: "Experiment introduction", hash: "" },
+    { id: "ce-overview", type: "text", label: "[EXPERIMENT TITLE] + overview paragraph", hash: "overview" },
+    { id: "ce-methodology", type: "text", label: "Methodology description", hash: "methodology" },
+    { id: "ce-videos", type: "video", label: "3 comparative rollout videos (Baxter / Franka / Unitree G1)", meta: "Section is currently text-only", hash: "videos" },
+    { id: "ce-results-table", type: "data", label: "Transfer results table — 9 blank cells", hash: "results" },
+    { id: "ce-results-desc", type: "text", label: "Results description", hash: "results" },
+    { id: "ce-failures", type: "video", label: "2 negative-transfer failure examples", hash: "failure-cases" },
+  ]},
+  { title: "06 · Physical Robot & Sim-to-Real", href: "experiments/physical-robot.html", items: [
+    { id: "phys-intro", type: "text", label: "Experiment introduction", hash: "" },
+    { id: "phys-setup-captions", type: "text", label: "2 figure captions (physical setup, architecture diagram)", hash: "setup-photos" },
+    { id: "phys-overview", type: "text", label: "[EXPERIMENT TITLE] + overview paragraph", hash: "overview" },
+    { id: "phys-methodology", type: "text", label: "Methodology description", hash: "methodology" },
+    { id: "phys-hardware-captions", type: "text", label: "2 hardware-overview figure captions", hash: "camera-robot-setup" },
+    { id: "phys-video-caption", type: "text", label: "Sim-to-real video caption", hash: "videos" },
+    { id: "phys-more-videos", type: "video", label: "Additional real-robot rollout clips", hash: "videos" },
+    { id: "phys-results-data", type: "data", label: "3 result metrics (trials, successes, transfer rate)", hash: "results" },
+    { id: "phys-results-desc", type: "text", label: "Results description", hash: "results" },
+    { id: "phys-failures", type: "video", label: "2 sim-to-real-gap failure examples", hash: "failure-cases" },
+  ]},
+  { title: "07 · Real-Data Fine-Tuning", href: "experiments/real-finetuning.html", items: [
+    { id: "rft-intro", type: "text", label: "Experiment introduction", hash: "" },
+    { id: "rft-overview", type: "text", label: "[EXPERIMENT TITLE] + overview paragraph", hash: "overview" },
+    { id: "rft-methodology", type: "text", label: "Methodology description", hash: "methodology" },
+    { id: "rft-data-captions", type: "text", label: "3 data-collection figure captions", hash: "data-collection" },
+    { id: "rft-more-photos", type: "image", label: "Additional demonstration-collection photos", hash: "data-collection" },
+    { id: "rft-video-caption", type: "text", label: "Training video caption", hash: "videos" },
+    { id: "rft-demo-mov", type: "video", label: "\"Demo collection.MOV\" — needs trimming/compression (currently 269MB/1080p)", meta: "website/videos/physical/Demo collection.MOV", hash: "videos" },
+    { id: "rft-inference-mov", type: "video", label: "\"Inference.MOV\" — file is currently empty, needs re-export", meta: "website/videos/physical/Inference.MOV", hash: "videos" },
+    { id: "rft-results-data", type: "data", label: "Success rate %", hash: "results" },
+    { id: "rft-results-desc", type: "text", label: "Results description", hash: "results" },
+    { id: "rft-failure-notes", type: "text", label: "Failure-mode notes (arm_hit_table_edge, pushed_wrong_direction, knocked_off_table)", hash: "failure-cases" },
+  ]},
+  { title: "Conclusions & Project Overview", href: "conclusions.html", items: [
+    { id: "concl-intro", type: "text", label: "Conclusions introduction", hash: "" },
+    { id: "concl-rq-summary", type: "text", label: "Research-questions summary paragraph", hash: "research-questions" },
+    { id: "concl-rq-cards", type: "text", label: "3 research questions + answer summaries", hash: "research-questions" },
+    { id: "concl-findings-table", type: "data", label: "\"Key finding\" column — 7 rows, one per experiment", hash: "summary-across-experiments" },
+    { id: "concl-limitations", type: "text", label: "Limitations", hash: "limitations" },
+    { id: "concl-future-work", type: "text", label: "Future work", hash: "future-work" },
+    { id: "concl-reproducibility", type: "text", label: "Reproducibility notes", hash: "reproducibility-ethics" },
+    { id: "concl-ethics", type: "text", label: "Ethical &amp; practical considerations", hash: "reproducibility-ethics" },
+  ]},
+  { title: "About", href: "about.html", items: [
+    { id: "about-intro", type: "text", label: "About-section intro", hash: "" },
+    { id: "about-author", type: "text", label: "Author name + bio", hash: "author" },
+    { id: "about-supervisors", type: "text", label: "Supervisor name(s) + department", hash: "supervision" },
+    { id: "about-acknowledgements", type: "text", label: "Acknowledgements", hash: "acknowledgements" },
+    { id: "about-thesis-link", type: "data", label: "[THESIS PDF] link", hash: "links" },
+    { id: "about-code-link", type: "data", label: "[CODE REPOSITORY] link", hash: "links" },
+    { id: "about-contact", type: "data", label: "[CONTACT EMAIL]", hash: "links" },
+    { id: "about-citation", type: "text", label: "BibTeX citation key / author list", hash: "BibTeX" },
+  ]},
+  { title: "Media Gallery", href: "gallery.html", items: [
+    { id: "gallery-intro", type: "text", label: "Gallery introduction", hash: "" },
+    { id: "gallery-captions", type: "text", label: "All image captions (mirror the captions written on each experiment page)", meta: "~40 [CAPTION — TO BE WRITTEN] placeholders — fill these in alongside the source page's captions", hash: "" },
+  ]},
+];
+
+(function () {
+  "use strict";
+  var STORAGE_KEY = "vla-hrc-todo-progress";
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch (e) { state = {}; }
+
+  function save() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  var root = document.getElementById("todo-root");
+  var totalCount = 0, doneCount = 0;
+
+  PAGES.forEach(function (page) {
+    var card = document.createElement("div");
+    card.className = "todo-page-card";
+
+    var head = document.createElement("div");
+    head.className = "todo-page-head";
+    var pageDone = page.items.filter(function (it) { return state[it.id]; }).length;
+    head.innerHTML =
+      '<h3>' + page.title + '</h3>' +
+      '<span class="todo-progress-pill" data-page-progress="' + page.href + '">' + pageDone + ' / ' + page.items.length + '</span>';
+    card.appendChild(head);
+
+    page.items.forEach(function (item) {
+      totalCount++;
+      if (state[item.id]) doneCount++;
+
+      var row = document.createElement("div");
+      row.className = "todo-row" + (state[item.id] ? " is-done" : "");
+      row.setAttribute("data-type", item.type);
+      row.setAttribute("data-item-id", item.id);
+
+      var url = page.href + (item.hash ? "#" + item.hash : "");
+      row.innerHTML =
+        '<input type="checkbox" class="todo-check"' + (state[item.id] ? " checked" : "") + '>' +
+        '<div class="todo-body">' +
+          '<span class="todo-type ' + item.type + '">' + item.type + '</span> ' +
+          '<span class="todo-label">' + item.label + '</span>' +
+          (item.meta ? '<div class="todo-meta">' + item.meta + '</div>' : '') +
+        '</div>' +
+        '<a class="todo-goto button is-small" href="' + url + '" target="_blank" rel="noopener">Open &rarr;</a>';
+
+      row.querySelector(".todo-check").addEventListener("change", function (e) {
+        state[item.id] = e.target.checked;
+        save();
+        row.classList.toggle("is-done", e.target.checked);
+        updateProgress();
+      });
+
+      card.appendChild(row);
+    });
+
+    root.appendChild(card);
+  });
+
+  function updateProgress() {
+    var total = 0, done = 0;
+    PAGES.forEach(function (page) {
+      var pageDone = 0;
+      page.items.forEach(function (item) {
+        total++;
+        if (state[item.id]) { done++; pageDone++; }
+      });
+      var pill = document.querySelector('[data-page-progress="' + page.href + '"]');
+      if (pill) pill.textContent = pageDone + " / " + page.items.length;
+    });
+    var pct = total ? Math.round((done / total) * 100) : 0;
+    document.getElementById("progress-bar-inner").style.width = pct + "%";
+    document.getElementById("progress-label").textContent = done + " / " + total + " complete (" + pct + "%)";
+  }
+  updateProgress();
+
+  // Filters
+  var activeFilter = "all";
+  var hideDone = false;
+  function applyFilters() {
+    document.querySelectorAll(".todo-row").forEach(function (row) {
+      var matchesType = activeFilter === "all" || row.getAttribute("data-type") === activeFilter;
+      var matchesDone = !hideDone || !row.classList.contains("is-done");
+      row.setAttribute("data-hidden", (!matchesType || !matchesDone) ? "true" : "false");
+    });
+  }
+  document.querySelectorAll(".filter-bar [data-filter]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      document.querySelectorAll(".filter-bar [data-filter]").forEach(function (b) { b.classList.remove("is-dark"); });
+      btn.classList.add("is-dark");
+      activeFilter = btn.getAttribute("data-filter");
+      applyFilters();
+    });
+  });
+  document.getElementById("hide-done-toggle").addEventListener("click", function () {
+    hideDone = !hideDone;
+    this.classList.toggle("is-dark", hideDone);
+    applyFilters();
+  });
+  document.getElementById("reset-progress").addEventListener("click", function () {
+    if (!confirm("Clear all checked-off progress on this device?")) return;
+    state = {};
+    save();
+    location.reload();
+  });
+
+  // Also re-run the row-observer after navbar/footer injection re-renders DOM
+  document.addEventListener("DOMContentLoaded", function () {});
+})();
+</script>
+
+</body>
+</html>

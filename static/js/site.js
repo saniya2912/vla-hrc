@@ -55,6 +55,11 @@
       '<a class="navbar-item' + (active === "conclusions" ? " is-active-page" : "") + '" href="' + root + 'conclusions.html">Conclusions</a>' +
       '<a class="navbar-item' + (active === "about" ? " is-active-page" : "") + '" href="' + root + 'about.html">About</a>' +
       "</div>" +
+      '<div class="navbar-end">' +
+      '<a class="navbar-item' + (active === "todo" ? " is-active-page" : "") + '" href="' + root + 'todo.html" title="Working checklist of every placeholder on the site">' +
+      '<span class="icon"><i class="fas fa-clipboard-list"></i></span><span>Content Checklist</span>' +
+      "</a>" +
+      "</div>" +
       "</div>" +
       "</nav>";
 
