@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VLA Policy &amp; Baxter Simulation &mdash; VLA-HRC</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/bulma.min.css">
+  <link rel="stylesheet" href="../static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="../static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="../static/css/site.css">
+  <link rel="icon" href="../static/images/favicon.svg">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="../static/js/fontawesome.all.min.js"></script>
+  <script src="../static/js/bulma-carousel.min.js"></script>
+  <script src="../static/js/bulma-slider.min.js"></script>
+  <script>window.__SITE_DEPTH__ = 1;</script>
+  <script src="../static/js/site.js"></script>
+</head>
+<body>
+
+<div id="site-navbar" data-active="vla-policy"></div>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <span class="tag is-light">Experiment 01</span>
+      <span class="tag is-light">π0.5</span>
+      <span class="tag is-light">LoRA fine-tuning</span>
+      <span class="tag is-light">MuJoCo</span>
+      <span class="tag is-light">Baxter</span>
+      <h1 class="title is-2 publication-title" style="margin-top:0.75rem;">VLA Policy &amp; Baxter Simulation</h1>
+      <div class="placeholder-text">[EXPERIMENT INTRODUCTION — TO BE WRITTEN. Overview of adapting the π0.5 vision&ndash;language&ndash;action model to a simulated Baxter multi-task pick-and-place setting via LoRA fine-tuning.]</div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video autoplay muted loop playsinline poster="../media/vla-policy/rollout-demo.jpg">
+        <source src="../media/vla-policy/rollout-demo.mp4" type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">[VIDEO CAPTION — TO BE WRITTEN] Wrist-camera policy rollout, π0.5 (fine-tuned) on the Baxter MuJoCo task.</h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Overview</span>
+    <h2 class="title is-3">[EXPERIMENT TITLE]</h2>
+    <div class="placeholder-text">[EXPERIMENT OVERVIEW — TO BE WRITTEN. Motivation for using Baxter + MuJoCo, why π0.5, and what this experiment establishes as the foundation for later stages.]</div>
+  </div>
+</section>
+
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">System &amp; methodology</span>
+    <h2 class="title is-3">Platform, simulation, and adaptation strategy</h2>
+    <div class="columns is-vcentered">
+      <div class="column">
+        <div class="placeholder-text">[METHODOLOGY DESCRIPTION — TO BE WRITTEN] Robot DE NIRO / Baxter platform, the MuJoCo simulation environment, and the π0.5 base model.</div>
+        <table class="table is-fullwidth spec-table" style="margin-top:1rem;background:transparent;">
+          <tbody>
+            <tr><td>Platform</td><td>Robot DE NIRO (Baxter-based)</td></tr>
+            <tr><td>Simulator</td><td>MuJoCo</td></tr>
+            <tr><td>Base policy</td><td>π0.5 Vision&ndash;Language&ndash;Action model</td></tr>
+            <tr><td>Adaptation</td><td>Parameter-efficient LoRA fine-tuning</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="column">
+        <figure class="image">
+          <img src="../media/vla-policy/baxter-mujoco.png" alt="Baxter robot in MuJoCo simulation" style="border-radius:10px;">
+        </figure>
+        <p style="font-size:0.85rem;color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Baxter model in the MuJoCo simulation environment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Experimental setup</span>
+    <h2 class="title is-3">Task design &amp; demonstration collection</h2>
+    <div class="placeholder-text">[TASK DESIGN DESCRIPTION — TO BE WRITTEN] Six-task multi-colour block pick-and-place, scripted demonstration collection, dataset conversion &amp; normalisation.</div>
+
+    <div class="columns" style="margin-top:1rem;">
+      <div class="column has-text-centered">
+        <figure class="image"><img src="../media/vla-policy/scene_approach.png" alt="Scene camera — approach" style="border-radius:8px;"></figure>
+        <p class="is-size-7">Scene camera &mdash; approach</p>
+      </div>
+      <div class="column has-text-centered">
+        <figure class="image"><img src="../media/vla-policy/wrist_approach.png" alt="Wrist camera — approach" style="border-radius:8px;"></figure>
+        <p class="is-size-7">Wrist camera &mdash; approach</p>
+      </div>
+      <div class="column has-text-centered">
+        <figure class="image"><img src="../media/vla-policy/scene_push.png" alt="Scene camera — push" style="border-radius:8px;"></figure>
+        <p class="is-size-7">Scene camera &mdash; push</p>
+      </div>
+      <div class="column has-text-centered">
+        <figure class="image"><img src="../media/vla-policy/wrist_push.png" alt="Wrist camera — push" style="border-radius:8px;"></figure>
+        <p class="is-size-7">Wrist camera &mdash; push</p>
+      </div>
+    </div>
+
+    <figure class="image" style="margin-top:1.5rem;">
+      <img src="../media/vla-policy/demo-block-centroid.png" alt="Demonstration block centroid tracking" style="border-radius:10px;">
+    </figure>
+    <p style="font-size:0.85rem;color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Block-centroid tracking used during scripted demonstration collection.</p>
+  </div>
+</section>
+
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Videos</span>
+    <h2 class="title is-3">Execution sequence &amp; task rollouts</h2>
+    <div class="placeholder-text">[VIDEO SECTION INTRO — TO BE WRITTEN]</div>
+    <div class="img-grid" style="margin-top:1rem;">
+      <figure data-lightbox data-caption="[CAPTION] a. Initial"><img src="../media/vla-policy/exec-a_initial.png" alt="a. Initial"></figure>
+      <figure data-lightbox data-caption="[CAPTION] b. Approach"><img src="../media/vla-policy/exec-b_approach.png" alt="b. Approach"></figure>
+      <figure data-lightbox data-caption="[CAPTION] c. Descent"><img src="../media/vla-policy/exec-c_descent.png" alt="c. Descent"></figure>
+      <figure data-lightbox data-caption="[CAPTION] d. Lift"><img src="../media/vla-policy/exec-d_lift.png" alt="d. Lift"></figure>
+      <figure data-lightbox data-caption="[CAPTION] e. Carry"><img src="../media/vla-policy/exec-e_carry.png" alt="e. Carry"></figure>
+      <figure data-lightbox data-caption="[CAPTION] f. Place"><img src="../media/vla-policy/exec-f_place.png" alt="f. Place"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Photos &amp; platform</span>
+    <h2 class="title is-3">Robot DE NIRO / Baxter</h2>
+    <div class="columns">
+      <div class="column">
+        <figure class="image"><img src="../media/vla-policy/de-niro.png" alt="Robot DE NIRO / Baxter platform" style="border-radius:10px;"></figure>
+        <p style="font-size:0.85rem;color:#888;">[FIGURE CAPTION — TO BE WRITTEN]</p>
+      </div>
+      <div class="column">
+        <figure class="image"><img src="../media/vla-policy/mujoco-setup.png" alt="MuJoCo scene setup" style="border-radius:10px;"></figure>
+        <p style="font-size:0.85rem;color:#888;">[FIGURE CAPTION — TO BE WRITTEN] MuJoCo scene definition for the pick-and-place task.</p>
+      </div>
+    </div>
+    <figure class="image" style="margin-top:1rem;">
+      <img src="../media/vla-policy/workspace-alignment.png" alt="Workspace alignment" style="border-radius:10px;">
+    </figure>
+    <p style="font-size:0.85rem;color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Workspace alignment between simulation and physical setup.</p>
+  </div>
+</section>
+
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Results</span>
+    <h2 class="title is-3">Baseline policy performance</h2>
+    <div class="placeholder-text">[RESULTS DESCRIPTION — TO BE WRITTEN] Full checkpoint-by-checkpoint comparison lives on the <a href="checkpoints.html">Checkpoint &amp; Policy Development</a> page.</div>
+    <div class="columns" style="margin-top:1rem;">
+      <div class="column"><div class="box has-text-centered"><p class="heading">Tasks</p><p class="title">6</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Success rate</p><p class="title">&mdash;%</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Demonstrations / task</p><p class="title">&mdash;</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Control representation</p><p class="title is-5">TBD</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Failure cases</span>
+    <h2 class="title is-3">Where the base policy struggles</h2>
+    <div class="columns">
+      <div class="column"><div class="box media-placeholder">[FAILURE MODE — TBD]</div></div>
+      <div class="column"><div class="box media-placeholder">[FAILURE MODE — TBD]</div></div>
+      <div class="column"><div class="box media-placeholder">[FAILURE MODE — TBD]</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Related experiments</span>
+    <h2 class="title is-3">Continue exploring</h2>
+    <div class="columns">
+      <div class="column is-half">
+        <a class="card experiment-card" href="checkpoints.html">
+          <div class="card-image"><figure class="image"><img src="../media/checkpoints/success-bar-chart.png" alt="Checkpoint & Policy Development"></figure></div>
+          <div class="card-content"><p class="title is-5">Checkpoint &amp; Policy Development</p><p class="subtitle is-6">[DESCRIPTION — TO BE WRITTEN]</p></div>
+        </a>
+      </div>
+      <div class="column is-half">
+        <a class="card experiment-card" href="vlm-planner.html">
+          <div class="card-image"><figure class="image"><img src="../media/diagrams/vlm-planner-pipeline.png" alt="VLM Planner"></figure></div>
+          <div class="card-content"><p class="title is-5">VLM Planner</p><p class="subtitle is-6">[DESCRIPTION — TO BE WRITTEN]</p></div>
+        </a>
+      </div>
+    </div>
+    <nav class="level" style="margin-top:2rem;border-top:1px solid #eee;padding-top:1.5rem;">
+      <div class="level-left"><a href="../index.html">&larr; Back to Overview</a></div>
+      <div class="level-right"><a href="checkpoints.html">Next: Checkpoint &amp; Policy Development &rarr;</a></div>
+    </nav>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+</body>
+</html>

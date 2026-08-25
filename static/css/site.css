@@ -1,0 +1,279 @@
+/* ==========================================================================
+   VLA-HRC — overrides on top of Bulma + the Nerfies template stylesheet.
+   Kept in the same spirit as the original static/css/index.css: small,
+   targeted rules layered on Bulma's defaults rather than a parallel design
+   system. Multi-page navbar/placeholder/gallery rules are new; the rest
+   (publication-title, teaser, results-carousel, interpolation-panel,
+   footer .icon-link) are carried over from the Nerfies template almost
+   verbatim.
+   ========================================================================== */
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.dnerf, .vla-hrc-caps {
+  font-variant: small-caps;
+}
+
+/* ---- Nerfies-style publication header, kept from the original template ---- */
+
+.publication-title {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors a {
+  color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+  text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.link-block a {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.publication-video {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  border-radius: 10px !important;
+}
+
+.publication-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Teaser hero (page-top video/image) ---- */
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.teaser video, .teaser img {
+  border-radius: 10px;
+  max-height: 640px;
+  width: 100%;
+  object-fit: contain;
+  background: #0b0c0e;
+}
+
+/* ---- Results / media carousel (bulmaCarousel), same pattern as Nerfies ---- */
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 6px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  padding: 0;
+  font-size: 0;
+  background: #f5f5f5;
+}
+
+.results-carousel video, .results-carousel img {
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  font-size: 0.85rem;
+  color: #555;
+  padding: 8px 4px 2px;
+  text-align: center;
+}
+
+/* ---- Interpolation-style grey panel, reused for before/after comparisons ---- */
+
+.interpolation-panel, .compare-panel {
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 1.25rem;
+}
+
+.ba-slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  user-select: none;
+  background: #000;
+}
+.ba-slider img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; }
+.ba-slider .ba-after { clip-path: inset(0 0 0 50%); }
+.ba-slider .ba-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; background: #fff; cursor: ew-resize; box-shadow: 0 0 0 1px rgba(0,0,0,.25); }
+.ba-slider .ba-handle::after {
+  content: "\21d4"; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 34px; height: 34px; border-radius: 50%; background: #fff; color: #222;
+  display: flex; align-items: center; justify-content: center; font-size: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+.ba-tag { position: absolute; top: 10px; font-size: 0.68rem; letter-spacing: .04em; text-transform: uppercase; color: #fff; background: rgba(0,0,0,.6); padding: 3px 9px; border-radius: 999px; z-index: 2; }
+.ba-tag.left { left: 10px; } .ba-tag.right { right: 10px; }
+
+/* ---- Placeholder text / media, styled as a Bulma notification ---- */
+
+.placeholder-text {
+  background: #fffbea;
+  border-left: 4px solid #ffdd57;
+  padding: 0.85rem 1.1rem;
+  font-style: italic;
+  color: #6b5d1f;
+  border-radius: 0 4px 4px 0;
+}
+
+.placeholder-chip {
+  font-size: 0.65rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  background: #fff3cd;
+  color: #946c00;
+  border: 1px solid #ffdd57;
+  border-radius: 999px;
+  padding: 2px 9px;
+  margin-left: 8px;
+  vertical-align: middle;
+  font-variant: normal;
+}
+
+.media-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  background: repeating-linear-gradient(135deg, #f5f5f5, #f5f5f5 10px, #ececec 10px, #ececec 20px);
+  border: 1.5px dashed #ccc;
+  border-radius: 8px;
+  color: #888;
+  font-family: monospace;
+  font-size: 0.78rem;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+/* ---- Multi-page navbar dropdown, same visual pattern as the original
+        "More Research" navbar-dropdown ---- */
+
+.navbar-item.is-active-page {
+  font-weight: 700;
+  color: hsl(204, 86%, 43%) !important;
+}
+
+.navbar-dropdown .navbar-item .dd-sub {
+  display: block;
+  font-size: 0.72rem;
+  color: #888;
+}
+
+/* ---- Bulma card grid for the experiments index, matching Bulma's .card ---- */
+
+.experiment-card .card-image figure.image {
+  margin: 0;
+}
+.experiment-card .card-image img, .experiment-card .card-image video {
+  height: 190px;
+  width: 100%;
+  object-fit: cover;
+}
+.experiment-card .card-content .tags {
+  margin-top: 0.5rem;
+}
+.experiment-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+}
+.experiment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+/* ---- Loop diagram (HRC escalation loop) ---- */
+
+.loop-diagram { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.5rem; margin: 1.5rem 0; }
+.loop-node { padding: 0.75rem 1.25rem; border-radius: 999px; border: 1.5px solid #dbdbdb; background: #fff; font-weight: 600; font-size: 0.88rem; }
+.loop-node.escalate { border-color: #ffdd57; color: #946c00; background: #fffbea; }
+.loop-connector { color: #b5b5b5; font-size: 1.1rem; }
+
+/* ---- Pipeline strip on the homepage ---- */
+
+.pipeline-step { text-align: center; }
+.pipeline-step .step-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 10px; margin-bottom: 6px;
+  background: hsl(204, 86%, 94%); color: hsl(204, 86%, 43%); font-weight: 700; font-size: 0.85rem;
+}
+.pipeline-step .step-title { display: block; font-weight: 600; font-size: 0.9rem; }
+.pipeline-step .step-desc { display: block; font-size: 0.76rem; color: #888; }
+.pipeline-arrow { color: #ccc; text-align: center; }
+
+/* ---- Footer, same as the Nerfies template ---- */
+
+.footer .icon-link {
+  font-size: 25px;
+  color: #000;
+}
+
+/* ---- Image grid with lightbox (extends the .carousel pattern for pages
+        that need a fuller grid instead of a scroller) ---- */
+
+.img-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.img-grid figure { margin: 0; cursor: zoom-in; border-radius: 6px; overflow: hidden; aspect-ratio: 4/3; }
+.img-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
+.img-grid figure:hover img { transform: scale(1.05); }
+
+.lightbox-overlay {
+  position: fixed; inset: 0; z-index: 1000; background: rgba(10,10,10,.92);
+  display: flex; align-items: center; justify-content: center; padding: 2rem;
+  opacity: 0; visibility: hidden; transition: opacity .2s ease, visibility .2s ease;
+}
+.lightbox-overlay.is-open { opacity: 1; visibility: visible; }
+.lightbox-overlay img { max-width: 92vw; max-height: 84vh; object-fit: contain; border-radius: 6px; }
+.lightbox-overlay .lightbox-caption { position: absolute; bottom: 24px; left: 0; right: 0; text-align: center; color: #ddd; font-size: 0.85rem; }
+.lightbox-overlay button { position: absolute; width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); color: #fff; font-size: 1.2rem; cursor: pointer; }
+.lightbox-overlay .lb-close { top: 18px; right: 20px; }
+.lightbox-overlay .lb-prev { left: 18px; top: 50%; transform: translateY(-50%); }
+.lightbox-overlay .lb-next { right: 18px; top: 50%; transform: translateY(-50%); }
+
+/* ---- Misc ---- */
+
+.section-eyebrow {
+  font-family: monospace;
+  font-size: 0.75rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: hsl(204, 86%, 43%);
+  font-weight: 700;
+}
+
+.spec-table td:first-child { color: #888; font-family: monospace; font-size: 0.78rem; text-transform: uppercase; white-space: nowrap; }
+
+@media (max-width: 768px) {
+  .pipeline-arrow { transform: rotate(90deg); }
+}

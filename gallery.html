@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Media Gallery &mdash; VLA-HRC</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="static/css/site.css">
+  <link rel="icon" href="static/images/favicon.svg">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script>window.__SITE_DEPTH__ = 0;</script>
+  <script src="static/js/site.js"></script>
+</head>
+<body>
+
+<div id="site-navbar" data-active="gallery"></div>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <span class="tag is-light">All media</span>
+      <h1 class="title is-2 publication-title" style="margin-top:0.75rem;">Media Gallery</h1>
+      <div class="placeholder-text">[GALLERY INTRODUCTION — TO BE WRITTEN] Every experiment's photos, diagrams, and rollout footage in one place. Jump to a section, or browse the full project pages for context.</div>
+      <div class="tags" style="margin-top:1rem;">
+        <a href="#gal-vla-policy" class="tag">VLA Policy</a>
+        <a href="#gal-checkpoints" class="tag">Checkpoints</a>
+        <a href="#gal-vlm-planner" class="tag">VLM Planner</a>
+        <a href="#gal-hrc" class="tag">HRC</a>
+        <a href="#gal-cross-embodiment" class="tag">Cross-Embodiment</a>
+        <a href="#gal-physical-robot" class="tag">Physical Robot</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gal-vla-policy">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">01 &middot; VLA Policy &amp; Simulation</span>
+    <h2 class="title is-3">Baxter in MuJoCo</h2>
+    <div class="img-grid">
+      <figure data-lightbox data-caption="[CAPTION] Baxter in MuJoCo"><img src="media/vla-policy/baxter-mujoco.png" alt="Baxter in MuJoCo"></figure>
+      <figure data-lightbox data-caption="[CAPTION] MuJoCo scene setup"><img src="media/vla-policy/mujoco-setup.png" alt="MuJoCo scene setup"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Robot DE NIRO / Baxter"><img src="media/vla-policy/de-niro.png" alt="Robot DE NIRO / Baxter"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Workspace alignment"><img src="media/vla-policy/workspace-alignment.png" alt="Workspace alignment"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Demonstration block centroid"><img src="media/vla-policy/demo-block-centroid.png" alt="Demonstration block centroid"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Scene camera — approach"><img src="media/vla-policy/scene_approach.png" alt="Scene camera — approach"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Wrist camera — approach"><img src="media/vla-policy/wrist_approach.png" alt="Wrist camera — approach"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Scene camera — push"><img src="media/vla-policy/scene_push.png" alt="Scene camera — push"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Wrist camera — push"><img src="media/vla-policy/wrist_push.png" alt="Wrist camera — push"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Execution — initial"><img src="media/vla-policy/exec-a_initial.png" alt="Execution — initial"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Execution — approach"><img src="media/vla-policy/exec-b_approach.png" alt="Execution — approach"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Execution — descent"><img src="media/vla-policy/exec-c_descent.png" alt="Execution — descent"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Execution — lift"><img src="media/vla-policy/exec-d_lift.png" alt="Execution — lift"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Execution — carry"><img src="media/vla-policy/exec-e_carry.png" alt="Execution — carry"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Execution — place"><img src="media/vla-policy/exec-f_place.png" alt="Execution — place"></figure>
+    </div>
+    <div class="columns results-carousel" style="margin-top:1rem;">
+      <div class="column is-one-third">
+        <div class="item"><video controls muted loop playsinline poster="media/vla-policy/rollout-demo.jpg"><source src="media/vla-policy/rollout-demo.mp4" type="video/mp4"></video><div class="carousel-caption">Policy rollout demo</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gal-checkpoints" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">02 &middot; Checkpoint &amp; Policy Development</span>
+    <h2 class="title is-3">Diagnostics &amp; checkpoint rollouts</h2>
+    <div class="img-grid">
+      <figure data-lightbox data-caption="[CAPTION] Success rate by checkpoint"><img src="media/checkpoints/success-bar-chart.png" alt="Success rate by checkpoint"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Gripper initialisation fix"><img src="media/checkpoints/gripper-init-fix.png" alt="Gripper initialisation fix"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Gripper hysteresis"><img src="media/checkpoints/gripper-hysteresis.png" alt="Gripper hysteresis"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Policy actions (7D)"><img src="media/checkpoints/policy-actions-7d.png" alt="Policy actions (7D)"></figure>
+      <figure data-lightbox data-caption="[CAPTION] State mismatch"><img src="media/checkpoints/state-mismatch.png" alt="State mismatch"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Chunk repetition"><img src="media/checkpoints/chunk-repetition.png" alt="Chunk repetition"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Incomplete task"><img src="media/checkpoints/incomplete-task.png" alt="Incomplete task"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Task complete"><img src="media/checkpoints/task-complete.png" alt="Task complete"></figure>
+    </div>
+    <p style="margin-top:1rem;">Full per-task, per-checkpoint video grid on the <a href="experiments/checkpoints.html">Checkpoint &amp; Policy Development</a> page (24 rollout clips across 4 checkpoints).</p>
+  </div>
+</section>
+
+<section class="section" id="gal-vlm-planner">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">03 &middot; VLM Planner</span>
+    <h2 class="title is-3">Planner pipeline &amp; goal space</h2>
+    <div class="img-grid">
+      <figure data-lightbox data-caption="[CAPTION] Planner pipeline"><img src="media/diagrams/vlm-planner-pipeline.png" alt="Planner pipeline"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Goal example"><img src="media/vlm-planner/goal-example.png" alt="Goal example"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Gemma planner monitor"><img src="media/vlm-planner/gemma-monitor.png" alt="Gemma planner monitor"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Test query — current scene"><img src="media/vlm-planner/test-current.png" alt="Test query current"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Test query — goal scene"><img src="media/vlm-planner/test-goal.png" alt="Test query goal"></figure>
+      <figure data-lightbox data-caption="[CAPTION] red far · blue far · green far"><img src="media/vlm-planner/goal_images_6task/red_far_blue_far_green_far.png" alt="goal config"></figure>
+      <figure data-lightbox data-caption="[CAPTION] red far · blue far · green near"><img src="media/vlm-planner/goal_images_6task/red_far_blue_far_green_near.png" alt="goal config"></figure>
+      <figure data-lightbox data-caption="[CAPTION] red far · blue near · green far"><img src="media/vlm-planner/goal_images_6task/red_far_blue_near_green_far.png" alt="goal config"></figure>
+      <figure data-lightbox data-caption="[CAPTION] red far · blue near · green near"><img src="media/vlm-planner/goal_images_6task/red_far_blue_near_green_near.png" alt="goal config"></figure>
+      <figure data-lightbox data-caption="[CAPTION] red near · blue far · green far"><img src="media/vlm-planner/goal_images_6task/red_near_blue_far_green_far.png" alt="goal config"></figure>
+      <figure data-lightbox data-caption="[CAPTION] red near · blue far · green near"><img src="media/vlm-planner/goal_images_6task/red_near_blue_far_green_near.png" alt="goal config"></figure>
+      <figure data-lightbox data-caption="[CAPTION] red near · blue near · green far"><img src="media/vlm-planner/goal_images_6task/red_near_blue_near_green_far.png" alt="goal config"></figure>
+      <figure data-lightbox data-caption="[CAPTION] red near · blue near · green near"><img src="media/vlm-planner/goal_images_6task/red_near_blue_near_green_near.png" alt="goal config"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gal-hrc" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">04 &middot; Human-Robot Collaboration</span>
+    <h2 class="title is-3">Dashboard &amp; interaction loop</h2>
+    <div class="img-grid">
+      <figure data-lightbox data-caption="[CAPTION] HRC status dashboard"><img src="media/hrc/hrc-dashboard.png" alt="HRC status dashboard"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Autonomous execution"><img src="media/hrc/autonomous-execution.png" alt="Autonomous execution"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Human intervention"><img src="media/hrc/human-intervention.png" alt="Human intervention"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Final collaborative scene"><img src="media/hrc/final-scene.png" alt="Final collaborative scene"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Human-robot interaction loop"><img src="media/diagrams/hrc-loop.png" alt="Human-robot interaction loop"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Early concept diagram"><img src="media/diagrams/hrc-concept.png" alt="Early concept diagram"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gal-cross-embodiment">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">05 &middot; Cross-Embodiment</span>
+    <h2 class="title is-3">Baxter &middot; Franka &middot; Unitree G1</h2>
+    <div class="img-grid">
+      <figure data-lightbox data-caption="[CAPTION] Baxter"><img src="media/cross-embodiment/baxter-twoblocks.png" alt="Baxter"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Franka"><img src="media/cross-embodiment/franka-twoblocks.png" alt="Franka"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Unitree G1"><img src="media/cross-embodiment/g1-twoblocks.png" alt="Unitree G1"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gal-physical-robot" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">06&ndash;07 &middot; Physical Robot, Sim-to-Real &amp; Real-Data Fine-Tuning</span>
+    <h2 class="title is-3">Real hardware</h2>
+    <div class="img-grid">
+      <figure data-lightbox data-caption="[CAPTION] Physical Baxter setup"><img src="media/physical-robot/physical-setup.jpg" alt="Physical Baxter setup"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Real-robot control architecture"><img src="media/diagrams/realrobot-architecture.png" alt="Real-robot control architecture"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Late-stage setup overview"><img src="media/physical-robot/late-stage-overview.png" alt="Late-stage setup overview"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Late-stage setup update"><img src="media/physical-robot/late-stage-update.jpg" alt="Late-stage setup update"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Training block positions"><img src="media/real-finetuning/training-block-positions-montage.png" alt="Training block positions"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Training centroid visualization"><img src="media/real-finetuning/training-centroid-visualization.png" alt="Training centroid visualization"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Block-detection reference"><img src="media/real-finetuning/block-detect-annotated-reference.png" alt="Block-detection reference"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Trial 7 — before (success)"><img src="media/real-finetuning/snapshots/trial_007_before.png" alt="Trial 7 before"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Trial 7 — after (success)"><img src="media/real-finetuning/snapshots/trial_007_after.png" alt="Trial 7 after"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Trial 2 — before (failed)"><img src="media/real-finetuning/snapshots/trial_002_before.png" alt="Trial 2 before"></figure>
+      <figure data-lightbox data-caption="[CAPTION] Trial 2 — after (failed)"><img src="media/real-finetuning/snapshots/trial_002_after.png" alt="Trial 2 after"></figure>
+    </div>
+    <div class="columns results-carousel" style="margin-top:1rem;">
+      <div class="column is-half">
+        <div class="item"><video controls muted loop playsinline poster="media/posters/sim-to-real-episode4.jpg"><source src="media/physical-robot/clips/sim-to-real-episode4.mp4" type="video/mp4"></video><div class="carousel-caption">Sim-to-real episode 4</div></div>
+      </div>
+      <div class="column is-half">
+        <div class="item"><video controls muted loop playsinline poster="media/posters/real-data-pilot-trial7.jpg"><source src="media/real-finetuning/clips/real-data-pilot-success-trial7.mp4" type="video/mp4"></video><div class="carousel-caption">Real-data pilot — success trial 7</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+</body>
+</html>

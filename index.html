@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="[SHORT PROJECT DESCRIPTION — TO BE WRITTEN]">
+  <meta name="keywords" content="VLA, Vision-Language-Action, Human-Robot Collaboration, Baxter, pi0.5, LoRA">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[PROJECT TITLE] &mdash; VLA-HRC</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="static/css/site.css">
+  <link rel="icon" href="static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script>window.__SITE_DEPTH__ = 0;</script>
+  <script src="static/js/site.js"></script>
+</head>
+<body>
+
+<div id="site-navbar" data-active="home"></div>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">[PROJECT TITLE] <span class="placeholder-chip">to be written</span></h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">[AUTHORS]</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">[INSTITUTION / DEPARTMENT / SUPERVISORS]</span>
+          </div>
+          <div class="is-size-6" style="margin-top:0.5rem;">
+            <span class="tag is-light">MRes Design Engineering</span>
+            <span class="tag is-light">Imperial College London</span>
+            <span class="tag is-light">2025&ndash;2026</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>[THESIS PDF]</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>[CODE]</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="experiments/vla-policy.html" class="external-link button is-normal is-rounded is-link">
+                  <span class="icon"><i class="fas fa-arrow-right"></i></span>
+                  <span>Explore the experiments</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="media-placeholder" style="aspect-ratio:21/9;">
+        <span>[HERO VIDEO PLACEHOLDER]</span>
+      </div>
+      <h2 class="subtitle has-text-centered" style="margin-top:1rem;">
+        [HERO VIDEO CAPTION — TO BE WRITTEN. Candidate: best physical-robot or six-task rollout clip.]
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-4 has-text-centered">Project gallery</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="media/vla-policy/exec-a_initial.png" alt="Execution sequence — initial">
+          <div class="carousel-caption">[CAPTION — TO BE WRITTEN]</div>
+        </div>
+        <div class="item">
+          <img src="media/vla-policy/exec-c_descent.png" alt="Execution sequence — descent">
+          <div class="carousel-caption">[CAPTION — TO BE WRITTEN]</div>
+        </div>
+        <div class="item">
+          <img src="media/vla-policy/exec-f_place.png" alt="Execution sequence — place">
+          <div class="carousel-caption">[CAPTION — TO BE WRITTEN]</div>
+        </div>
+        <div class="item">
+          <img src="media/cross-embodiment/baxter-twoblocks.png" alt="Baxter embodiment">
+          <div class="carousel-caption">[CAPTION — TO BE WRITTEN]</div>
+        </div>
+        <div class="item">
+          <img src="media/cross-embodiment/franka-twoblocks.png" alt="Franka embodiment">
+          <div class="carousel-caption">[CAPTION — TO BE WRITTEN]</div>
+        </div>
+        <div class="item">
+          <img src="media/cross-embodiment/g1-twoblocks.png" alt="Unitree G1 embodiment">
+          <div class="carousel-caption">[CAPTION — TO BE WRITTEN]</div>
+        </div>
+        <div class="item">
+          <img src="media/hrc/hrc-dashboard.png" alt="HRC status dashboard">
+          <div class="carousel-caption">[CAPTION — TO BE WRITTEN]</div>
+        </div>
+        <div class="item">
+          <img src="media/physical-robot/physical-setup.jpg" alt="Physical Baxter setup">
+          <div class="carousel-caption">[CAPTION — TO BE WRITTEN]</div>
+        </div>
+      </div>
+      <p class="has-text-centered" style="margin-top:0.5rem;"><a href="gallery.html">Full media gallery &rarr;</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <span class="section-eyebrow">System overview</span>
+        <h2 class="title is-3">From a pretrained VLA to a collaborative manipulation system</h2>
+        <div class="placeholder-text has-text-left">[SYSTEM OVERVIEW DESCRIPTION — TO BE WRITTEN. This section should walk through how π0.5, LoRA fine-tuning, the VLM planner, and human escalation fit together.]</div>
+      </div>
+    </div>
+
+    <div class="columns is-centered" style="margin-top:2rem;">
+      <div class="column pipeline-step">
+        <span class="step-icon">01</span>
+        <span class="step-title">π0.5 VLA base model</span>
+        <span class="step-desc">Pretrained vision&ndash;language&ndash;action policy</span>
+      </div>
+      <div class="column is-narrow pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+      <div class="column pipeline-step">
+        <span class="step-icon">02</span>
+        <span class="step-title">LoRA fine-tuning</span>
+        <span class="step-desc">Adapted to Baxter in MuJoCo</span>
+      </div>
+      <div class="column is-narrow pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+      <div class="column pipeline-step">
+        <span class="step-icon">03</span>
+        <span class="step-title">VLM planner</span>
+        <span class="step-desc">Current vs. goal scene &rarr; task sequence</span>
+      </div>
+      <div class="column is-narrow pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+      <div class="column pipeline-step">
+        <span class="step-icon">04</span>
+        <span class="step-title">HRC execution loop</span>
+        <span class="step-desc">Plan &middot; execute &middot; check &middot; escalate</span>
+      </div>
+      <div class="column is-narrow pipeline-arrow"><i class="fas fa-arrow-right"></i></div>
+      <div class="column pipeline-step">
+        <span class="step-icon">05</span>
+        <span class="step-title">Cross-embodiment &amp; real robot</span>
+        <span class="step-desc">Franka &middot; Unitree G1 &middot; physical Baxter</span>
+      </div>
+    </div>
+
+    <figure class="image" style="margin-top:2rem;">
+      <img src="media/diagrams/pi05-overview.png" alt="π0.5 pretraining and post-training architecture overview" style="border-radius:10px;border:1px solid #eee;">
+      <figcaption class="has-text-centered" style="font-size:0.85rem;color:#888;margin-top:0.5rem;">[FIGURE CAPTION — TO BE WRITTEN] &mdash; π0.5 pre-training / post-training &amp; inference architecture (source: thesis figures).</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered" style="margin-bottom:2rem;">
+      <span class="section-eyebrow">Experiments</span>
+      <h2 class="title is-3">Eight stages, one pipeline</h2>
+      <p>Each stage of the thesis has its own page with methodology, media, and results.</p>
+    </div>
+
+    <div class="columns is-multiline">
+      <div class="column is-one-third">
+        <a class="card experiment-card" href="experiments/vla-policy.html">
+          <div class="card-image"><figure class="image"><img src="media/vla-policy/baxter-mujoco.png" alt="VLA Policy & Baxter Simulation"></figure></div>
+          <div class="card-content">
+            <p class="title is-5">01 &middot; VLA Policy &amp; Baxter Simulation</p>
+            <p class="subtitle is-6">[EXPERIMENT DESCRIPTION — TO BE WRITTEN] Adapting π0.5 to a simulated Baxter pick-and-place setting.</p>
+            <div class="tags"><span class="tag">π0.5</span><span class="tag">LoRA</span><span class="tag">MuJoCo</span></div>
+          </div>
+        </a>
+      </div>
+      <div class="column is-one-third">
+        <a class="card experiment-card" href="experiments/checkpoints.html">
+          <div class="card-image"><figure class="image"><img src="media/checkpoints/success-bar-chart.png" alt="Checkpoint & Policy Development"></figure></div>
+          <div class="card-content">
+            <p class="title is-5">02 &middot; Checkpoint &amp; Policy Development</p>
+            <p class="subtitle is-6">[EXPERIMENT DESCRIPTION — TO BE WRITTEN] Iterating the six-task policy across checkpoints and control representations.</p>
+            <div class="tags"><span class="tag">Checkpoints</span><span class="tag">Training</span></div>
+          </div>
+        </a>
+      </div>
+      <div class="column is-one-third">
+        <a class="card experiment-card" href="experiments/vlm-planner.html">
+          <div class="card-image"><figure class="image"><img src="media/diagrams/vlm-planner-pipeline.png" alt="VLM Planner"></figure></div>
+          <div class="card-content">
+            <p class="title is-5">03 &middot; VLM Planner</p>
+            <p class="subtitle is-6">[EXPERIMENT DESCRIPTION — TO BE WRITTEN] Comparing current vs. goal scenes to produce an ordered task sequence.</p>
+            <div class="tags"><span class="tag">Gemma-3-12B</span><span class="tag">Planning</span></div>
+          </div>
+        </a>
+      </div>
+      <div class="column is-one-third">
+        <a class="card experiment-card" href="experiments/hrc.html">
+          <div class="card-image"><figure class="image"><img src="media/hrc/hrc-dashboard.png" alt="Human-Robot Collaboration"></figure></div>
+          <div class="card-content">
+            <p class="title is-5">04 &middot; Human-Robot Collaboration</p>
+            <p class="subtitle is-6">[EXPERIMENT DESCRIPTION — TO BE WRITTEN] Plan, execute, check, and escalate failed subtasks to a human collaborator.</p>
+            <div class="tags"><span class="tag">Escalation</span><span class="tag">Dashboard</span></div>
+          </div>
+        </a>
+      </div>
+      <div class="column is-one-third">
+        <a class="card experiment-card" href="experiments/cross-embodiment.html">
+          <div class="card-image"><figure class="image"><img src="media/cross-embodiment/franka-twoblocks.png" alt="Cross-Embodiment Evaluation"></figure></div>
+          <div class="card-content">
+            <p class="title is-5">05 &middot; Cross-Embodiment Evaluation</p>
+            <p class="subtitle is-6">[EXPERIMENT DESCRIPTION — TO BE WRITTEN] Joint multi-embodiment training and transfer across three robot platforms.</p>
+            <div class="tags"><span class="tag">Baxter</span><span class="tag">Franka</span><span class="tag">Unitree G1</span></div>
+          </div>
+        </a>
+      </div>
+      <div class="column is-one-third">
+        <a class="card experiment-card" href="experiments/physical-robot.html">
+          <div class="card-image"><figure class="image"><img src="media/physical-robot/physical-setup.jpg" alt="Physical Robot & Sim-to-Real"></figure></div>
+          <div class="card-content">
+            <p class="title is-5">06 &middot; Physical Robot &amp; Sim-to-Real</p>
+            <p class="subtitle is-6">[EXPERIMENT DESCRIPTION — TO BE WRITTEN] Deploying the policy on the physical Baxter platform.</p>
+            <div class="tags"><span class="tag">Sim-to-real</span></div>
+          </div>
+        </a>
+      </div>
+      <div class="column is-one-third">
+        <a class="card experiment-card" href="experiments/real-finetuning.html">
+          <div class="card-image"><figure class="image"><img src="media/real-finetuning/training-block-positions-montage.png" alt="Real-Data Fine-Tuning"></figure></div>
+          <div class="card-content">
+            <p class="title is-5">07 &middot; Real-Data Fine-Tuning</p>
+            <p class="subtitle is-6">[EXPERIMENT DESCRIPTION — TO BE WRITTEN] Fine-tuning directly on physical-robot demonstrations.</p>
+            <div class="tags"><span class="tag">Real demonstrations</span></div>
+          </div>
+        </a>
+      </div>
+      <div class="column is-one-third">
+        <a class="card experiment-card" href="conclusions.html">
+          <div class="card-image"><figure class="image media-placeholder" style="height:190px;min-height:0;"><span>[PREVIEW]</span></figure></div>
+          <div class="card-content">
+            <p class="title is-5">08 &middot; Conclusions &amp; Project Overview</p>
+            <p class="subtitle is-6">[SUMMARY — TO BE WRITTEN] Findings across all experiments and directions for future work.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkpoint &amp; Policy Development &mdash; VLA-HRC</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/bulma.min.css">
+  <link rel="stylesheet" href="../static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="../static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="../static/css/site.css">
+  <link rel="icon" href="../static/images/favicon.svg">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="../static/js/fontawesome.all.min.js"></script>
+  <script src="../static/js/bulma-carousel.min.js"></script>
+  <script src="../static/js/bulma-slider.min.js"></script>
+  <script>window.__SITE_DEPTH__ = 1;</script>
+  <script src="../static/js/site.js"></script>
+</head>
+<body>
+
+<div id="site-navbar" data-active="checkpoints"></div>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <span class="tag is-light">Experiment 02</span>
+      <span class="tag is-light">Six-task policy</span>
+      <span class="tag is-light">Position vs. velocity control</span>
+      <span class="tag is-light">Training &amp; inference pipeline</span>
+      <h1 class="title is-2 publication-title" style="margin-top:0.75rem;">Checkpoint &amp; Policy Development</h1>
+      <div class="placeholder-text">[EXPERIMENT INTRODUCTION — TO BE WRITTEN. Iterating the six-task Baxter policy across checkpoints, control representations, and dataset/training corrections.]</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Overview</span>
+    <h2 class="title is-3">[EXPERIMENT TITLE]</h2>
+    <div class="placeholder-text">[EXPERIMENT OVERVIEW — TO BE WRITTEN]</div>
+  </div>
+</section>
+
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Methodology</span>
+    <h2 class="title is-3">Dataset audit, training &amp; inference pipeline</h2>
+    <div class="placeholder-text">[METHODOLOGY DESCRIPTION — TO BE WRITTEN] Dataset and policy audit, training configuration, inference architecture.</div>
+    <div class="columns" style="margin-top:1rem;">
+      <div class="column"><figure class="image"><img src="../media/checkpoints/gripper-init-fix.png" alt="Gripper initialisation fix" style="border-radius:8px;"></figure></div>
+      <div class="column"><figure class="image"><img src="../media/checkpoints/gripper-hysteresis.png" alt="Gripper hysteresis" style="border-radius:8px;"></figure></div>
+      <div class="column"><figure class="image"><img src="../media/checkpoints/policy-actions-7d.png" alt="Policy actions, 7 degrees of freedom" style="border-radius:8px;"></figure></div>
+    </div>
+    <p style="font-size:0.85rem;color:#888;">[FIGURE CAPTIONS — TO BE WRITTEN]</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Experimental setup</span>
+    <h2 class="title is-3">Checkpoints under comparison</h2>
+    <table class="table is-fullwidth is-striped">
+      <thead><tr><th>Checkpoint</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>base</code></td><td>π0.5 pretrained, no fine-tuning</td></tr>
+        <tr><td><code>pos_v2</code></td><td>Position-control, dataset iteration 2</td></tr>
+        <tr><td><code>pos_v3</code></td><td>Position-control, dataset iteration 3</td></tr>
+        <tr><td><code>v4b_run2</code></td><td>Position-control, corrected training/inference pipeline &mdash; latest</td></tr>
+      </tbody>
+    </table>
+    <div class="placeholder-text">[CHECKPOINT DESCRIPTIONS — TO BE WRITTEN. Additional checkpoints referenced in the thesis: pos_run3_199999, pos_v4_199999, pos_v4b_99999, vel_pickplace_99999 — see repository for raw rollouts.]</div>
+  </div>
+</section>
+
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Videos</span>
+    <h2 class="title is-3">Checkpoint comparison &mdash; six tasks</h2>
+    <div class="placeholder-text">[CHECKPOINT COMPARISON INTRO — TO BE WRITTEN] Same six tasks, evaluated across four checkpoints along the development trajectory.</div>
+
+    <h4 class="title is-5" style="margin-top:2rem;">Base <span class="tag is-light">pretrained π0.5, no fine-tuning</span></h4>
+    <div class="carousel results-carousel">
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/base/task0.jpg"><source src="../media/checkpoints/base/task0.mp4" type="video/mp4"></video><div class="carousel-caption">Task 0 &mdash; red far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/base/task1.jpg"><source src="../media/checkpoints/base/task1.mp4" type="video/mp4"></video><div class="carousel-caption">Task 1 &mdash; red near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/base/task2.jpg"><source src="../media/checkpoints/base/task2.mp4" type="video/mp4"></video><div class="carousel-caption">Task 2 &mdash; blue far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/base/task3.jpg"><source src="../media/checkpoints/base/task3.mp4" type="video/mp4"></video><div class="carousel-caption">Task 3 &mdash; blue near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/base/task4.jpg"><source src="../media/checkpoints/base/task4.mp4" type="video/mp4"></video><div class="carousel-caption">Task 4 &mdash; green far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/base/task5.jpg"><source src="../media/checkpoints/base/task5.mp4" type="video/mp4"></video><div class="carousel-caption">Task 5 &mdash; green near</div></div>
+    </div>
+
+    <h4 class="title is-5" style="margin-top:2rem;">pos_v2</h4>
+    <div class="carousel results-carousel">
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v2/task0.jpg"><source src="../media/checkpoints/pos_v2/task0.mp4" type="video/mp4"></video><div class="carousel-caption">Task 0 &mdash; red far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v2/task1.jpg"><source src="../media/checkpoints/pos_v2/task1.mp4" type="video/mp4"></video><div class="carousel-caption">Task 1 &mdash; red near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v2/task2.jpg"><source src="../media/checkpoints/pos_v2/task2.mp4" type="video/mp4"></video><div class="carousel-caption">Task 2 &mdash; blue far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v2/task3.jpg"><source src="../media/checkpoints/pos_v2/task3.mp4" type="video/mp4"></video><div class="carousel-caption">Task 3 &mdash; blue near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v2/task4.jpg"><source src="../media/checkpoints/pos_v2/task4.mp4" type="video/mp4"></video><div class="carousel-caption">Task 4 &mdash; green far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v2/task5.jpg"><source src="../media/checkpoints/pos_v2/task5.mp4" type="video/mp4"></video><div class="carousel-caption">Task 5 &mdash; green near</div></div>
+    </div>
+
+    <h4 class="title is-5" style="margin-top:2rem;">pos_v3</h4>
+    <div class="carousel results-carousel">
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v3/task0.jpg"><source src="../media/checkpoints/pos_v3/task0.mp4" type="video/mp4"></video><div class="carousel-caption">Task 0 &mdash; red far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v3/task1.jpg"><source src="../media/checkpoints/pos_v3/task1.mp4" type="video/mp4"></video><div class="carousel-caption">Task 1 &mdash; red near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v3/task2.jpg"><source src="../media/checkpoints/pos_v3/task2.mp4" type="video/mp4"></video><div class="carousel-caption">Task 2 &mdash; blue far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v3/task3.jpg"><source src="../media/checkpoints/pos_v3/task3.mp4" type="video/mp4"></video><div class="carousel-caption">Task 3 &mdash; blue near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v3/task4.jpg"><source src="../media/checkpoints/pos_v3/task4.mp4" type="video/mp4"></video><div class="carousel-caption">Task 4 &mdash; green far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v3/task5.jpg"><source src="../media/checkpoints/pos_v3/task5.mp4" type="video/mp4"></video><div class="carousel-caption">Task 5 &mdash; green near</div></div>
+    </div>
+
+    <h4 class="title is-5" style="margin-top:2rem;">v4b_run2 <span class="tag is-link is-light">latest / corrected pipeline</span></h4>
+    <div class="carousel results-carousel">
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/v4b_run2/task0.jpg"><source src="../media/checkpoints/v4b_run2/task0.mp4" type="video/mp4"></video><div class="carousel-caption">Task 0 &mdash; red far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/v4b_run2/task1.jpg"><source src="../media/checkpoints/v4b_run2/task1.mp4" type="video/mp4"></video><div class="carousel-caption">Task 1 &mdash; red near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/v4b_run2/task2.jpg"><source src="../media/checkpoints/v4b_run2/task2.mp4" type="video/mp4"></video><div class="carousel-caption">Task 2 &mdash; blue far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/v4b_run2/task3.jpg"><source src="../media/checkpoints/v4b_run2/task3.mp4" type="video/mp4"></video><div class="carousel-caption">Task 3 &mdash; blue near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/v4b_run2/task4.jpg"><source src="../media/checkpoints/v4b_run2/task4.mp4" type="video/mp4"></video><div class="carousel-caption">Task 4 &mdash; green far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/v4b_run2/task5.jpg"><source src="../media/checkpoints/v4b_run2/task5.mp4" type="video/mp4"></video><div class="carousel-caption">Task 5 &mdash; green near</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Results</span>
+    <h2 class="title is-3">Success rate by checkpoint</h2>
+    <figure class="image">
+      <img src="../media/checkpoints/success-bar-chart.png" alt="Success rate bar chart across checkpoints" style="border-radius:10px;">
+    </figure>
+    <p style="font-size:0.85rem;color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Existing thesis figure &mdash; success rate comparison across checkpoints.</p>
+
+    <div class="table-container" style="margin-top:1rem;">
+      <table class="table is-fullwidth is-striped">
+        <thead><tr><th>Checkpoint</th><th>Control</th><th>Task 0</th><th>Task 1</th><th>Task 2</th><th>Task 3</th><th>Task 4</th><th>Task 5</th><th>Overall</th></tr></thead>
+        <tbody>
+          <tr><td>Base (π0.5)</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td>pos_v2</td><td>Position</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td>pos_v3</td><td>Position</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td>v4b_run2</td><td>Position</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="is-size-7" style="color:#aaa;">[RESULTS DESCRIPTION — TO BE WRITTEN. Table values intentionally left blank pending final thesis numbers.]</p>
+
+    <div class="columns" style="margin-top:1rem;">
+      <div class="column"><div class="box has-text-centered"><p class="heading">Best checkpoint</p><p class="title is-5">v4b_run2</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Trial-level success</p><p class="title">&mdash;%</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Control representation</p><p class="title is-5">Position</p></div></div>
+      <div class="column"><div class="box has-text-centered"><p class="heading">Tasks with non-zero success</p><p class="title">&mdash;/6</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Failure cases</span>
+    <h2 class="title is-3">Diagnosing checkpoint failures</h2>
+    <div class="columns">
+      <div class="column"><figure class="image"><img src="../media/checkpoints/state-mismatch.png" alt="State mismatch diagnostic" style="border-radius:8px;"></figure><p class="is-size-7">[CAPTION — TBD] State mismatch.</p></div>
+      <div class="column"><figure class="image"><img src="../media/checkpoints/chunk-repetition.png" alt="Action chunk repetition diagnostic" style="border-radius:8px;"></figure><p class="is-size-7">[CAPTION — TBD] Chunk repetition.</p></div>
+      <div class="column"><figure class="image"><img src="../media/checkpoints/incomplete-task.png" alt="Incomplete task example" style="border-radius:8px;"></figure><p class="is-size-7">[CAPTION — TBD] Incomplete task.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Additional media</span>
+    <h2 class="title is-3">Task completion example</h2>
+    <figure class="image"><img src="../media/checkpoints/task-complete.png" alt="Task completion example" style="border-radius:10px;"></figure>
+  </div>
+</section>
+
+<section class="section" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Related experiments</span>
+    <h2 class="title is-3">Continue exploring</h2>
+    <div class="columns">
+      <div class="column is-half">
+        <a class="card experiment-card" href="vla-policy.html">
+          <div class="card-image"><figure class="image"><img src="../media/vla-policy/baxter-mujoco.png" alt="VLA Policy & Baxter Simulation"></figure></div>
+          <div class="card-content"><p class="title is-5">VLA Policy &amp; Baxter Simulation</p><p class="subtitle is-6">[DESCRIPTION — TO BE WRITTEN]</p></div>
+        </a>
+      </div>
+      <div class="column is-half">
+        <a class="card experiment-card" href="vlm-planner.html">
+          <div class="card-image"><figure class="image"><img src="../media/diagrams/vlm-planner-pipeline.png" alt="VLM Planner"></figure></div>
+          <div class="card-content"><p class="title is-5">VLM Planner</p><p class="subtitle is-6">[DESCRIPTION — TO BE WRITTEN]</p></div>
+        </a>
+      </div>
+    </div>
+    <nav class="level" style="margin-top:2rem;border-top:1px solid #eee;padding-top:1.5rem;">
+      <div class="level-left"><a href="vla-policy.html">&larr; VLA Policy &amp; Baxter Simulation</a></div>
+      <div class="level-right"><a href="vlm-planner.html">Next: VLM Planner &rarr;</a></div>
+    </nav>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+</body>
+</html>
