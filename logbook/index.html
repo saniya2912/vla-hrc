@@ -27,7 +27,210 @@
     <div class="container is-max-desktop">
       <span class="tag is-light">Logbook</span>
       <h1 class="title is-2 publication-title" style="margin-top:0.75rem;">Logbook</h1>
-      <div class="placeholder-text">[LOGBOOK — TO BE WRITTEN]</div>
+      <p>A reconstructed development record for the whole project, built from the Early Stage Gateway Report, the Late Stage Gateway Report, the final thesis, and the project's git history. It is organised by research phase rather than by calendar date &mdash; month-level anchors are shown only where a report or commit actually states one.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop content">
+
+    <div class="logbook-phase">
+      <span class="logbook-meta">Early Stage &middot; Gateway Report planned Apr&ndash;Sep 2026</span>
+      <h3 class="title is-4">Project start &amp; Early Stage</h3>
+      <p><strong>Attempted:</strong> the project opened with perception-only pilots aimed at a VLM-based human-action monitoring system &mdash; GroundingDINO for real-world object detection on a fruit-sorting task, and a pretrained Gemma-3-12B model for both a simulated MuJoCo block-description task and the same real-world monitoring task. In parallel, the pretrained &pi;0.5 policy (trained on a 7-DOF Franka via LIBERO) was deployed zero-shot on a MuJoCo model of Baxter, without any fine-tuning.</p>
+      <p><strong>What happened:</strong> GroundingDINO gave reliable, interpretable object detections but no task-level reasoning. Gemma-3-12B produced accurate free-form scene descriptions but unreliable structured output once more than one spatial relationship had to be verified at once. The zero-shot &pi;0.5 test was functionally wired end-to-end but produced no meaningful task execution: its 7D end-effector actions were naively mapped onto Baxter's 15D joint-velocity space (only the right arm moved), its expected 8D end-effector state instead received raw joint angles, and the gripper command was ignored outright.</p>
+      <p><strong>Learned / changed:</strong> direct transfer of a pretrained VLA policy to a new embodiment is insufficient &mdash; either fine-tuning or an intermediate mapping is required. This finding, not the original human-monitoring framing, became the project's actual next step. The Early Stage Report's own research questions (RQ1&ndash;4) were still framed around VLM-based monitoring of a human collaborator; that framing was later replaced by VLA embodiment adaptation as the project's centre of gravity.</p>
+    </div>
+
+    <div class="logbook-phase">
+      <span class="logbook-meta">Evidence: thesis methodology &middot; first commit d9c2f77, 2026-05-07</span>
+      <h3 class="title is-4">Baxter simulation &amp; demonstration pipeline</h3>
+      <div class="columns is-vcentered">
+        <div class="column">
+          <p><strong>Attempted:</strong> a custom 15-DOF Baxter model was built in MuJoCo (dynamic velocity actuators, collision masks, three cameras), together with a scripted demonstration pipeline using damped least-squares inverse kinematics. The task was decomposed into six reusable primitives (red/blue/green &times; near/far). The first fine-tuning attempt used &pi;0.5's original velocity-control formulation, in which the policy predicts joint velocities.</p>
+          <p><strong>What happened:</strong> velocity control learned to approach the correct block &mdash; language grounding worked &mdash; but the gripper rarely closed within an episode, so no successful grasp occurred.</p>
+          <p><strong>Learned / changed:</strong> the policy was redesigned to predict target joint <em>positions</em> instead, converted to motion by a proportional controller. This produced the first successful grasping behaviour and became the standard action representation for the rest of the project. By the time of the repository's first tracked commit (2026-05-07), this position-control, six-task setup was already the working baseline.</p>
+        </div>
+        <div class="column is-two-fifths">
+          <figure class="image"><img src="../media/vla-policy/baxter-mujoco.png" alt="Baxter in MuJoCo" style="border-radius:8px;"></figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="logbook-phase">
+      <span class="logbook-meta">Git: checkpoint-comparison commits, 2026-06-11 &ndash; 06-15 &middot; Late Stage commit c468cea, 2026-06-20</span>
+      <h3 class="title is-4">VLA fine-tuning &amp; policy debugging</h3>
+      <p><strong>Attempted:</strong> three successive checkpoints were trained and compared on the same six tasks &mdash; <code>pos_run3</code>, then <code>pos_v2</code> (native 10&nbsp;Hz demonstration recording, state expanded to 11 dimensions with 3D end-effector position), then <code>pos_v3</code> (warm-started from <code>pos_v2</code> with a lower learning rate and additional near-side demonstrations).</p>
+      <p><strong>What happened:</strong> success rose steadily &mdash; 20.0% &rarr; 40.0% &rarr; 43.3% overall &mdash; but <code>pos_v3</code> scored 0/10 on both green-block tasks, which at the time read as a workspace-geometry or joint-limit problem.</p>
+      <p><strong>Milestone:</strong> the Late Stage Gateway Report was submitted around this point (git: <code>c468cea "mres late stage"</code>, 2026-06-20). Its own status table marks the simulation environment, demonstration collection, VLA adaptation, the action-representation redesign, and the VLM planner as <em>Completed</em>; planner&ndash;policy integration, end-to-end evaluation, and physical deployment as <em>In Progress</em>. Its remaining-work plan named four milestones &mdash; policy refinement, planner&ndash;policy evaluation, physical deployment, dissertation writing &mdash; and did <strong>not</strong> yet mention cross-embodiment evaluation or a real-data-only fine-tuning pilot; both were added later, as the final stage's new contributions.</p>
+    </div>
+
+    <div class="logbook-phase">
+      <span class="logbook-meta">Evidence: thesis methodology (planner design) &middot; independently evaluated at 94.6% in the final results</span>
+      <h3 class="title is-4">VLM planner</h3>
+      <div class="columns is-vcentered">
+        <div class="column">
+          <p><strong>Attempted:</strong> the first planner design compared rendered current/goal workspace images directly with Gemma-3-12B.</p>
+          <p><strong>What happened:</strong> swapping which image was labelled "current" versus "goal" produced <em>identical</em> planner output &mdash; proof the model wasn't grounding its decisions in the images for this task.</p>
+          <p><strong>Learned / changed:</strong> the planner was switched to the simulator's ground-truth symbolic block state (near/far per block) instead of images, with each block queried independently rather than all three at once &mdash; a design motivated directly by the Early Stage finding that Gemma's structured output degraded once multiple similar objects had to be reasoned about together. A closed-loop check-then-replan cycle (max three rounds) was added on top. This version was later evaluated independently across all 56 non-trivial goal configurations, reaching 94.6% exact-match accuracy.</p>
+        </div>
+        <div class="column is-two-fifths">
+          <figure class="image"><img src="../media/diagrams/vlm-planner-pipeline.png" alt="VLM planner pipeline" style="border-radius:8px;"></figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="logbook-phase">
+      <span class="logbook-meta">Git: "before filtered training run" 2026-08-11 &middot; "v4 trained..." 2026-08-12 &middot; "v4b trained" 2026-08-14</span>
+      <h3 class="title is-4">Dataset audit &amp; checkpoint correction</h3>
+      <p><strong>Attempted:</strong> an audit of exactly what <code>pos_v3</code> had trained on, prompted by its complete green-block failure.</p>
+      <p><strong>What happened:</strong> the real cause wasn't geometry at all &mdash; the far-side source directory for green demonstrations had been deleted from disk after conversion, so <code>pos_v3</code> trained on <em>zero</em> green episodes, an effect compounded by <code>pos_v3</code> being warm-started rather than trained fresh. <code>pos_v4</code>, trained fresh on an audited complete dataset, fixed green (first non-zero results on either green task) but regressed red/blue &mdash; it had only 100 demonstrations/task against <code>pos_v3</code>'s 230&ndash;250, netting a lower overall score (38.3%). Scaling every task to its full data pool via mixture training (<code>v4b run1</code>) then collapsed to 15% despite normal training loss, traced to two independent serving-time normalisation bugs (the wrong normalisation formula at inference, and a one-normalisation-per-session design that broke once one robot served six independently-normalised tasks).</p>
+      <p><strong>Learned / changed:</strong> fixing both bugs and retraining (<code>v4b run2</code>) reached 41.7% overall and the project's best green-far result (70%) &mdash; the first checkpoint with a non-zero result on every task. Across this whole sequence, every jump and regression traced to a specific data or infrastructure cause, never to model capacity.</p>
+    </div>
+
+    <div class="logbook-phase">
+      <span class="logbook-meta">Git: ROS/deployment scripts 2026-07-25 &middot; "in the middle of cross embodiement experiments" 2026-07-27 &middot; eval pipeline + setup log 2026-08-07</span>
+      <h3 class="title is-4">Physical deployment preparation &amp; cross-embodiment start</h3>
+      <p><strong>Attempted:</strong> two threads opened in parallel. Physical-robot infrastructure (ROS workspace, deployment scripts, the two-machine control-laptop/lab-PC split, camera-alignment tooling) began going in from 2026-07-25. Two days later, cross-embodiment scenes for Franka Emika Panda and Unitree G1 were being built in MuJoCo, sharing the same table, dividing line, and block layout as Baxter.</p>
+      <p><strong>What happened:</strong> initial scripted demonstration yield across the new embodiments was uneven &mdash; Franka collected 128 episodes across the six tasks (green-near yield as low as 3%), G1 113 episodes with two tasks excluded entirely. Both were later re-collected to 693 (Franka) and 699 (G1) episodes across all six tasks after fixing IK and grasp-orientation issues, alongside a corrected evaluation pipeline and sweep results (2026-08-07).</p>
+    </div>
+
+    <div class="logbook-phase">
+      <span class="logbook-meta">Git: "hrc final experiments started" &amp; "v1 done", 2026-08-14</span>
+      <h3 class="title is-4">HRC integration</h3>
+      <div class="columns is-vcentered">
+        <div class="column">
+          <p><strong>Attempted:</strong> combining the VLM planner and the fine-tuned policy into a working collaborative loop, immediately after <code>v4b</code>: each subtask attempted autonomously, escalated to a human after a fixed retry limit.</p>
+          <p><strong>What happened:</strong> full-pipeline runs initially failed almost completely (0/3, then 0/1 and 0/2 planned subtasks) despite the policy's own validated 30&ndash;70% per-task rates &mdash; a failure rate improbable enough to demand investigation. Four distinct bugs were found and fixed in sequence: the image-based planner wasn't grounded (fixed by the symbolic-state switch above); the simulation runner fed the policy an 8-dimensional state instead of the 11-dimensional format every other evaluation used; the arm was reset to home only once per session instead of before every subtask; and multi-block scenes placed every block that needed to move away from home <em>simultaneously</em> &mdash; a composition absent from every single-task training demonstration.</p>
+          <p><strong>Learned / changed:</strong> the last bug was fixed without retraining, by a rendering-only change: non-target blocks are shown at their home position in the image passed to the policy, while the live simulation and ground-truth state continue using their true position. With all four fixes in place, the escalation mechanism reached 100% final-goal completion across 50 trials, with 46.1% of subtasks requiring human intervention. This remains a working demonstration on representative configurations rather than the larger systematic trial matrix originally proposed.</p>
+        </div>
+        <div class="column is-two-fifths">
+          <figure class="image"><img src="../media/hrc/hrc-dashboard.png" alt="HRC status dashboard" style="border-radius:8px;"></figure>
+          <p class="is-size-7" style="color:#888;margin-top:0.5rem;">The Early Stage concept for this stage was a dexterity-based negotiation between human and robot (below); the mechanism actually built is a considerably simpler fixed-retry-count trigger.</p>
+          <figure class="image" style="margin-top:0.75rem;"><img src="../media/diagrams/hrc-concept.png" alt="Early HRC concept sketch, superseded" style="border-radius:8px;"></figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="logbook-phase">
+      <span class="logbook-meta">Git: "first run of physical robot worked" 2026-08-13 &middot; ablation 2026-08-15 &middot; "real robot training done" 2026-08-16</span>
+      <h3 class="title is-4">Physical robot deployment &amp; real-data fine-tuning</h3>
+      <div class="columns is-vcentered">
+        <div class="column">
+          <p><strong>Attempted:</strong> the strongest simulation checkpoint (<code>pos_v3</code>, 9/10 in simulation) was deployed directly on the physical Baxter for task&nbsp;0, with no additional real-world training.</p>
+          <p><strong>What happened:</strong> 0 of 4 trials succeeded. Diagnosis pointed to a physical home pose that differed from the MuJoCo training pose by roughly 28&deg; at the elbow and 12&deg; at the wrist, an unaligned RealSense camera, and sensitivity to language grounding (in-vocabulary "red" behaved more consistently than out-of-vocabulary "brown" for the same block).</p>
+          <p><strong>Learned / changed:</strong> rather than continuing to debug transfer from simulation, a separate real-data-only pilot was run: 28 kinesthetic-teaching demonstrations (1,731 frames) of a simplified push task, fine-tuned fresh from the base &pi;0.5 checkpoint with no simulation data at all. It reached 14/25 (56%) success, with pushing-the-wrong-direction the dominant failure mode &mdash; and with the caveat that evaluation positions stayed close to the training distribution, so this measures near-distribution reliability rather than proven generalisation.</p>
+        </div>
+        <div class="column is-two-fifths">
+          <figure class="image"><img src="../media/physical-robot/physical-setup.jpg" alt="Physical Baxter setup" style="border-radius:8px;"></figure>
+          <div class="columns" style="margin-top:0.5rem;">
+            <div class="column"><figure class="image"><img src="../media/real-finetuning/snapshots/trial_007_before.png" alt="Trial 7 before" style="border-radius:6px;"></figure><p class="is-size-7 has-text-centered">Trial 7 &mdash; before</p></div>
+            <div class="column"><figure class="image"><img src="../media/real-finetuning/snapshots/trial_007_after.png" alt="Trial 7 after, success" style="border-radius:6px;"></figure><p class="is-size-7 has-text-centered">Trial 7 &mdash; after (success)</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="logbook-phase">
+      <span class="logbook-meta">Solo checkpoints trained &amp; corrected through mid-August &middot; joint training completed after being "in progress" mid-project</span>
+      <h3 class="title is-4">Cross-embodiment completion</h3>
+      <div class="columns is-vcentered">
+        <div class="column">
+          <p><strong>Attempted:</strong> solo checkpoints were trained and evaluated for Franka and G1 on the corrected, re-collected datasets, then compared against a single policy trained jointly across Baxter, Franka, and G1 (each embodiment keeping its own normalisation statistics, combined via OpenPI's mixture-loading support).</p>
+          <p><strong>What happened:</strong> the first solo evaluation round (<code>run1</code>) was later found to have been served through the same family of normalisation bug that caused the <code>v4b run1</code> collapse, and was re-run (<code>run2</code>) on corrected data. The completed joint-vs-solo comparison showed no uniform transfer effect: Franka improved (34.0%&rarr;41.3%, +7.3&nbsp;pp), G1 regressed slightly (42.0%&rarr;34.0%, &minus;8.0&nbsp;pp), and Baxter regressed sharply (43.3%&rarr;10.7%, &minus;32.6&nbsp;pp). A gripper-engagement diagnostic found the gripper failed to close in 34.7% of Baxter joint-policy trials, against 2.7% (Franka) and 10.7% (G1).</p>
+          <p><strong>Learned / changed:</strong> this thread, like the real-data-only pilot above, was not in the Late Stage Report's remaining-work plan &mdash; both became the final stage's own additional contributions, reflected in the thesis's final research questions RQ5 and RQ6.</p>
+        </div>
+        <div class="column is-two-fifths">
+          <div class="columns">
+            <div class="column"><figure class="image"><img src="../media/cross-embodiment/baxter-twoblocks.png" alt="Baxter" style="border-radius:6px;"></figure></div>
+            <div class="column"><figure class="image"><img src="../media/cross-embodiment/franka-twoblocks.png" alt="Franka" style="border-radius:6px;"></figure></div>
+            <div class="column"><figure class="image"><img src="../media/cross-embodiment/g1-twoblocks.png" alt="Unitree G1" style="border-radius:6px;"></figure></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="logbook-phase" style="margin-bottom:0;">
+      <span class="logbook-meta">Git: thesis chapter restructuring, 2026-08-23 &ndash; 08-25</span>
+      <h3 class="title is-4">Thesis consolidation</h3>
+      <p>The final chapters were restructured and consolidated into the thesis's final form (Introduction, Literature Review, Research Gap and Questions, Methodology, Results, Discussion, Conclusion), folding in all of the work above. The commented-out draft notes left in the thesis source are themselves evidence of this evolution: they record that RQ1&ndash;3 (embodiment adaptation, engineering decisions, planner&ndash;policy integration) "were established during the earlier stages of the project," while RQ4&ndash;6 (escalation-based HRC, cross-embodiment transfer, sim-to-real) "define the new contributions of this final stage."</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="section section-alt" id="gantt-planned" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Planned Gantt &middot; Early Stage Gateway Report</span>
+    <h2 class="title is-3">Original plan (April&ndash;September)</h2>
+    <p>Reproduced from the Early Stage Report's own Gantt chart, unchanged &mdash; six phases (A&ndash;F) as planned before implementation began.</p>
+    <div class="table-container" style="margin-top:1rem;">
+      <table class="table is-fullwidth is-striped gantt-table">
+        <thead><tr><th>Phase</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th></tr></thead>
+        <tbody>
+          <tr><td>A &middot; Baseline VLA fine-tuning (Baxter sim)</td><td><div class="gantt-cell"></div></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>B &middot; Perception module development</td><td></td><td><div class="gantt-cell"></div></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>C &middot; Real Baxter VLA implementation</td><td></td><td></td><td><div class="gantt-cell"></div></td><td></td><td></td><td></td></tr>
+          <tr><td>D &middot; VLM + VLA integration</td><td></td><td></td><td></td><td><div class="gantt-cell"></div></td><td></td><td></td></tr>
+          <tr><td>E &middot; Dexterity &amp; long-horizon testing</td><td></td><td></td><td></td><td><div class="gantt-cell"></div></td><td><div class="gantt-cell"></div></td><td></td></tr>
+          <tr><td>F &middot; Generalisation across tasks</td><td></td><td><div class="gantt-cell"></div></td><td><div class="gantt-cell"></div></td><td><div class="gantt-cell"></div></td><td><div class="gantt-cell"></div></td><td><div class="gantt-cell"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="is-size-7" style="color:#888;margin-top:0.75rem;">Phase E ("dexterity &amp; long-horizon testing") is the original human&ndash;robot negotiation concept later superseded by escalation-based task allocation; Phase D's "VLM + VLA integration" is what the final thesis's RQ3 answers.</p>
+  </div>
+</section>
+
+<section class="section" id="gantt-actual">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Actual Gantt &middot; reconstructed from reports &amp; git history</span>
+    <h2 class="title is-3">How the project actually ran</h2>
+    <p>Major phases positioned by month-level evidence (report Gantt charts, the Late Stage submission commit, and git commit dates). Where activity is not directly evidenced for a month, the cell is left empty rather than filled in by inference.</p>
+    <div class="table-container" style="margin-top:1rem;">
+      <table class="table is-fullwidth is-striped gantt-table">
+        <thead><tr><th>Phase</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th></tr></thead>
+        <tbody>
+          <tr><td>Perception pilots &amp; zero-shot &pi;0.5 test</td><td><div class="gantt-cell"></div></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>Baxter MuJoCo env, demo pipeline, velocity&rarr;position control</td><td><div class="gantt-cell"></div></td><td><div class="gantt-cell"></div></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>Checkpoint iteration (pos_run3 / v2 / v3) &amp; Late Stage Report</td><td></td><td><div class="gantt-cell"></div></td><td><div class="gantt-cell"></div></td><td></td><td></td><td></td></tr>
+          <tr><td>VLM planner (symbolic-state design)</td><td></td><td><div class="gantt-cell is-light"></div></td><td><div class="gantt-cell"></div></td><td></td><td></td><td></td></tr>
+          <tr><td>Physical-robot prep &amp; cross-embodiment scenes start</td><td></td><td></td><td></td><td><div class="gantt-cell"></div></td><td></td><td></td></tr>
+          <tr><td>Dataset audit &amp; checkpoint correction (pos_v4 / v4b)</td><td></td><td></td><td></td><td></td><td><div class="gantt-cell"></div></td><td></td></tr>
+          <tr><td>Physical robot first success &amp; HRC integration</td><td></td><td></td><td></td><td></td><td><div class="gantt-cell"></div></td><td></td></tr>
+          <tr><td>Real-robot sim-to-real test &amp; real-data fine-tuning</td><td></td><td></td><td></td><td></td><td><div class="gantt-cell"></div></td><td></td></tr>
+          <tr><td>Cross-embodiment: corrected data, solo &amp; joint training</td><td></td><td></td><td></td><td><div class="gantt-cell is-light"></div></td><td><div class="gantt-cell"></div></td><td></td></tr>
+          <tr><td>Thesis consolidation</td><td></td><td></td><td></td><td></td><td><div class="gantt-cell"></div></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="is-size-7" style="color:#888;margin-top:0.75rem;">Lighter cells mark a phase whose start isn't independently dated &mdash; only that it was under way or complete by a later, evidenced point. Compared with the original plan: real deployment and evaluation compressed heavily into August rather than spreading April&ndash;September, and cross-embodiment transfer plus the real-data-only fine-tuning pilot were not part of the original phase plan at all &mdash; both emerged later, replacing Phase E's dexterity/negotiation concept as the project's actual final-stage extensions.</p>
+  </div>
+</section>
+
+<section class="section section-alt" id="risk-register" style="background:#fafafa;">
+  <div class="container is-max-desktop">
+    <span class="section-eyebrow">Risk register</span>
+    <h2 class="title is-3">Risks, as assessed and as they played out</h2>
+    <p>Merged from the Early Stage Report's original register and the Late Stage Report's updated assessment, with an added Outcome column reflecting what the final thesis and git history show actually happened. L = Likelihood (1&ndash;5), I = Impact (1&ndash;5), Level = L&times;I.</p>
+    <div class="table-container" style="margin-top:1rem;">
+      <table class="table is-fullwidth is-striped">
+        <thead><tr><th>Risk</th><th>Stage raised</th><th>L</th><th>I</th><th>Level</th><th>Mitigation</th><th>Outcome</th></tr></thead>
+        <tbody>
+          <tr><td>Action-space mismatch</td><td>Early</td><td>5</td><td>4</td><td>20 (High)</td><td>Intermediate mappings (IK, scaling); analyse outputs before deployment</td><td><strong>Materialised.</strong> Zero-shot 7D&rarr;15D mapping failed outright; resolved via LoRA fine-tuning and the position-control redesign.</td></tr>
+          <tr><td>VLA policy fails to generalise / model performance</td><td>Early</td><td>4</td><td>4</td><td>16 (High)</td><td>Start with simple tasks; simulate first; fine-tune</td><td><strong>Partially materialised.</strong> Velocity control failed to grasp; position control + iterative checkpoints reached 43.3% (sim) before further fixes.</td></tr>
+          <tr><td>Compute constraints (fine-tuning pi0.5)</td><td>Early</td><td>4</td><td>4</td><td>16 (High)</td><td>LoRA / smaller models; optimise batch size</td><td><strong>Mitigated successfully.</strong> LoRA (rank 16, ~30&ndash;50M trainable params) kept training on a single RTX&nbsp;5090 throughout.</td></tr>
+          <tr><td>Integration complexity (VLM + VLA + perception)</td><td>Early</td><td>4</td><td>3</td><td>12 (High)</td><td>Modular development, test components independently</td><td><strong>Materialised, resolved.</strong> Four distinct HRC integration bugs found via independent component testing (see HRC log entry).</td></tr>
+          <tr><td>Simulation-to-real gap</td><td>Early &amp; Late</td><td>3&ndash;4</td><td>4&ndash;5</td><td>15&ndash;16 (High)</td><td>Fine-tune for real-world data; validate full pipeline in sim first</td><td><strong>Materialised.</strong> Direct transfer: 0/4 on physical Baxter. Response: real-data-only fine-tuning pilot, 56% on a simplified task.</td></tr>
+          <tr><td>Hardware failure (Baxter / RealSense)</td><td>Early</td><td>2</td><td>4</td><td>8 (Medium)</td><td>Regular maintenance and equipment testing</td><td>Not reported as a blocking issue in the final thesis.</td></tr>
+          <tr><td>Real-time performance</td><td>Early</td><td>3</td><td>3</td><td>9 (Medium)</td><td>Reduce inference frequency; optimise pipeline</td><td>Not reported as a blocking issue; 10&nbsp;Hz replanning used throughout.</td></tr>
+          <tr><td>Data collection issues</td><td>Early</td><td>3</td><td>3</td><td>9 (Medium)</td><td>Standardise pipeline; test early; log all streams</td><td><strong>Materialised.</strong> Deleted source directory silently zeroed <code>pos_v3</code>'s green-block data; caught by dataset audit.</td></tr>
+          <tr><td>Manipulation reliability</td><td>Late</td><td>4</td><td>4</td><td>16 (High)</td><td>Refine demonstration data; continue checkpoint evaluation</td><td><strong>Materialised.</strong> Best sim checkpoint plateaued at 43.3%; near-side tasks remained consistently weaker than far-side.</td></tr>
+          <tr><td>Training data coverage (workspace regions)</td><td>Late</td><td>3</td><td>4</td><td>12 (High)</td><td>Collect demonstrations across a wider position range</td><td><strong>Investigated further.</strong> A dedicated non-target block position ablation (HRC results) found physical distractor position, not just data coverage, affects success.</td></tr>
+          <tr><td>Physical deployment timeline</td><td>Late</td><td>3</td><td>4</td><td>12 (High)</td><td>Complete software validation and end-to-end sim testing first</td><td><strong>Materialised but recovered.</strong> Physical deployment and HRC integration both compressed into August; first physical success recorded 2026-08-13.</td></tr>
+          <tr><td>End-to-end evaluation reveals new failure modes</td><td>Late</td><td>2</td><td>4</td><td>8 (Medium)</td><td>Evaluate the complete planner&ndash;policy pipeline across configurations</td><td><strong>Materialised.</strong> Full-pipeline HRC runs initially failed almost completely; traced to four distinct, previously component-level-invisible bugs.</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
