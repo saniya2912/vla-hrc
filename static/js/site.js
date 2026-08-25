@@ -51,7 +51,6 @@
       '<a class="navbar-link' + (isExpGroup ? " is-active-page" : "") + '">Experiments</a>' +
       '<div class="navbar-dropdown">' + ddItems + "</div>" +
       "</div>" +
-      '<a class="navbar-item' + (active === "conclusions" ? " is-active-page" : "") + '" href="' + root + 'conclusions.html">Conclusions</a>' +
       '<a class="navbar-item' + (active === "about" ? " is-active-page" : "") + '" href="' + root + 'about.html">About</a>' +
       "</div>" +
       '<div class="navbar-end">' +
