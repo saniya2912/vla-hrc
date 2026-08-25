@@ -45,7 +45,7 @@
       "</a>" +
       "</div>" +
       '<div id="siteNavMenu" class="navbar-menu">' +
-      '<div class="navbar-end">' +
+      '<div class="navbar-end" style="margin-right:6vw;">' +
       '<a class="navbar-item' + (active === "home" ? " is-active-page" : "") + '" href="' + root + 'index.html">Home</a>' +
       '<div class="navbar-item has-dropdown is-hoverable">' +
       '<a class="navbar-link' + (isExpGroup ? " is-active-page" : "") + '">Experiments</a>' +
