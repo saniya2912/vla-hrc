@@ -287,7 +287,22 @@ body {
 .gantt-table th, .gantt-table td { text-align: center; vertical-align: middle; }
 .gantt-table td:first-child, .gantt-table th:first-child { text-align: left; white-space: normal; }
 .gantt-cell { background: hsl(204,86%,53%); border-radius: 3px; height: 1.4rem; }
-.gantt-cell.is-light { background: hsl(204,86%,90%); }
+.gantt-cell.is-light { opacity: 0.45; }
+
+/* Distinct colour per phase row, cycled across a 12-colour qualitative
+   palette so each Gantt bar is visually traceable to its row/legend. */
+.gantt-c1  { background: #4C72B0; }
+.gantt-c2  { background: #DD8452; }
+.gantt-c3  { background: #55A868; }
+.gantt-c4  { background: #C44E52; }
+.gantt-c5  { background: #8172B2; }
+.gantt-c6  { background: #937860; }
+.gantt-c7  { background: #DA8BC3; }
+.gantt-c8  { background: #8C8C8C; }
+.gantt-c9  { background: #CCB974; }
+.gantt-c10 { background: #64B5CD; }
+.gantt-c11 { background: #4E79A7; }
+.gantt-c12 { background: #F28E2B; }
 
 .logbook-phase { border-left: 3px solid hsl(204,86%,53%); padding-left: 1.25rem; margin-bottom: 2.25rem; }
 .logbook-phase h3 { margin-bottom: 0.4rem; }
