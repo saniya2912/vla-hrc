@@ -78,7 +78,7 @@
       '<div class="columns is-centered">' +
       '<div class="column is-8">' +
       '<div class="content has-text-centered">' +
-      "<p><strong>[PROJECT TITLE]</strong> &mdash; MRes Design Engineering thesis, Imperial College London.</p>" +
+      "<p><strong>Towards Generalisable Vision&ndash;Language&ndash;Action Policies for Human&ndash;Robot Collaboration</strong> &mdash; MRes Design Engineering thesis, Imperial College London.</p>" +
       '<p style="font-size:0.85rem;color:#888;">' +
       "Built from the <a href=\"https://github.com/nerfies/nerfies.github.io\" target=\"_blank\" rel=\"noopener\">Nerfies</a> project page template, " +
       "licensed under a <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-ShareAlike 4.0 License</a>." +
