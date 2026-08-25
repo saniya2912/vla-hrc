@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Human-Robot Collaboration &mdash; VLA-HRC</title>
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-  <link rel="stylesheet" href="../static/css/bulma.min.css">
-  <link rel="stylesheet" href="../static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="../static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../static/css/site.css">
-  <link rel="icon" href="../static/images/favicon.svg">
+  <link rel="stylesheet" href="../../static/css/bulma.min.css">
+  <link rel="stylesheet" href="../../static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="../../static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="../../static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="../../static/css/site.css">
+  <link rel="icon" href="../../static/images/favicon.svg">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="../static/js/fontawesome.all.min.js"></script>
-  <script src="../static/js/bulma-carousel.min.js"></script>
-  <script src="../static/js/bulma-slider.min.js"></script>
-  <script>window.__SITE_DEPTH__ = 1;</script>
-  <script src="../static/js/site.js"></script>
+  <script defer src="../../static/js/fontawesome.all.min.js"></script>
+  <script src="../../static/js/bulma-carousel.min.js"></script>
+  <script src="../../static/js/bulma-slider.min.js"></script>
+  <script>window.__SITE_DEPTH__ = 2;</script>
+  <script src="../../static/js/site.js"></script>
 </head>
 <body>
 
@@ -39,7 +39,7 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <figure class="image">
-        <img src="../media/diagrams/hrc-loop.png" alt="Human-robot collaboration loop diagram" style="border-radius:10px;">
+        <img src="../../media/diagrams/hrc-loop.png" alt="Human-robot collaboration loop diagram" style="border-radius:10px;">
       </figure>
       <h2 class="subtitle has-text-centered">Human&ndash;robot interaction loop for the collaborative task: the robot and the human collaborator exchange visual and verbal instructions while working toward the shared goal configuration.</h2>
     </div>
@@ -75,7 +75,7 @@
     <span class="section-eyebrow">Experimental setup</span>
     <h2 class="title is-3">HRC status dashboard</h2>
     <figure class="image">
-      <img src="../media/hrc/hrc-dashboard.png" alt="HRC status dashboard alongside MuJoCo simulation" style="border-radius:10px;">
+      <img src="../../media/hrc/hrc-dashboard.png" alt="HRC status dashboard alongside MuJoCo simulation" style="border-radius:10px;">
     </figure>
     <p style="font-size:0.85rem;color:#888;">Human Robot Collaboration dashboard with live MuJoCo viewer. It displays the initial and goal configurations, the current block configuration, the VLM-generated task sequence with each subtask marked pending/executing/completed, and the number of attempts made for the active subtask. When the retry limit is reached, the subtask is marked <code>FLAGGED FOR HUMAN</code>; once the human moves the block into position, the dashboard detects the change, clears the flag, and resumes execution automatically.</p>
   </div>
@@ -87,11 +87,11 @@
     <h2 class="title is-3">Two trial outcomes</h2>
     <div class="columns">
       <div class="column">
-        <figure class="image"><img src="../media/hrc/autonomous-execution.png" alt="Autonomous execution" style="border-radius:8px;"></figure>
+        <figure class="image"><img src="../../media/hrc/autonomous-execution.png" alt="Autonomous execution" style="border-radius:8px;"></figure>
         <p class="has-text-centered"><span class="tag is-success is-light">success</span> Autonomous execution</p>
       </div>
       <div class="column">
-        <figure class="image"><img src="../media/hrc/human-intervention.png" alt="Human intervention" style="border-radius:8px;"></figure>
+        <figure class="image"><img src="../../media/hrc/human-intervention.png" alt="Human intervention" style="border-radius:8px;"></figure>
         <p class="has-text-centered"><span class="tag is-light">intervention</span> Human intervention</p>
       </div>
     </div>
@@ -121,8 +121,8 @@
     <span class="section-eyebrow">Additional media</span>
     <h2 class="title is-3">Final scene &amp; early concept sketch</h2>
     <div class="columns">
-      <div class="column"><figure class="image"><img src="../media/hrc/final-scene.png" alt="Final collaborative task scene" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Not captioned in the thesis text &mdash; tell me what this scene shows and I'll write it up.</p></div>
-      <div class="column"><figure class="image"><img src="../media/diagrams/hrc-concept.png" alt="Early human-robot collaboration concept diagram" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Early conceptual sketch of the collaborative task allocation problem: subtasks split between robot and human by dexterity requirement, with a negotiation step reconciling who performs which subtask. The implemented protocol above is a considerably simpler instance of this idea &mdash; a subtask is allocated to the human only after the robot has exhausted a fixed number of autonomous attempts, with no dexterity-recognition or negotiation step.</p></div>
+      <div class="column"><figure class="image"><img src="../../media/hrc/final-scene.png" alt="Final collaborative task scene" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Not captioned in the thesis text &mdash; tell me what this scene shows and I'll write it up.</p></div>
+      <div class="column"><figure class="image"><img src="../../media/diagrams/hrc-concept.png" alt="Early human-robot collaboration concept diagram" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Early conceptual sketch of the collaborative task allocation problem: subtasks split between robot and human by dexterity requirement, with a negotiation step reconciling who performs which subtask. The implemented protocol above is a considerably simpler instance of this idea &mdash; a subtask is allocated to the human only after the robot has exhausted a fixed number of autonomous attempts, with no dexterity-recognition or negotiation step.</p></div>
     </div>
   </div>
 </section>
@@ -133,21 +133,21 @@
     <h2 class="title is-3">Continue exploring</h2>
     <div class="columns">
       <div class="column is-half">
-        <a class="card experiment-card" href="vlm-planner.html">
-          <div class="card-image"><figure class="image"><img src="../media/diagrams/vlm-planner-pipeline.png" alt="VLM Planner"></figure></div>
+        <a class="card experiment-card" href="../vlm-planner/">
+          <div class="card-image"><figure class="image"><img src="../../media/diagrams/vlm-planner-pipeline.png" alt="VLM Planner"></figure></div>
           <div class="card-content"><p class="title is-5">VLM Planner</p><p class="subtitle is-6">Composing the six learned primitives into multi-step rearrangements, at 94.6% planning accuracy.</p></div>
         </a>
       </div>
       <div class="column is-half">
-        <a class="card experiment-card" href="cross-embodiment.html">
-          <div class="card-image"><figure class="image"><img src="../media/cross-embodiment/franka-twoblocks.png" alt="Cross-Embodiment Evaluation"></figure></div>
+        <a class="card experiment-card" href="../cross-embodiment/">
+          <div class="card-image"><figure class="image"><img src="../../media/cross-embodiment/franka-twoblocks.png" alt="Cross-Embodiment Evaluation"></figure></div>
           <div class="card-content"><p class="title is-5">Cross-Embodiment Evaluation</p><p class="subtitle is-6">Extending the pipeline to Franka Emika Panda and Unitree G1, and training a single joint policy across all three.</p></div>
         </a>
       </div>
     </div>
     <nav class="level" style="margin-top:2rem;border-top:1px solid #eee;padding-top:1.5rem;">
-      <div class="level-left"><a href="vlm-planner.html">&larr; VLM Planner</a></div>
-      <div class="level-right"><a href="cross-embodiment.html">Next: Cross-Embodiment Evaluation &rarr;</a></div>
+      <div class="level-left"><a href="../vlm-planner/">&larr; VLM Planner</a></div>
+      <div class="level-right"><a href="../cross-embodiment/">Next: Cross-Embodiment Evaluation &rarr;</a></div>
     </nav>
   </div>
 </section>

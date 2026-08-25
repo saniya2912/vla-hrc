@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Content Checklist &mdash; VLA-HRC</title>
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="static/css/site.css">
-  <link rel="icon" href="static/images/favicon.svg">
+  <link rel="stylesheet" href="../static/css/bulma.min.css">
+  <link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="../static/css/site.css">
+  <link rel="icon" href="../static/images/favicon.svg">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script>window.__SITE_DEPTH__ = 0;</script>
-  <script src="static/js/site.js"></script>
+  <script defer src="../static/js/fontawesome.all.min.js"></script>
+  <script>window.__SITE_DEPTH__ = 1;</script>
+  <script src="../static/js/site.js"></script>
   <style>
     .todo-type { font-size: 0.65rem; letter-spacing: .04em; text-transform: uppercase; font-weight: 700; border-radius: 4px; padding: 3px 8px; white-space: nowrap; }
     .todo-type.text { background: #eef1fd; color: #2952e3; }
@@ -86,7 +86,7 @@
    it's the localStorage key, so don't reorder/renumber existing entries
    once you've started checking things off. */
 var PAGES = [
-  { title: "Home", href: "index.html", items: [
+  { title: "Home", href: "../", items: [
     { id: "home-title", type: "text", label: "[PROJECT TITLE]", meta: "Hero heading", hash: "hero" },
     { id: "home-authors", type: "text", label: "[AUTHORS]", meta: "Hero byline", hash: "hero" },
     { id: "home-institution", type: "text", label: "[INSTITUTION / DEPARTMENT / SUPERVISORS]", meta: "Hero byline", hash: "hero" },
@@ -100,7 +100,7 @@ var PAGES = [
     { id: "home-pipeline-caption", type: "text", label: "π0.5 architecture figure caption", hash: "system-overview" },
     { id: "home-card-descriptions", type: "text", label: "7 experiment card descriptions", meta: "Short blurb under each card title", hash: "experiments-grid" },
   ]},
-  { title: "01 · VLA Policy & Baxter Simulation", href: "experiments/vla-policy.html", items: [
+  { title: "01 · VLA Policy & Baxter Simulation", href: "../experiments/vla-policy/", items: [
     { id: "vla-intro", type: "text", label: "Experiment introduction", hash: "" },
     { id: "vla-hero-caption", type: "text", label: "Rollout video caption", meta: "Video itself already in place", hash: "" },
     { id: "vla-overview", type: "text", label: "[EXPERIMENT TITLE] + overview paragraph", hash: "overview" },
@@ -113,7 +113,7 @@ var PAGES = [
     { id: "vla-results-data", type: "data", label: "Metric values: success rate, demos/task, control representation", hash: "results" },
     { id: "vla-failures", type: "video", label: "3 failure-case examples (description + clip/image)", hash: "failure-cases" },
   ]},
-  { title: "02 · Checkpoint & Policy Development", href: "experiments/checkpoints.html", items: [
+  { title: "02 · Checkpoint & Policy Development", href: "../experiments/checkpoints/", items: [
     { id: "ckpt-intro", type: "text", label: "Experiment introduction", hash: "" },
     { id: "ckpt-overview", type: "text", label: "[EXPERIMENT TITLE] + overview paragraph", hash: "overview" },
     { id: "ckpt-methodology", type: "text", label: "Methodology description + 3 diagnostic figure captions", hash: "methodology" },
@@ -125,7 +125,7 @@ var PAGES = [
     { id: "ckpt-failure-captions", type: "text", label: "3 failure-diagnostic captions", hash: "failure-cases" },
     { id: "ckpt-additional", type: "text", label: "Task-complete figure caption", hash: "additional-media" },
   ]},
-  { title: "03 · VLM Planner", href: "experiments/vlm-planner.html", items: [
+  { title: "03 · VLM Planner", href: "../experiments/vlm-planner/", items: [
     { id: "vlm-intro", type: "text", label: "Experiment introduction", hash: "" },
     { id: "vlm-pipeline-caption", type: "text", label: "Planner pipeline figure caption", hash: "" },
     { id: "vlm-overview", type: "text", label: "[EXPERIMENT TITLE] + overview paragraph", hash: "overview" },
@@ -137,7 +137,7 @@ var PAGES = [
     { id: "vlm-results-desc", type: "text", label: "Results description", hash: "results" },
     { id: "vlm-failures", type: "video", label: "2 incorrect-planning failure examples", hash: "failure-cases" },
   ]},
-  { title: "04 · Human-Robot Collaboration", href: "experiments/hrc.html", items: [
+  { title: "04 · Human-Robot Collaboration", href: "../experiments/hrc/", items: [
     { id: "hrc-intro", type: "text", label: "Experiment introduction", hash: "" },
     { id: "hrc-loop-caption", type: "text", label: "HRC loop figure caption", hash: "" },
     { id: "hrc-overview", type: "text", label: "[EXPERIMENT TITLE] + overview paragraph", hash: "overview" },
@@ -149,7 +149,7 @@ var PAGES = [
     { id: "hrc-results-desc", type: "text", label: "Results description, incl. non-target block position ablation", hash: "results" },
     { id: "hrc-additional-captions", type: "text", label: "2 figure captions (final scene, early concept sketch)", hash: "additional-media" },
   ]},
-  { title: "05 · Cross-Embodiment Evaluation", href: "experiments/cross-embodiment.html", items: [
+  { title: "05 · Cross-Embodiment Evaluation", href: "../experiments/cross-embodiment/", items: [
     { id: "ce-intro", type: "text", label: "Experiment introduction", hash: "" },
     { id: "ce-overview", type: "text", label: "[EXPERIMENT TITLE] + overview paragraph", hash: "overview" },
     { id: "ce-methodology", type: "text", label: "Methodology description", hash: "methodology" },
@@ -158,7 +158,7 @@ var PAGES = [
     { id: "ce-results-desc", type: "text", label: "Results description", hash: "results" },
     { id: "ce-failures", type: "video", label: "2 negative-transfer failure examples", hash: "failure-cases" },
   ]},
-  { title: "06 · Physical Robot & Sim-to-Real", href: "experiments/physical-robot.html", items: [
+  { title: "06 · Physical Robot & Sim-to-Real", href: "../experiments/physical-robot/", items: [
     { id: "phys-intro", type: "text", label: "Experiment introduction", hash: "" },
     { id: "phys-setup-captions", type: "text", label: "2 figure captions (physical setup, architecture diagram)", hash: "setup-photos" },
     { id: "phys-overview", type: "text", label: "[EXPERIMENT TITLE] + overview paragraph", hash: "overview" },
@@ -170,7 +170,7 @@ var PAGES = [
     { id: "phys-results-desc", type: "text", label: "Results description", hash: "results" },
     { id: "phys-failures", type: "video", label: "2 sim-to-real-gap failure examples", hash: "failure-cases" },
   ]},
-  { title: "07 · Real-Data Fine-Tuning", href: "experiments/real-finetuning.html", items: [
+  { title: "07 · Real-Data Fine-Tuning", href: "../experiments/real-finetuning/", items: [
     { id: "rft-intro", type: "text", label: "Experiment introduction", hash: "" },
     { id: "rft-overview", type: "text", label: "[EXPERIMENT TITLE] + overview paragraph", hash: "overview" },
     { id: "rft-methodology", type: "text", label: "Methodology description", hash: "methodology" },
@@ -183,7 +183,7 @@ var PAGES = [
     { id: "rft-results-desc", type: "text", label: "Results description", hash: "results" },
     { id: "rft-failure-notes", type: "text", label: "Failure-mode notes (arm_hit_table_edge, pushed_wrong_direction, knocked_off_table)", hash: "failure-cases" },
   ]},
-  { title: "About", href: "about.html", items: [
+  { title: "About", href: "../about/", items: [
     { id: "about-intro", type: "text", label: "About-section intro", hash: "" },
     { id: "about-author", type: "text", label: "Author name + bio", hash: "author" },
     { id: "about-supervisors", type: "text", label: "Supervisor name(s) + department", hash: "supervision" },

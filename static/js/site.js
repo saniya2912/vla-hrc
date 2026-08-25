@@ -15,13 +15,13 @@
   }
 
   var NAV_EXPERIMENTS = [
-    { key: "vla-policy", title: "VLA Policy & Simulation", sub: "π0.5 on Baxter in MuJoCo", href: "experiments/vla-policy.html" },
-    { key: "checkpoints", title: "Checkpoint & Policy Development", sub: "Six-task iteration, training & inference", href: "experiments/checkpoints.html" },
-    { key: "vlm-planner", title: "VLM Planner", sub: "High-level task planning", href: "experiments/vlm-planner.html" },
-    { key: "hrc", title: "Human-Robot Collaboration", sub: "Escalation & shared execution", href: "experiments/hrc.html" },
-    { key: "cross-embodiment", title: "Cross-Embodiment", sub: "Baxter · Franka · Unitree G1", href: "experiments/cross-embodiment.html" },
-    { key: "physical-robot", title: "Physical Robot & Sim-to-Real", sub: "Real Baxter deployment", href: "experiments/physical-robot.html" },
-    { key: "real-finetuning", title: "Real-Data Fine-Tuning", sub: "Learning from physical demonstrations", href: "experiments/real-finetuning.html" }
+    { key: "vla-policy", title: "VLA Policy & Simulation", sub: "π0.5 on Baxter in MuJoCo", href: "experiments/vla-policy/" },
+    { key: "checkpoints", title: "Checkpoint & Policy Development", sub: "Six-task iteration, training & inference", href: "experiments/checkpoints/" },
+    { key: "vlm-planner", title: "VLM Planner", sub: "High-level task planning", href: "experiments/vlm-planner/" },
+    { key: "hrc", title: "Human-Robot Collaboration", sub: "Escalation & shared execution", href: "experiments/hrc/" },
+    { key: "cross-embodiment", title: "Cross-Embodiment", sub: "Baxter · Franka · Unitree G1", href: "experiments/cross-embodiment/" },
+    { key: "physical-robot", title: "Physical Robot & Sim-to-Real", sub: "Real Baxter deployment", href: "experiments/physical-robot/" },
+    { key: "real-finetuning", title: "Real-Data Fine-Tuning", sub: "Learning from physical demonstrations", href: "experiments/real-finetuning/" }
   ];
 
   function buildNavbar(active) {
@@ -37,7 +37,7 @@
     var html =
       '<nav class="navbar" role="navigation" aria-label="main navigation">' +
       '<div class="navbar-brand">' +
-      '<a class="navbar-item" href="' + root + 'index.html" style="font-weight:700;">' +
+      '<a class="navbar-item" href="' + root + '" style="font-weight:700;">' +
       '<img src="' + root + 'static/images/de-niro-logo.png" alt="Robot DE NIRO" style="height:34px;width:auto;margin-right:8px;">VLA&ndash;HRC' +
       "</a>" +
       '<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="siteNavMenu">' +
@@ -46,13 +46,13 @@
       "</div>" +
       '<div id="siteNavMenu" class="navbar-menu">' +
       '<div class="navbar-end" style="margin-right:6vw;">' +
-      '<a class="navbar-item' + (active === "home" ? " is-active-page" : "") + '" href="' + root + 'index.html">Home</a>' +
+      '<a class="navbar-item' + (active === "home" ? " is-active-page" : "") + '" href="' + root + '">Home</a>' +
       '<div class="navbar-item has-dropdown is-hoverable">' +
       '<a class="navbar-link' + (isExpGroup ? " is-active-page" : "") + '">Experiments</a>' +
       '<div class="navbar-dropdown">' + ddItems + "</div>" +
       "</div>" +
-      '<a class="navbar-item' + (active === "about" ? " is-active-page" : "") + '" href="' + root + 'about.html">About</a>' +
-      '<a class="navbar-item' + (active === "logbook" ? " is-active-page" : "") + '" href="' + root + 'logbook.html">Logbook</a>' +
+      '<a class="navbar-item' + (active === "about" ? " is-active-page" : "") + '" href="' + root + 'about/">About</a>' +
+      '<a class="navbar-item' + (active === "logbook" ? " is-active-page" : "") + '" href="' + root + 'logbook/">Logbook</a>' +
       "</div>" +
       "</div>" +
       "</nav>";

@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Physical Robot &amp; Sim-to-Real &mdash; VLA-HRC</title>
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-  <link rel="stylesheet" href="../static/css/bulma.min.css">
-  <link rel="stylesheet" href="../static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="../static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../static/css/site.css">
-  <link rel="icon" href="../static/images/favicon.svg">
+  <link rel="stylesheet" href="../../static/css/bulma.min.css">
+  <link rel="stylesheet" href="../../static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="../../static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="../../static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="../../static/css/site.css">
+  <link rel="icon" href="../../static/images/favicon.svg">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="../static/js/fontawesome.all.min.js"></script>
-  <script src="../static/js/bulma-carousel.min.js"></script>
-  <script src="../static/js/bulma-slider.min.js"></script>
-  <script>window.__SITE_DEPTH__ = 1;</script>
-  <script src="../static/js/site.js"></script>
+  <script defer src="../../static/js/fontawesome.all.min.js"></script>
+  <script src="../../static/js/bulma-carousel.min.js"></script>
+  <script src="../../static/js/bulma-slider.min.js"></script>
+  <script>window.__SITE_DEPTH__ = 2;</script>
+  <script src="../../static/js/site.js"></script>
 </head>
 <body>
 
@@ -38,8 +38,8 @@
 <section class="section" id="setup-photos">
   <div class="container is-max-desktop">
     <div class="columns">
-      <div class="column"><figure class="image"><img src="../media/physical-robot/physical-setup.jpg" alt="Physical Baxter robot setup" style="border-radius:10px;"></figure><p class="is-size-7" style="color:#888;">Physical setup with Robot DE NIRO and RealSense camera (faces blurred for privacy).</p></div>
-      <div class="column"><figure class="image"><img src="../media/diagrams/realrobot-architecture.png" alt="Real robot system architecture diagram" style="border-radius:10px;"></figure><p class="is-size-7" style="color:#888;">Network architecture between the robot hardware, the remote control laptop, and the lab PC with GPU.</p></div>
+      <div class="column"><figure class="image"><img src="../../media/physical-robot/physical-setup.jpg" alt="Physical Baxter robot setup" style="border-radius:10px;"></figure><p class="is-size-7" style="color:#888;">Physical setup with Robot DE NIRO and RealSense camera (faces blurred for privacy).</p></div>
+      <div class="column"><figure class="image"><img src="../../media/diagrams/realrobot-architecture.png" alt="Real robot system architecture diagram" style="border-radius:10px;"></figure><p class="is-size-7" style="color:#888;">Network architecture between the robot hardware, the remote control laptop, and the lab PC with GPU.</p></div>
     </div>
   </div>
 </section>
@@ -48,7 +48,7 @@
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Overview</span>
     <h2 class="title is-3">Two threads: direct transfer, and real-data-only fine-tuning</h2>
-    <p>This stage has two parts: validating simulation-to-real policy transfer directly, and a separate pilot that fine-tunes a policy from real demonstrations alone rather than continuing to debug transfer from simulation (covered on the <a href="real-finetuning.html">Real-Data Fine-Tuning</a> page). Together they test whether the simulation environment built for this project is an adequate proxy for the physical Baxter.</p>
+    <p>This stage has two parts: validating simulation-to-real policy transfer directly, and a separate pilot that fine-tunes a policy from real demonstrations alone rather than continuing to debug transfer from simulation (covered on the <a href="../real-finetuning/">Real-Data Fine-Tuning</a> page). Together they test whether the simulation environment built for this project is an adequate proxy for the physical Baxter.</p>
   </div>
 </section>
 
@@ -73,11 +73,11 @@
     <span class="section-eyebrow">Camera &amp; robot setup</span>
     <h2 class="title is-3">Hardware overview</h2>
     <div class="columns">
-      <div class="column"><figure class="image"><img src="../media/physical-robot/late-stage-overview.png" alt="Late-stage physical setup overview" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Not captioned in the thesis text &mdash; tell me what this shows and I'll write it up.</p></div>
-      <div class="column"><figure class="image"><img src="../media/physical-robot/late-stage-update.jpg" alt="Late-stage physical setup update" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Not captioned in the thesis text &mdash; tell me what this shows and I'll write it up.</p></div>
+      <div class="column"><figure class="image"><img src="../../media/physical-robot/late-stage-overview.png" alt="Late-stage physical setup overview" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Not captioned in the thesis text &mdash; tell me what this shows and I'll write it up.</p></div>
+      <div class="column"><figure class="image"><img src="../../media/physical-robot/late-stage-update.jpg" alt="Late-stage physical setup update" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] Not captioned in the thesis text &mdash; tell me what this shows and I'll write it up.</p></div>
     </div>
     <figure class="image" style="margin-top:1rem;">
-      <img src="../media/vla-policy/workspace-alignment.png" alt="Camera and workspace alignment" style="border-radius:8px;">
+      <img src="../../media/vla-policy/workspace-alignment.png" alt="Camera and workspace alignment" style="border-radius:8px;">
     </figure>
     <p style="font-size:0.85rem;color:#888;">Camera and workspace alignment: the live RealSense view is overlaid with the simulated workspace to match the physical camera viewpoint to the training configuration.</p>
   </div>
@@ -89,8 +89,8 @@
     <h2 class="title is-3">Sim-to-real rollouts</h2>
     <div class="hero teaser" style="padding:0;">
       <div class="hero-body" style="padding:0;">
-        <video controls muted loop playsinline poster="../media/physical-robot/clips/sim-to-real-episode4.jpg" style="max-height:480px;">
-          <source src="../media/physical-robot/clips/sim-to-real-episode4.mp4" type="video/mp4">
+        <video controls muted loop playsinline poster="../../media/physical-robot/clips/sim-to-real-episode4.jpg" style="max-height:480px;">
+          <source src="../../media/physical-robot/clips/sim-to-real-episode4.mp4" type="video/mp4">
         </video>
         <h2 class="subtitle has-text-centered">Direct simulation-to-real transfer rollout on the physical Baxter (episode 4) &mdash; task 0, move the red block to the far side, using the <code>pos_v3</code> checkpoint with no additional real-world training.</h2>
       </div>
@@ -129,21 +129,21 @@
     <h2 class="title is-3">Continue exploring</h2>
     <div class="columns">
       <div class="column is-half">
-        <a class="card experiment-card" href="cross-embodiment.html">
-          <div class="card-image"><figure class="image"><img src="../media/cross-embodiment/franka-twoblocks.png" alt="Cross-Embodiment Evaluation"></figure></div>
+        <a class="card experiment-card" href="../cross-embodiment/">
+          <div class="card-image"><figure class="image"><img src="../../media/cross-embodiment/franka-twoblocks.png" alt="Cross-Embodiment Evaluation"></figure></div>
           <div class="card-content"><p class="title is-5">Cross-Embodiment Evaluation</p><p class="subtitle is-6">Extending the pipeline to Franka Emika Panda and Unitree G1, and training a single joint policy across all three.</p></div>
         </a>
       </div>
       <div class="column is-half">
-        <a class="card experiment-card" href="real-finetuning.html">
-          <div class="card-image"><figure class="image"><img src="../media/real-finetuning/training-block-positions-montage.png" alt="Real-Data Fine-Tuning"></figure></div>
+        <a class="card experiment-card" href="../real-finetuning/">
+          <div class="card-image"><figure class="image"><img src="../../media/real-finetuning/training-block-positions-montage.png" alt="Real-Data Fine-Tuning"></figure></div>
           <div class="card-content"><p class="title is-5">Real-Data Fine-Tuning</p><p class="subtitle is-6">Fine-tuning &pi;0.5 from scratch on 28 real-robot demonstrations, with no simulation data at all.</p></div>
         </a>
       </div>
     </div>
     <nav class="level" style="margin-top:2rem;border-top:1px solid #eee;padding-top:1.5rem;">
-      <div class="level-left"><a href="cross-embodiment.html">&larr; Cross-Embodiment Evaluation</a></div>
-      <div class="level-right"><a href="real-finetuning.html">Next: Real-Data Fine-Tuning &rarr;</a></div>
+      <div class="level-left"><a href="../cross-embodiment/">&larr; Cross-Embodiment Evaluation</a></div>
+      <div class="level-right"><a href="../real-finetuning/">Next: Real-Data Fine-Tuning &rarr;</a></div>
     </nav>
   </div>
 </section>

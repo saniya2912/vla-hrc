@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Real-Data Fine-Tuning &mdash; VLA-HRC</title>
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-  <link rel="stylesheet" href="../static/css/bulma.min.css">
-  <link rel="stylesheet" href="../static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="../static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../static/css/site.css">
-  <link rel="icon" href="../static/images/favicon.svg">
+  <link rel="stylesheet" href="../../static/css/bulma.min.css">
+  <link rel="stylesheet" href="../../static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="../../static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="../../static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="../../static/css/site.css">
+  <link rel="icon" href="../../static/images/favicon.svg">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="../static/js/fontawesome.all.min.js"></script>
-  <script src="../static/js/bulma-carousel.min.js"></script>
-  <script src="../static/js/bulma-slider.min.js"></script>
-  <script>window.__SITE_DEPTH__ = 1;</script>
-  <script src="../static/js/site.js"></script>
+  <script defer src="../../static/js/fontawesome.all.min.js"></script>
+  <script src="../../static/js/bulma-carousel.min.js"></script>
+  <script src="../../static/js/bulma-slider.min.js"></script>
+  <script>window.__SITE_DEPTH__ = 2;</script>
+  <script src="../../static/js/site.js"></script>
 </head>
 <body>
 
@@ -63,10 +63,10 @@
     <span class="section-eyebrow">Data collection</span>
     <h2 class="title is-3">Physical demonstration collection</h2>
     <div class="columns">
-      <div class="column"><figure class="image"><img src="../media/real-finetuning/training-block-positions-montage.png" alt="Training block positions montage" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Block-position diversity across the 28 training demonstrations.</p></div>
-      <div class="column"><figure class="image"><img src="../media/real-finetuning/block-detect-annotated-reference.png" alt="Annotated block-detection reference" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Reference frame for the colour-threshold block-position detector used to measure displacement.</p></div>
+      <div class="column"><figure class="image"><img src="../../media/real-finetuning/training-block-positions-montage.png" alt="Training block positions montage" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Block-position diversity across the 28 training demonstrations.</p></div>
+      <div class="column"><figure class="image"><img src="../../media/real-finetuning/block-detect-annotated-reference.png" alt="Annotated block-detection reference" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Reference frame for the colour-threshold block-position detector used to measure displacement.</p></div>
     </div>
-    <figure class="image" style="margin-top:1rem;"><img src="../media/real-finetuning/training-centroid-visualization.png" alt="Training centroid visualization" style="border-radius:8px;"></figure>
+    <figure class="image" style="margin-top:1rem;"><img src="../../media/real-finetuning/training-centroid-visualization.png" alt="Training centroid visualization" style="border-radius:8px;"></figure>
     <p class="is-size-7" style="color:#888;">Detected block positions across the 28 real-data training episodes. Yellow dots: detected block centre for each episode. Red cross: centroid (mean position).</p>
     <p class="is-size-7" style="color:#aaa;">[MEDIA TODO] Additional photos from the physical demonstration-collection sessions can go here (see <code>website/videos/physical/</code>).</p>
   </div>
@@ -78,8 +78,8 @@
     <h2 class="title is-3">Training data &amp; physical inference</h2>
     <div class="hero teaser" style="padding:0;">
       <div class="hero-body" style="padding:0;">
-        <video controls muted loop playsinline poster="../media/real-finetuning/clips/real-data-pilot-success-trial7.jpg" style="max-height:480px;">
-          <source src="../media/real-finetuning/clips/real-data-pilot-success-trial7.mp4" type="video/mp4">
+        <video controls muted loop playsinline poster="../../media/real-finetuning/clips/real-data-pilot-success-trial7.jpg" style="max-height:480px;">
+          <source src="../../media/real-finetuning/clips/real-data-pilot-success-trial7.mp4" type="video/mp4">
         </video>
         <h2 class="subtitle has-text-centered">Successful trial from the real-data-only fine-tuned policy pushing the block to the far side (trial 7 of 25).</h2>
       </div>
@@ -111,8 +111,8 @@
         <h4 class="title is-6 has-text-centered">Trial 7 &mdash; before / after <span class="tag is-success is-light">success</span></h4>
         <div class="ba-slider">
           <span class="ba-tag left">Before</span><span class="ba-tag right">After</span>
-          <img class="ba-before" src="../media/real-finetuning/snapshots/trial_007_before.png" alt="Trial 7 before">
-          <img class="ba-after" src="../media/real-finetuning/snapshots/trial_007_after.png" alt="Trial 7 after">
+          <img class="ba-before" src="../../media/real-finetuning/snapshots/trial_007_before.png" alt="Trial 7 before">
+          <img class="ba-after" src="../../media/real-finetuning/snapshots/trial_007_after.png" alt="Trial 7 after">
           <div class="ba-handle"></div>
         </div>
       </div>
@@ -120,8 +120,8 @@
         <h4 class="title is-6 has-text-centered">Trial 2 &mdash; before / after <span class="tag is-danger is-light">failed: arm_hit_table_edge</span></h4>
         <div class="ba-slider">
           <span class="ba-tag left">Before</span><span class="ba-tag right">After</span>
-          <img class="ba-before" src="../media/real-finetuning/snapshots/trial_002_before.png" alt="Trial 2 before">
-          <img class="ba-after" src="../media/real-finetuning/snapshots/trial_002_after.png" alt="Trial 2 after">
+          <img class="ba-before" src="../../media/real-finetuning/snapshots/trial_002_before.png" alt="Trial 2 before">
+          <img class="ba-after" src="../../media/real-finetuning/snapshots/trial_002_after.png" alt="Trial 2 after">
           <div class="ba-handle"></div>
         </div>
       </div>
@@ -135,14 +135,14 @@
     <h2 class="title is-3">Continue exploring</h2>
     <div class="columns">
       <div class="column is-half">
-        <a class="card experiment-card" href="physical-robot.html">
-          <div class="card-image"><figure class="image"><img src="../media/physical-robot/physical-setup.jpg" alt="Physical Robot & Sim-to-Real"></figure></div>
+        <a class="card experiment-card" href="../physical-robot/">
+          <div class="card-image"><figure class="image"><img src="../../media/physical-robot/physical-setup.jpg" alt="Physical Robot & Sim-to-Real"></figure></div>
           <div class="card-content"><p class="title is-5">Physical Robot &amp; Sim-to-Real</p><p class="subtitle is-6">Deploying the simulation-trained policy directly on physical Robot DE NIRO / Baxter hardware.</p></div>
         </a>
       </div>
     </div>
     <nav class="level" style="margin-top:2rem;border-top:1px solid #eee;padding-top:1.5rem;">
-      <div class="level-left"><a href="physical-robot.html">&larr; Physical Robot &amp; Sim-to-Real</a></div>
+      <div class="level-left"><a href="../physical-robot/">&larr; Physical Robot &amp; Sim-to-Real</a></div>
     </nav>
   </div>
 </section>

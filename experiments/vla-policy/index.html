@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VLA Policy &amp; Baxter Simulation &mdash; VLA-HRC</title>
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-  <link rel="stylesheet" href="../static/css/bulma.min.css">
-  <link rel="stylesheet" href="../static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="../static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../static/css/site.css">
-  <link rel="icon" href="../static/images/favicon.svg">
+  <link rel="stylesheet" href="../../static/css/bulma.min.css">
+  <link rel="stylesheet" href="../../static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="../../static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="../../static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="../../static/css/site.css">
+  <link rel="icon" href="../../static/images/favicon.svg">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="../static/js/fontawesome.all.min.js"></script>
-  <script src="../static/js/bulma-carousel.min.js"></script>
-  <script src="../static/js/bulma-slider.min.js"></script>
-  <script>window.__SITE_DEPTH__ = 1;</script>
-  <script src="../static/js/site.js"></script>
+  <script defer src="../../static/js/fontawesome.all.min.js"></script>
+  <script src="../../static/js/bulma-carousel.min.js"></script>
+  <script src="../../static/js/bulma-slider.min.js"></script>
+  <script>window.__SITE_DEPTH__ = 2;</script>
+  <script src="../../static/js/site.js"></script>
 </head>
 <body>
 
@@ -39,8 +39,8 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <video autoplay muted loop playsinline poster="../media/vla-policy/rollout-demo.jpg">
-        <source src="../media/vla-policy/rollout-demo.mp4" type="video/mp4">
+      <video autoplay muted loop playsinline poster="../../media/vla-policy/rollout-demo.jpg">
+        <source src="../../media/vla-policy/rollout-demo.mp4" type="video/mp4">
       </video>
       <h2 class="subtitle has-text-centered">Wrist-camera policy rollout: the fine-tuned &pi;0.5 policy executing a pick-and-place primitive on the Baxter MuJoCo task.</h2>
     </div>
@@ -73,7 +73,7 @@
       </div>
       <div class="column">
         <figure class="image">
-          <img src="../media/vla-policy/baxter-mujoco.png" alt="Baxter robot in MuJoCo simulation" style="border-radius:10px;">
+          <img src="../../media/vla-policy/baxter-mujoco.png" alt="Baxter robot in MuJoCo simulation" style="border-radius:10px;">
         </figure>
         <p style="font-size:0.85rem;color:#888;">Baxter in the custom MuJoCo pick-and-place environment.</p>
       </div>
@@ -89,19 +89,19 @@
 
     <div class="columns" style="margin-top:1rem;">
       <div class="column has-text-centered">
-        <figure class="image"><img src="../media/vla-policy/scene_approach.png" alt="Scene camera — approach" style="border-radius:8px;"></figure>
+        <figure class="image"><img src="../../media/vla-policy/scene_approach.png" alt="Scene camera — approach" style="border-radius:8px;"></figure>
         <p class="is-size-7">Scene camera &mdash; approach</p>
       </div>
       <div class="column has-text-centered">
-        <figure class="image"><img src="../media/vla-policy/wrist_approach.png" alt="Wrist camera — approach" style="border-radius:8px;"></figure>
+        <figure class="image"><img src="../../media/vla-policy/wrist_approach.png" alt="Wrist camera — approach" style="border-radius:8px;"></figure>
         <p class="is-size-7">Wrist camera &mdash; approach</p>
       </div>
       <div class="column has-text-centered">
-        <figure class="image"><img src="../media/vla-policy/scene_push.png" alt="Scene camera — push" style="border-radius:8px;"></figure>
+        <figure class="image"><img src="../../media/vla-policy/scene_push.png" alt="Scene camera — push" style="border-radius:8px;"></figure>
         <p class="is-size-7">Scene camera &mdash; push</p>
       </div>
       <div class="column has-text-centered">
-        <figure class="image"><img src="../media/vla-policy/wrist_push.png" alt="Wrist camera — push" style="border-radius:8px;"></figure>
+        <figure class="image"><img src="../../media/vla-policy/wrist_push.png" alt="Wrist camera — push" style="border-radius:8px;"></figure>
         <p class="is-size-7">Wrist camera &mdash; push</p>
       </div>
     </div>
@@ -115,12 +115,12 @@
     <h2 class="title is-3">Execution sequence &amp; task rollouts</h2>
     <p>A representative successful trial: the policy executes a complete pick-and-place sequence &mdash; approach, descent to within millimetres of the block centre, lift, carry across the workspace divider, and controlled placement.</p>
     <div class="img-grid" style="margin-top:1rem;">
-      <figure data-lightbox data-caption="Initial"><img src="../media/vla-policy/exec-a_initial.png" alt="Initial"></figure>
-      <figure data-lightbox data-caption="Approach"><img src="../media/vla-policy/exec-b_approach.png" alt="Approach"></figure>
-      <figure data-lightbox data-caption="Descent"><img src="../media/vla-policy/exec-c_descent.png" alt="Descent"></figure>
-      <figure data-lightbox data-caption="Lift (z=0.35m)"><img src="../media/vla-policy/exec-d_lift.png" alt="Lift"></figure>
-      <figure data-lightbox data-caption="Carry (x=0.75m)"><img src="../media/vla-policy/exec-e_carry.png" alt="Carry"></figure>
-      <figure data-lightbox data-caption="Place (x=0.76m)"><img src="../media/vla-policy/exec-f_place.png" alt="Place"></figure>
+      <figure data-lightbox data-caption="Initial"><img src="../../media/vla-policy/exec-a_initial.png" alt="Initial"></figure>
+      <figure data-lightbox data-caption="Approach"><img src="../../media/vla-policy/exec-b_approach.png" alt="Approach"></figure>
+      <figure data-lightbox data-caption="Descent"><img src="../../media/vla-policy/exec-c_descent.png" alt="Descent"></figure>
+      <figure data-lightbox data-caption="Lift (z=0.35m)"><img src="../../media/vla-policy/exec-d_lift.png" alt="Lift"></figure>
+      <figure data-lightbox data-caption="Carry (x=0.75m)"><img src="../../media/vla-policy/exec-e_carry.png" alt="Carry"></figure>
+      <figure data-lightbox data-caption="Place (x=0.76m)"><img src="../../media/vla-policy/exec-f_place.png" alt="Place"></figure>
     </div>
   </div>
 </section>
@@ -131,11 +131,11 @@
     <h2 class="title is-3">Robot DE NIRO / Baxter</h2>
     <div class="columns">
       <div class="column">
-        <figure class="image"><img src="../media/vla-policy/de-niro.png" alt="Robot DE NIRO / Baxter platform" style="border-radius:10px;"></figure>
+        <figure class="image"><img src="../../media/vla-policy/de-niro.png" alt="Robot DE NIRO / Baxter platform" style="border-radius:10px;"></figure>
         <p style="font-size:0.85rem;color:#888;">Robot DE NIRO, the long-term target platform.</p>
       </div>
       <div class="column">
-        <figure class="image"><img src="../media/vla-policy/mujoco-setup.png" alt="MuJoCo scene setup" style="border-radius:10px;"></figure>
+        <figure class="image"><img src="../../media/vla-policy/mujoco-setup.png" alt="MuJoCo scene setup" style="border-radius:10px;"></figure>
         <p style="font-size:0.85rem;color:#888;">The MuJoCo tabletop scene used for demonstration collection and evaluation.</p>
       </div>
     </div>
@@ -146,7 +146,7 @@
   <div class="container is-max-desktop">
     <span class="section-eyebrow">Results</span>
     <h2 class="title is-3">Baseline policy performance</h2>
-    <p>The zero-shot &pi;0.5 baseline achieved 15.0% overall trial-level success (9/60 trials) &mdash; a non-trivial result for a model never trained on Baxter, but one concentrated almost entirely on the red block. Full checkpoint-by-checkpoint comparison after fine-tuning lives on the <a href="checkpoints.html">Checkpoint &amp; Policy Development</a> page.</div>
+    <p>The zero-shot &pi;0.5 baseline achieved 15.0% overall trial-level success (9/60 trials) &mdash; a non-trivial result for a model never trained on Baxter, but one concentrated almost entirely on the red block. Full checkpoint-by-checkpoint comparison after fine-tuning lives on the <a href="../checkpoints/">Checkpoint &amp; Policy Development</a> page.</div>
     <div class="columns" style="margin-top:1rem;">
       <div class="column"><div class="box has-text-centered"><p class="heading">Tasks</p><p class="title">6</p></div></div>
       <div class="column"><div class="box has-text-centered"><p class="heading">Zero-shot success rate</p><p class="title">15.0%</p></div></div>
@@ -175,21 +175,21 @@
     <h2 class="title is-3">Continue exploring</h2>
     <div class="columns">
       <div class="column is-half">
-        <a class="card experiment-card" href="checkpoints.html">
-          <div class="card-image"><figure class="image"><img src="../media/checkpoints/success-bar-chart.png" alt="Checkpoint & Policy Development"></figure></div>
+        <a class="card experiment-card" href="../checkpoints/">
+          <div class="card-image"><figure class="image"><img src="../../media/checkpoints/success-bar-chart.png" alt="Checkpoint & Policy Development"></figure></div>
           <div class="card-content"><p class="title is-5">Checkpoint &amp; Policy Development</p><p class="subtitle is-6">Iterating the six-task policy across eight checkpoints, reaching 43.3% trial-level success.</p></div>
         </a>
       </div>
       <div class="column is-half">
-        <a class="card experiment-card" href="vlm-planner.html">
-          <div class="card-image"><figure class="image"><img src="../media/diagrams/vlm-planner-pipeline.png" alt="VLM Planner"></figure></div>
+        <a class="card experiment-card" href="../vlm-planner/">
+          <div class="card-image"><figure class="image"><img src="../../media/diagrams/vlm-planner-pipeline.png" alt="VLM Planner"></figure></div>
           <div class="card-content"><p class="title is-5">VLM Planner</p><p class="subtitle is-6">Composing the six learned primitives into multi-step rearrangements, at 94.6% planning accuracy.</p></div>
         </a>
       </div>
     </div>
     <nav class="level" style="margin-top:2rem;border-top:1px solid #eee;padding-top:1.5rem;">
-      <div class="level-left"><a href="../index.html">&larr; Back to Overview</a></div>
-      <div class="level-right"><a href="checkpoints.html">Next: Checkpoint &amp; Policy Development &rarr;</a></div>
+      <div class="level-left"><a href="../../">&larr; Back to Overview</a></div>
+      <div class="level-right"><a href="../checkpoints/">Next: Checkpoint &amp; Policy Development &rarr;</a></div>
     </nav>
   </div>
 </section>

@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Checkpoint &amp; Policy Development &mdash; VLA-HRC</title>
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-  <link rel="stylesheet" href="../static/css/bulma.min.css">
-  <link rel="stylesheet" href="../static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="../static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../static/css/site.css">
-  <link rel="icon" href="../static/images/favicon.svg">
+  <link rel="stylesheet" href="../../static/css/bulma.min.css">
+  <link rel="stylesheet" href="../../static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="../../static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="../../static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="../../static/css/site.css">
+  <link rel="icon" href="../../static/images/favicon.svg">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="../static/js/fontawesome.all.min.js"></script>
-  <script src="../static/js/bulma-carousel.min.js"></script>
-  <script src="../static/js/bulma-slider.min.js"></script>
-  <script>window.__SITE_DEPTH__ = 1;</script>
-  <script src="../static/js/site.js"></script>
+  <script defer src="../../static/js/fontawesome.all.min.js"></script>
+  <script src="../../static/js/bulma-carousel.min.js"></script>
+  <script src="../../static/js/bulma-slider.min.js"></script>
+  <script>window.__SITE_DEPTH__ = 2;</script>
+  <script src="../../static/js/site.js"></script>
 </head>
 <body>
 
@@ -49,9 +49,9 @@
     <h2 class="title is-3">Dataset audit, training &amp; inference pipeline</h2>
     <p>Two further changes were introduced in <code>pos_v2</code>: demonstrations were recorded at the native 10&nbsp;Hz control rate rather than downsampled, and the robot state representation was expanded from 8 to 11 dimensions by including the 3D end-effector position. <code>pos_v3</code> continued training from <code>pos_v2</code> with a lower learning rate and additional near-side demonstrations. Two deployment-specific train&ndash;inference mismatches were also identified and fixed along the way: a gripper-initialisation mismatch, and gripper hysteresis within a single action chunk. The same fix is reused unmodified in the physical-robot deployment.</p>
     <div class="columns" style="margin-top:1rem;">
-      <div class="column"><figure class="image"><img src="../media/checkpoints/gripper-init-fix.png" alt="Gripper initialisation fix" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Gripper initialisation mismatch: without the fix, the reset gripper control value (&asymp;0.65) places the policy near the grasp threshold at step 0, causing spurious early carry-mode behaviour; resetting to fully open (0.0) restores the expected initial state.</p></div>
-      <div class="column"><figure class="image"><img src="../media/checkpoints/gripper-hysteresis.png" alt="Gripper hysteresis" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Gripper hysteresis: a spurious close&ndash;open&ndash;close event within a single action chunk would otherwise drop a carried object; a grasp-latch fix prevents this from reaching the gripper controller.</p></div>
-      <div class="column"><figure class="image"><img src="../media/checkpoints/policy-actions-7d.png" alt="Policy actions, 7 degrees of freedom" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] This plot isn't captioned in the thesis text — tell me what it shows and I'll write it up.</p></div>
+      <div class="column"><figure class="image"><img src="../../media/checkpoints/gripper-init-fix.png" alt="Gripper initialisation fix" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Gripper initialisation mismatch: without the fix, the reset gripper control value (&asymp;0.65) places the policy near the grasp threshold at step 0, causing spurious early carry-mode behaviour; resetting to fully open (0.0) restores the expected initial state.</p></div>
+      <div class="column"><figure class="image"><img src="../../media/checkpoints/gripper-hysteresis.png" alt="Gripper hysteresis" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Gripper hysteresis: a spurious close&ndash;open&ndash;close event within a single action chunk would otherwise drop a carried object; a grasp-latch fix prevents this from reaching the gripper controller.</p></div>
+      <div class="column"><figure class="image"><img src="../../media/checkpoints/policy-actions-7d.png" alt="Policy actions, 7 degrees of freedom" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">[FIGURE CAPTION — TO BE WRITTEN] This plot isn't captioned in the thesis text — tell me what it shows and I'll write it up.</p></div>
     </div>
   </div>
 </section>
@@ -84,42 +84,42 @@
 
     <h4 class="title is-5" style="margin-top:2rem;">Base <span class="tag is-light">pretrained π0.5, no fine-tuning</span></h4>
     <div class="carousel results-carousel">
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/base/task0.jpg"><source src="../media/checkpoints/base/task0.mp4" type="video/mp4"></video><div class="carousel-caption">Task 0 &mdash; red far</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/base/task1.jpg"><source src="../media/checkpoints/base/task1.mp4" type="video/mp4"></video><div class="carousel-caption">Task 1 &mdash; red near</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/base/task2.jpg"><source src="../media/checkpoints/base/task2.mp4" type="video/mp4"></video><div class="carousel-caption">Task 2 &mdash; blue far</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/base/task3.jpg"><source src="../media/checkpoints/base/task3.mp4" type="video/mp4"></video><div class="carousel-caption">Task 3 &mdash; blue near</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/base/task4.jpg"><source src="../media/checkpoints/base/task4.mp4" type="video/mp4"></video><div class="carousel-caption">Task 4 &mdash; green far</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/base/task5.jpg"><source src="../media/checkpoints/base/task5.mp4" type="video/mp4"></video><div class="carousel-caption">Task 5 &mdash; green near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/base/task0.jpg"><source src="../../media/checkpoints/base/task0.mp4" type="video/mp4"></video><div class="carousel-caption">Task 0 &mdash; red far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/base/task1.jpg"><source src="../../media/checkpoints/base/task1.mp4" type="video/mp4"></video><div class="carousel-caption">Task 1 &mdash; red near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/base/task2.jpg"><source src="../../media/checkpoints/base/task2.mp4" type="video/mp4"></video><div class="carousel-caption">Task 2 &mdash; blue far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/base/task3.jpg"><source src="../../media/checkpoints/base/task3.mp4" type="video/mp4"></video><div class="carousel-caption">Task 3 &mdash; blue near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/base/task4.jpg"><source src="../../media/checkpoints/base/task4.mp4" type="video/mp4"></video><div class="carousel-caption">Task 4 &mdash; green far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/base/task5.jpg"><source src="../../media/checkpoints/base/task5.mp4" type="video/mp4"></video><div class="carousel-caption">Task 5 &mdash; green near</div></div>
     </div>
 
     <h4 class="title is-5" style="margin-top:2rem;">pos_v2</h4>
     <div class="carousel results-carousel">
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v2/task0.jpg"><source src="../media/checkpoints/pos_v2/task0.mp4" type="video/mp4"></video><div class="carousel-caption">Task 0 &mdash; red far</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v2/task1.jpg"><source src="../media/checkpoints/pos_v2/task1.mp4" type="video/mp4"></video><div class="carousel-caption">Task 1 &mdash; red near</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v2/task2.jpg"><source src="../media/checkpoints/pos_v2/task2.mp4" type="video/mp4"></video><div class="carousel-caption">Task 2 &mdash; blue far</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v2/task3.jpg"><source src="../media/checkpoints/pos_v2/task3.mp4" type="video/mp4"></video><div class="carousel-caption">Task 3 &mdash; blue near</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v2/task4.jpg"><source src="../media/checkpoints/pos_v2/task4.mp4" type="video/mp4"></video><div class="carousel-caption">Task 4 &mdash; green far</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v2/task5.jpg"><source src="../media/checkpoints/pos_v2/task5.mp4" type="video/mp4"></video><div class="carousel-caption">Task 5 &mdash; green near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/pos_v2/task0.jpg"><source src="../../media/checkpoints/pos_v2/task0.mp4" type="video/mp4"></video><div class="carousel-caption">Task 0 &mdash; red far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/pos_v2/task1.jpg"><source src="../../media/checkpoints/pos_v2/task1.mp4" type="video/mp4"></video><div class="carousel-caption">Task 1 &mdash; red near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/pos_v2/task2.jpg"><source src="../../media/checkpoints/pos_v2/task2.mp4" type="video/mp4"></video><div class="carousel-caption">Task 2 &mdash; blue far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/pos_v2/task3.jpg"><source src="../../media/checkpoints/pos_v2/task3.mp4" type="video/mp4"></video><div class="carousel-caption">Task 3 &mdash; blue near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/pos_v2/task4.jpg"><source src="../../media/checkpoints/pos_v2/task4.mp4" type="video/mp4"></video><div class="carousel-caption">Task 4 &mdash; green far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/pos_v2/task5.jpg"><source src="../../media/checkpoints/pos_v2/task5.mp4" type="video/mp4"></video><div class="carousel-caption">Task 5 &mdash; green near</div></div>
     </div>
 
     <h4 class="title is-5" style="margin-top:2rem;">pos_v3</h4>
     <div class="carousel results-carousel">
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v3/task0.jpg"><source src="../media/checkpoints/pos_v3/task0.mp4" type="video/mp4"></video><div class="carousel-caption">Task 0 &mdash; red far</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v3/task1.jpg"><source src="../media/checkpoints/pos_v3/task1.mp4" type="video/mp4"></video><div class="carousel-caption">Task 1 &mdash; red near</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v3/task2.jpg"><source src="../media/checkpoints/pos_v3/task2.mp4" type="video/mp4"></video><div class="carousel-caption">Task 2 &mdash; blue far</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v3/task3.jpg"><source src="../media/checkpoints/pos_v3/task3.mp4" type="video/mp4"></video><div class="carousel-caption">Task 3 &mdash; blue near</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v3/task4.jpg"><source src="../media/checkpoints/pos_v3/task4.mp4" type="video/mp4"></video><div class="carousel-caption">Task 4 &mdash; green far</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/pos_v3/task5.jpg"><source src="../media/checkpoints/pos_v3/task5.mp4" type="video/mp4"></video><div class="carousel-caption">Task 5 &mdash; green near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/pos_v3/task0.jpg"><source src="../../media/checkpoints/pos_v3/task0.mp4" type="video/mp4"></video><div class="carousel-caption">Task 0 &mdash; red far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/pos_v3/task1.jpg"><source src="../../media/checkpoints/pos_v3/task1.mp4" type="video/mp4"></video><div class="carousel-caption">Task 1 &mdash; red near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/pos_v3/task2.jpg"><source src="../../media/checkpoints/pos_v3/task2.mp4" type="video/mp4"></video><div class="carousel-caption">Task 2 &mdash; blue far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/pos_v3/task3.jpg"><source src="../../media/checkpoints/pos_v3/task3.mp4" type="video/mp4"></video><div class="carousel-caption">Task 3 &mdash; blue near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/pos_v3/task4.jpg"><source src="../../media/checkpoints/pos_v3/task4.mp4" type="video/mp4"></video><div class="carousel-caption">Task 4 &mdash; green far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/pos_v3/task5.jpg"><source src="../../media/checkpoints/pos_v3/task5.mp4" type="video/mp4"></video><div class="carousel-caption">Task 5 &mdash; green near</div></div>
     </div>
 
     <h4 class="title is-5" style="margin-top:2rem;">v4b_run2 <span class="tag is-link is-light">latest / corrected pipeline</span></h4>
     <div class="carousel results-carousel">
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/v4b_run2/task0.jpg"><source src="../media/checkpoints/v4b_run2/task0.mp4" type="video/mp4"></video><div class="carousel-caption">Task 0 &mdash; red far</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/v4b_run2/task1.jpg"><source src="../media/checkpoints/v4b_run2/task1.mp4" type="video/mp4"></video><div class="carousel-caption">Task 1 &mdash; red near</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/v4b_run2/task2.jpg"><source src="../media/checkpoints/v4b_run2/task2.mp4" type="video/mp4"></video><div class="carousel-caption">Task 2 &mdash; blue far</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/v4b_run2/task3.jpg"><source src="../media/checkpoints/v4b_run2/task3.mp4" type="video/mp4"></video><div class="carousel-caption">Task 3 &mdash; blue near</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/v4b_run2/task4.jpg"><source src="../media/checkpoints/v4b_run2/task4.mp4" type="video/mp4"></video><div class="carousel-caption">Task 4 &mdash; green far</div></div>
-      <div class="item"><video controls muted loop playsinline poster="../media/checkpoints/v4b_run2/task5.jpg"><source src="../media/checkpoints/v4b_run2/task5.mp4" type="video/mp4"></video><div class="carousel-caption">Task 5 &mdash; green near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/v4b_run2/task0.jpg"><source src="../../media/checkpoints/v4b_run2/task0.mp4" type="video/mp4"></video><div class="carousel-caption">Task 0 &mdash; red far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/v4b_run2/task1.jpg"><source src="../../media/checkpoints/v4b_run2/task1.mp4" type="video/mp4"></video><div class="carousel-caption">Task 1 &mdash; red near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/v4b_run2/task2.jpg"><source src="../../media/checkpoints/v4b_run2/task2.mp4" type="video/mp4"></video><div class="carousel-caption">Task 2 &mdash; blue far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/v4b_run2/task3.jpg"><source src="../../media/checkpoints/v4b_run2/task3.mp4" type="video/mp4"></video><div class="carousel-caption">Task 3 &mdash; blue near</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/v4b_run2/task4.jpg"><source src="../../media/checkpoints/v4b_run2/task4.mp4" type="video/mp4"></video><div class="carousel-caption">Task 4 &mdash; green far</div></div>
+      <div class="item"><video controls muted loop playsinline poster="../../media/checkpoints/v4b_run2/task5.jpg"><source src="../../media/checkpoints/v4b_run2/task5.mp4" type="video/mp4"></video><div class="carousel-caption">Task 5 &mdash; green near</div></div>
     </div>
   </div>
 </section>
@@ -129,7 +129,7 @@
     <span class="section-eyebrow">Results</span>
     <h2 class="title is-3">Success rate by checkpoint</h2>
     <figure class="image">
-      <img src="../media/checkpoints/success-bar-chart.png" alt="Success rate bar chart across checkpoints" style="border-radius:10px;">
+      <img src="../../media/checkpoints/success-bar-chart.png" alt="Success rate bar chart across checkpoints" style="border-radius:10px;">
     </figure>
     <p style="font-size:0.85rem;color:#888;">Trial-level success rate by task and checkpoint, grouped by block colour.</p>
 
@@ -160,8 +160,8 @@
     <span class="section-eyebrow">Failure cases</span>
     <h2 class="title is-3">Diagnosing checkpoint failures</h2>
     <div class="columns">
-      <div class="column"><figure class="image"><img src="../media/checkpoints/state-mismatch.png" alt="State mismatch diagnostic" style="border-radius:8px;"></figure><p class="is-size-7">[FIGURE CAPTION — TO BE WRITTEN] Not captioned in the thesis text &mdash; tell me what this diagnostic shows and I'll write it up.</p></div>
-      <div class="column"><figure class="image"><img src="../media/checkpoints/chunk-repetition.png" alt="Action chunk repetition diagnostic" style="border-radius:8px;"></figure><p class="is-size-7">[FIGURE CAPTION — TO BE WRITTEN] Not captioned in the thesis text &mdash; tell me what this diagnostic shows and I'll write it up.</p></div>
+      <div class="column"><figure class="image"><img src="../../media/checkpoints/state-mismatch.png" alt="State mismatch diagnostic" style="border-radius:8px;"></figure><p class="is-size-7">[FIGURE CAPTION — TO BE WRITTEN] Not captioned in the thesis text &mdash; tell me what this diagnostic shows and I'll write it up.</p></div>
+      <div class="column"><figure class="image"><img src="../../media/checkpoints/chunk-repetition.png" alt="Action chunk repetition diagnostic" style="border-radius:8px;"></figure><p class="is-size-7">[FIGURE CAPTION — TO BE WRITTEN] Not captioned in the thesis text &mdash; tell me what this diagnostic shows and I'll write it up.</p></div>
     </div>
   </div>
 </section>
@@ -172,21 +172,21 @@
     <h2 class="title is-3">Continue exploring</h2>
     <div class="columns">
       <div class="column is-half">
-        <a class="card experiment-card" href="vla-policy.html">
-          <div class="card-image"><figure class="image"><img src="../media/vla-policy/baxter-mujoco.png" alt="VLA Policy & Baxter Simulation"></figure></div>
+        <a class="card experiment-card" href="../vla-policy/">
+          <div class="card-image"><figure class="image"><img src="../../media/vla-policy/baxter-mujoco.png" alt="VLA Policy & Baxter Simulation"></figure></div>
           <div class="card-content"><p class="title is-5">VLA Policy &amp; Baxter Simulation</p><p class="subtitle is-6">Adapting the pretrained &pi;0.5 policy to a six-task Baxter benchmark via LoRA fine-tuning.</p></div>
         </a>
       </div>
       <div class="column is-half">
-        <a class="card experiment-card" href="vlm-planner.html">
-          <div class="card-image"><figure class="image"><img src="../media/diagrams/vlm-planner-pipeline.png" alt="VLM Planner"></figure></div>
+        <a class="card experiment-card" href="../vlm-planner/">
+          <div class="card-image"><figure class="image"><img src="../../media/diagrams/vlm-planner-pipeline.png" alt="VLM Planner"></figure></div>
           <div class="card-content"><p class="title is-5">VLM Planner</p><p class="subtitle is-6">Composing the six learned primitives into multi-step rearrangements, at 94.6% planning accuracy.</p></div>
         </a>
       </div>
     </div>
     <nav class="level" style="margin-top:2rem;border-top:1px solid #eee;padding-top:1.5rem;">
-      <div class="level-left"><a href="vla-policy.html">&larr; VLA Policy &amp; Baxter Simulation</a></div>
-      <div class="level-right"><a href="vlm-planner.html">Next: VLM Planner &rarr;</a></div>
+      <div class="level-left"><a href="../vla-policy/">&larr; VLA Policy &amp; Baxter Simulation</a></div>
+      <div class="level-right"><a href="../vlm-planner/">Next: VLM Planner &rarr;</a></div>
     </nav>
   </div>
 </section>

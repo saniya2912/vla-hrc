@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VLM Planner &mdash; VLA-HRC</title>
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-  <link rel="stylesheet" href="../static/css/bulma.min.css">
-  <link rel="stylesheet" href="../static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="../static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="../static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="../static/css/site.css">
-  <link rel="icon" href="../static/images/favicon.svg">
+  <link rel="stylesheet" href="../../static/css/bulma.min.css">
+  <link rel="stylesheet" href="../../static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="../../static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="../../static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="../../static/css/site.css">
+  <link rel="icon" href="../../static/images/favicon.svg">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="../static/js/fontawesome.all.min.js"></script>
-  <script src="../static/js/bulma-carousel.min.js"></script>
-  <script src="../static/js/bulma-slider.min.js"></script>
-  <script>window.__SITE_DEPTH__ = 1;</script>
-  <script src="../static/js/site.js"></script>
+  <script defer src="../../static/js/fontawesome.all.min.js"></script>
+  <script src="../../static/js/bulma-carousel.min.js"></script>
+  <script src="../../static/js/bulma-slider.min.js"></script>
+  <script>window.__SITE_DEPTH__ = 2;</script>
+  <script src="../../static/js/site.js"></script>
 </head>
 <body>
 
@@ -39,7 +39,7 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <figure class="image">
-        <img src="../media/diagrams/vlm-planner-pipeline.png" alt="VLM planner pipeline diagram" style="border-radius:10px;">
+        <img src="../../media/diagrams/vlm-planner-pipeline.png" alt="VLM planner pipeline diagram" style="border-radius:10px;">
       </figure>
       <h2 class="subtitle has-text-centered">Current scene / goal scene &rarr; VLM planner (Gemma-3-12B) &rarr; ordered task sequence.</h2>
     </div>
@@ -77,14 +77,14 @@
     <h2 class="title is-3">Goal configurations &mdash; six-task workspace</h2>
     <p>The planner operates over the complete 2&sup3; = 8 configuration space defined by the three block colours and their near/far positions. A goal configuration is specified by the corresponding target arrangement, and the planner generates the required sequence of primitive manipulation tasks to reach it.</p>
     <div class="img-grid" style="margin-top:1rem;">
-      <figure data-lightbox data-caption="red far · blue far · green far"><img src="../media/vlm-planner/goal_images_6task/red_far_blue_far_green_far.png" alt="red far blue far green far"></figure>
-      <figure data-lightbox data-caption="red far · blue far · green near"><img src="../media/vlm-planner/goal_images_6task/red_far_blue_far_green_near.png" alt="red far blue far green near"></figure>
-      <figure data-lightbox data-caption="red far · blue near · green far"><img src="../media/vlm-planner/goal_images_6task/red_far_blue_near_green_far.png" alt="red far blue near green far"></figure>
-      <figure data-lightbox data-caption="red far · blue near · green near"><img src="../media/vlm-planner/goal_images_6task/red_far_blue_near_green_near.png" alt="red far blue near green near"></figure>
-      <figure data-lightbox data-caption="red near · blue far · green far"><img src="../media/vlm-planner/goal_images_6task/red_near_blue_far_green_far.png" alt="red near blue far green far"></figure>
-      <figure data-lightbox data-caption="red near · blue far · green near"><img src="../media/vlm-planner/goal_images_6task/red_near_blue_far_green_near.png" alt="red near blue far green near"></figure>
-      <figure data-lightbox data-caption="red near · blue near · green far"><img src="../media/vlm-planner/goal_images_6task/red_near_blue_near_green_far.png" alt="red near blue near green far"></figure>
-      <figure data-lightbox data-caption="red near · blue near · green near"><img src="../media/vlm-planner/goal_images_6task/red_near_blue_near_green_near.png" alt="red near blue near green near"></figure>
+      <figure data-lightbox data-caption="red far · blue far · green far"><img src="../../media/vlm-planner/goal_images_6task/red_far_blue_far_green_far.png" alt="red far blue far green far"></figure>
+      <figure data-lightbox data-caption="red far · blue far · green near"><img src="../../media/vlm-planner/goal_images_6task/red_far_blue_far_green_near.png" alt="red far blue far green near"></figure>
+      <figure data-lightbox data-caption="red far · blue near · green far"><img src="../../media/vlm-planner/goal_images_6task/red_far_blue_near_green_far.png" alt="red far blue near green far"></figure>
+      <figure data-lightbox data-caption="red far · blue near · green near"><img src="../../media/vlm-planner/goal_images_6task/red_far_blue_near_green_near.png" alt="red far blue near green near"></figure>
+      <figure data-lightbox data-caption="red near · blue far · green far"><img src="../../media/vlm-planner/goal_images_6task/red_near_blue_far_green_far.png" alt="red near blue far green far"></figure>
+      <figure data-lightbox data-caption="red near · blue far · green near"><img src="../../media/vlm-planner/goal_images_6task/red_near_blue_far_green_near.png" alt="red near blue far green near"></figure>
+      <figure data-lightbox data-caption="red near · blue near · green far"><img src="../../media/vlm-planner/goal_images_6task/red_near_blue_near_green_far.png" alt="red near blue near green far"></figure>
+      <figure data-lightbox data-caption="red near · blue near · green near"><img src="../../media/vlm-planner/goal_images_6task/red_near_blue_near_green_near.png" alt="red near blue near green near"></figure>
     </div>
   </div>
 </section>
@@ -95,18 +95,18 @@
     <h2 class="title is-3">Planning examples</h2>
     <p>Example current/goal scene pair used to develop and test the planner before switching to the symbolic-state input described above.</p>
     <div class="columns">
-      <div class="column"><figure class="image"><img src="../media/vlm-planner/goal-example.png" alt="Planner goal example" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Example current/goal scene pair used during planner development.</p></div>
-      <div class="column"><figure class="image"><img src="../media/vlm-planner/test-current.png" alt="Test query current scene" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Current scene (test query).</p></div>
-      <div class="column"><figure class="image"><img src="../media/vlm-planner/test-goal.png" alt="Test query goal scene" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Goal scene (test query).</p></div>
+      <div class="column"><figure class="image"><img src="../../media/vlm-planner/goal-example.png" alt="Planner goal example" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Example current/goal scene pair used during planner development.</p></div>
+      <div class="column"><figure class="image"><img src="../../media/vlm-planner/test-current.png" alt="Test query current scene" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Current scene (test query).</p></div>
+      <div class="column"><figure class="image"><img src="../../media/vlm-planner/test-goal.png" alt="Test query goal scene" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Goal scene (test query).</p></div>
     </div>
     <div class="placeholder-text" style="margin-top:1rem;">[VIDEO SECTION — TO BE ADDED] Planner walkthrough videos (correct plan, re-planning after execution, incorrect plan example).</div>
 
     <h3 class="title is-4" style="margin-top:2.5rem;">Early monitoring pilot</h3>
     <p>Before committing to this planner design, an earlier pilot compared two candidate approaches to visually monitoring a multi-object arrangement task on a real-world fruit-sorting setup: a detection-based approach using GroundingDINO, and a purely vision&ndash;language approach using a pretrained Gemma-3-12B model. GroundingDINO gave reliable, precisely localised detections and could verify simple spatial relationships robustly, but required predefined object queries and had no capacity for higher-level task reasoning. Gemma-3-12B produced accurate free-form scene descriptions and could reason flexibly about arbitrary goal conditions, but its structured, checklist-style output was materially less reliable once more than one spatial relationship had to be verified simultaneously. This trade-off &mdash; reliable detection with no reasoning versus flexible reasoning with unreliable structured output &mdash; directly motivated the per-block, single-object querying strategy adopted in the final planner above.</p>
     <div class="columns">
-      <div class="column"><figure class="image"><img src="../media/vlm-planner/incomplete-task.png" alt="GroundingDINO incorrect order detected" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">GroundingDINO: incorrect order detected.</p></div>
-      <div class="column"><figure class="image"><img src="../media/vlm-planner/task-complete.png" alt="GroundingDINO task completed" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">GroundingDINO: task completed.</p></div>
-      <div class="column"><figure class="image"><img src="../media/vlm-planner/gemma-monitor.png" alt="Gemma-3-12B goal monitor" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Gemma-3-12B goal monitor: per-condition checklist, with a failed spatial-relation check shown in red.</p></div>
+      <div class="column"><figure class="image"><img src="../../media/vlm-planner/incomplete-task.png" alt="GroundingDINO incorrect order detected" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">GroundingDINO: incorrect order detected.</p></div>
+      <div class="column"><figure class="image"><img src="../../media/vlm-planner/task-complete.png" alt="GroundingDINO task completed" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">GroundingDINO: task completed.</p></div>
+      <div class="column"><figure class="image"><img src="../../media/vlm-planner/gemma-monitor.png" alt="Gemma-3-12B goal monitor" style="border-radius:8px;"></figure><p class="is-size-7" style="color:#888;">Gemma-3-12B goal monitor: per-condition checklist, with a failed spatial-relation check shown in red.</p></div>
     </div>
   </div>
 </section>
@@ -150,21 +150,21 @@
     <h2 class="title is-3">Continue exploring</h2>
     <div class="columns">
       <div class="column is-half">
-        <a class="card experiment-card" href="checkpoints.html">
-          <div class="card-image"><figure class="image"><img src="../media/checkpoints/success-bar-chart.png" alt="Checkpoint & Policy Development"></figure></div>
+        <a class="card experiment-card" href="../checkpoints/">
+          <div class="card-image"><figure class="image"><img src="../../media/checkpoints/success-bar-chart.png" alt="Checkpoint & Policy Development"></figure></div>
           <div class="card-content"><p class="title is-5">Checkpoint &amp; Policy Development</p><p class="subtitle is-6">Iterating the six-task policy across eight checkpoints, reaching 43.3% trial-level success.</p></div>
         </a>
       </div>
       <div class="column is-half">
-        <a class="card experiment-card" href="hrc.html">
-          <div class="card-image"><figure class="image"><img src="../media/hrc/hrc-dashboard.png" alt="Human-Robot Collaboration"></figure></div>
+        <a class="card experiment-card" href="../hrc/">
+          <div class="card-image"><figure class="image"><img src="../../media/hrc/hrc-dashboard.png" alt="Human-Robot Collaboration"></figure></div>
           <div class="card-content"><p class="title is-5">Human-Robot Collaboration</p><p class="subtitle is-6">A plan&ndash;execute&ndash;check&ndash;escalate loop: across 50 trials, all reached their goal configuration.</p></div>
         </a>
       </div>
     </div>
     <nav class="level" style="margin-top:2rem;border-top:1px solid #eee;padding-top:1.5rem;">
-      <div class="level-left"><a href="checkpoints.html">&larr; Checkpoint &amp; Policy Development</a></div>
-      <div class="level-right"><a href="hrc.html">Next: Human-Robot Collaboration &rarr;</a></div>
+      <div class="level-left"><a href="../checkpoints/">&larr; Checkpoint &amp; Policy Development</a></div>
+      <div class="level-right"><a href="../hrc/">Next: Human-Robot Collaboration &rarr;</a></div>
     </nav>
   </div>
 </section>
